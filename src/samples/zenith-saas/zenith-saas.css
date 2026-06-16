@@ -1,0 +1,1144 @@
+/* ============================================================
+   zenith-saas.css — ALL selectors scoped under .sample-zenith-saas
+   No :root / body / html / bare-element selectors
+   ============================================================ */
+
+/* ---------- CSS custom properties (scoped) ---------- */
+.sample-zenith-saas {
+  --z-indigo:  #6366f1;
+  --z-violet:  #8b5cf6;
+  --z-purple:  #a855f7;
+  --z-fuchsia: #d946ef;
+  --z-pink:    #ec4899;
+
+  --z-bg:      #0a0a0f;
+  --z-surface: #12121a;
+  --z-card:    #16161f;
+  --z-border:  rgba(255,255,255,0.08);
+  --z-muted:   rgba(255,255,255,0.45);
+  --z-text:    #f1f1f6;
+
+  --z-grad-hero: linear-gradient(135deg, #6366f1 0%, #8b5cf6 35%, #a855f7 65%, #d946ef 100%);
+  --z-grad-cta:  linear-gradient(90deg,  #6366f1 0%, #a855f7 50%, #d946ef 100%);
+  --z-grad-ring: linear-gradient(135deg, #6366f1, #d946ef);
+  --z-grad-card: linear-gradient(160deg, rgba(99,102,241,0.12) 0%, rgba(217,70,239,0.06) 100%);
+
+  --z-radius-sm: 8px;
+  --z-radius:    16px;
+  --z-radius-lg: 24px;
+  --z-radius-xl: 32px;
+
+  --z-shadow: 0 24px 64px rgba(99,102,241,0.18);
+  --z-glow:   0 0 40px rgba(99,102,241,0.35);
+
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--z-bg);
+  color: var(--z-text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ---------- Utility ---------- */
+.sample-zenith-saas *,
+.sample-zenith-saas *::before,
+.sample-zenith-saas *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.sample-zenith-saas a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.sample-zenith-saas button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.sample-zenith-saas ul {
+  list-style: none;
+}
+
+/* ---------- Layout helpers ---------- */
+.sample-zenith-saas .z-container {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.sample-zenith-saas .z-section {
+  padding-block: 96px;
+}
+
+/* ---------- Gradient text ---------- */
+.sample-zenith-saas .z-grad-text {
+  background: var(--z-grad-hero);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.sample-zenith-saas .z-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10,10,15,0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--z-border);
+}
+
+.sample-zenith-saas .z-nav__inner {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  gap: 40px;
+}
+
+.sample-zenith-saas .z-nav__logo {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: var(--z-grad-hero);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  flex-shrink: 0;
+}
+
+.sample-zenith-saas .z-nav__links {
+  display: flex;
+  gap: 32px;
+  flex: 1;
+}
+
+.sample-zenith-saas .z-nav__links a {
+  font-size: 0.875rem;
+  color: var(--z-muted);
+  transition: color 0.2s;
+}
+
+.sample-zenith-saas .z-nav__links a:hover {
+  color: var(--z-text);
+}
+
+.sample-zenith-saas .z-nav__cta {
+  margin-left: auto;
+  padding: 8px 20px;
+  border-radius: 99px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  background: var(--z-grad-cta);
+  color: #fff;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.sample-zenith-saas .z-nav__cta:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+/* ---------- mobile nav ---------- */
+@media (max-width: 767px) {
+  .sample-zenith-saas .z-nav__links {
+    display: none;
+  }
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.sample-zenith-saas .z-hero {
+  position: relative;
+  overflow: hidden;
+  padding-block: 120px 80px;
+}
+
+/* background gradient blobs */
+.sample-zenith-saas .z-hero__blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+.sample-zenith-saas .z-hero__blob--1 {
+  width: 640px;
+  height: 640px;
+  background: radial-gradient(circle, #6366f1 0%, transparent 70%);
+  top: -200px;
+  left: -100px;
+}
+
+.sample-zenith-saas .z-hero__blob--2 {
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, #d946ef 0%, transparent 70%);
+  top: -100px;
+  right: -80px;
+}
+
+.sample-zenith-saas .z-hero__blob--3 {
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+  bottom: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.sample-zenith-saas .z-hero__inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.sample-zenith-saas .z-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 99px;
+  border: 1px solid rgba(99,102,241,0.4);
+  background: rgba(99,102,241,0.12);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #a5b4fc;
+  margin-bottom: 24px;
+}
+
+.sample-zenith-saas .z-hero__badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--z-grad-cta);
+  flex-shrink: 0;
+}
+
+.sample-zenith-saas .z-hero__headline {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+  white-space: pre-line;
+}
+
+/* word-split variant: allow per-word transforms */
+.sample-zenith-saas .z-hero__headline--split {
+  white-space: normal;
+  perspective: 900px;
+}
+
+.sample-zenith-saas .z-hero__headline--split > span {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+.sample-zenith-saas .z-hero__subcopy {
+  font-size: 1.125rem;
+  color: var(--z-muted);
+  max-width: 480px;
+  margin-bottom: 40px;
+  line-height: 1.7;
+}
+
+.sample-zenith-saas .z-hero__actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 56px;
+}
+
+.sample-zenith-saas .z-btn-primary {
+  padding: 14px 28px;
+  border-radius: 99px;
+  font-size: 1rem;
+  font-weight: 700;
+  background: var(--z-grad-cta);
+  color: #fff;
+  box-shadow: var(--z-glow);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.sample-zenith-saas .z-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 60px rgba(99,102,241,0.5);
+}
+
+.sample-zenith-saas .z-btn-secondary {
+  padding: 13px 28px;
+  border-radius: 99px;
+  font-size: 1rem;
+  font-weight: 600;
+  background: transparent;
+  color: var(--z-text);
+  border: 1px solid var(--z-border);
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.sample-zenith-saas .z-btn-secondary:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.18);
+}
+
+/* hero quick-stats */
+.sample-zenith-saas .z-hero__stats {
+  display: flex;
+  gap: 32px;
+}
+
+.sample-zenith-saas .z-hero__stat-value {
+  font-size: 1.75rem;
+  font-weight: 800;
+  background: var(--z-grad-hero);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.sample-zenith-saas .z-hero__stat-label {
+  font-size: 0.8rem;
+  color: var(--z-muted);
+  margin-top: 2px;
+}
+
+/* hero right — product mockup */
+.sample-zenith-saas .z-hero__mockup {
+  position: relative;
+}
+
+.sample-zenith-saas .z-mockup {
+  background: var(--z-card);
+  border: 1px solid var(--z-border);
+  border-radius: var(--z-radius-lg);
+  padding: 20px;
+  box-shadow: var(--z-shadow);
+  backdrop-filter: blur(8px);
+}
+
+.sample-zenith-saas .z-mockup__topbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.sample-zenith-saas .z-mockup__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.sample-zenith-saas .z-mockup__dot--red   { background: #ff5f57; }
+.sample-zenith-saas .z-mockup__dot--yellow { background: #febc2e; }
+.sample-zenith-saas .z-mockup__dot--green  { background: #28c840; }
+
+.sample-zenith-saas .z-mockup__url {
+  flex: 1;
+  height: 24px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 6px;
+  margin-left: 8px;
+  display: flex;
+  align-items: center;
+  padding-inline: 10px;
+  font-size: 0.7rem;
+  color: var(--z-muted);
+}
+
+.sample-zenith-saas .z-mockup__chart {
+  height: 120px;
+  background: rgba(99,102,241,0.08);
+  border-radius: var(--z-radius-sm);
+  margin-bottom: 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+.sample-zenith-saas .z-mockup__chart-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(180deg, rgba(99,102,241,0.4) 0%, rgba(99,102,241,0) 100%);
+  clip-path: polygon(0% 80%, 10% 60%, 20% 70%, 30% 40%, 40% 50%, 55% 20%, 70% 30%, 82% 10%, 95% 25%, 100% 15%, 100% 100%, 0% 100%);
+}
+
+.sample-zenith-saas .z-mockup__chart-stroke {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  clip-path: polygon(0% 80%, 10% 60%, 20% 70%, 30% 40%, 40% 50%, 55% 20%, 70% 30%, 82% 10%, 95% 25%, 100% 15%);
+  border-top: 2px solid var(--z-indigo);
+}
+
+.sample-zenith-saas .z-mockup__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sample-zenith-saas .z-mockup__row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sample-zenith-saas .z-mockup__row-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: var(--z-grad-cta);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+}
+
+.sample-zenith-saas .z-mockup__row-bar {
+  flex: 1;
+  height: 8px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.sample-zenith-saas .z-mockup__row-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: var(--z-grad-cta);
+}
+
+.sample-zenith-saas .z-mockup__badge {
+  position: absolute;
+  bottom: -18px;
+  left: -18px;
+  background: var(--z-surface);
+  border: 1px solid var(--z-border);
+  border-radius: var(--z-radius);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+}
+
+.sample-zenith-saas .z-mockup__badge-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.sample-zenith-saas .z-mockup__badge-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--z-text);
+}
+
+.sample-zenith-saas .z-mockup__badge-sub {
+  font-size: 0.7rem;
+  color: var(--z-muted);
+  margin-top: 1px;
+}
+
+/* hero responsive */
+@media (max-width: 900px) {
+  .sample-zenith-saas .z-hero__inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .sample-zenith-saas .z-hero__mockup {
+    max-width: 480px;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .sample-zenith-saas .z-hero {
+    padding-block: 72px 56px;
+  }
+  .sample-zenith-saas .z-hero__stats {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+}
+
+/* ============================================================
+   TRUSTED BY
+   ============================================================ */
+.sample-zenith-saas .z-logos {
+  border-block: 1px solid var(--z-border);
+  padding-block: 40px;
+  background: rgba(255,255,255,0.015);
+}
+
+.sample-zenith-saas .z-logos__label {
+  text-align: center;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--z-muted);
+  margin-bottom: 28px;
+}
+
+.sample-zenith-saas .z-logos__row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.sample-zenith-saas .z-logo-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+.sample-zenith-saas .z-logo-chip:hover {
+  opacity: 0.85;
+}
+
+.sample-zenith-saas .z-logo-chip__icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--z-grad-cta);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.sample-zenith-saas .z-logo-chip__name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--z-text);
+}
+
+/* ============================================================
+   BENTO FEATURES
+   ============================================================ */
+.sample-zenith-saas .z-features__header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.sample-zenith-saas .z-section-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 99px;
+  background: rgba(99,102,241,0.15);
+  border: 1px solid rgba(99,102,241,0.3);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #a5b4fc;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.sample-zenith-saas .z-section-title {
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.sample-zenith-saas .z-section-sub {
+  font-size: 1rem;
+  color: var(--z-muted);
+  max-width: 540px;
+  margin-inline: auto;
+}
+
+.sample-zenith-saas .z-bento {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(180px, auto);
+  gap: 16px;
+}
+
+.sample-zenith-saas .z-bento__card {
+  background: var(--z-card);
+  border: 1px solid var(--z-border);
+  border-radius: var(--z-radius-lg);
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s, transform 0.25s;
+  background-image: var(--z-grad-card);
+}
+
+.sample-zenith-saas .z-bento__card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 80% 20%, rgba(99,102,241,0.10) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.sample-zenith-saas .z-bento__card:hover {
+  border-color: rgba(99,102,241,0.4);
+  transform: translateY(-4px);
+}
+
+.sample-zenith-saas .z-bento__card--large {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.sample-zenith-saas .z-bento__card--medium {
+  grid-column: span 1;
+  grid-row: span 2;
+}
+
+.sample-zenith-saas .z-bento__card--small {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+.sample-zenith-saas .z-bento__icon {
+  font-size: 2rem;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.sample-zenith-saas .z-bento__title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: -0.015em;
+}
+
+.sample-zenith-saas .z-bento__body {
+  font-size: 0.875rem;
+  color: var(--z-muted);
+  line-height: 1.65;
+}
+
+.sample-zenith-saas .z-bento__card--large .z-bento__title {
+  font-size: 1.375rem;
+}
+
+.sample-zenith-saas .z-bento__card--large .z-bento__body {
+  font-size: 0.9375rem;
+  max-width: 360px;
+}
+
+@media (max-width: 900px) {
+  .sample-zenith-saas .z-bento {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .sample-zenith-saas .z-bento__card--large {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 600px) {
+  .sample-zenith-saas .z-bento {
+    grid-template-columns: 1fr;
+  }
+  .sample-zenith-saas .z-bento__card--large,
+  .sample-zenith-saas .z-bento__card--medium {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+}
+
+/* ============================================================
+   STATS BAND
+   ============================================================ */
+.sample-zenith-saas .z-stats {
+  background: linear-gradient(135deg, rgba(99,102,241,0.18) 0%, rgba(217,70,239,0.12) 100%);
+  border-block: 1px solid var(--z-border);
+  padding-block: 72px;
+}
+
+.sample-zenith-saas .z-stats__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  text-align: center;
+}
+
+.sample-zenith-saas .z-stats__value {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  background: var(--z-grad-hero);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  margin-bottom: 8px;
+}
+
+.sample-zenith-saas .z-stats__label {
+  font-size: 0.9rem;
+  color: var(--z-muted);
+}
+
+@media (max-width: 768px) {
+  .sample-zenith-saas .z-stats__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+}
+
+/* ============================================================
+   PRICING
+   ============================================================ */
+.sample-zenith-saas .z-pricing__header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.sample-zenith-saas .z-pricing__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.sample-zenith-saas .z-pricing__card {
+  background: var(--z-card);
+  border: 1px solid var(--z-border);
+  border-radius: var(--z-radius-xl);
+  padding: 36px 32px;
+  position: relative;
+  transition: transform 0.25s;
+}
+
+.sample-zenith-saas .z-pricing__card:hover {
+  transform: translateY(-4px);
+}
+
+.sample-zenith-saas .z-pricing__card--highlight {
+  border-color: transparent;
+  background: linear-gradient(var(--z-card), var(--z-card)) padding-box,
+              var(--z-grad-ring) border-box;
+  border: 2px solid transparent;
+  transform: scale(1.04);
+}
+
+.sample-zenith-saas .z-pricing__card--highlight:hover {
+  transform: scale(1.04) translateY(-4px);
+}
+
+.sample-zenith-saas .z-pricing__popular {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--z-grad-cta);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+
+.sample-zenith-saas .z-pricing__name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--z-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+}
+
+.sample-zenith-saas .z-pricing__price {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.sample-zenith-saas .z-pricing__amount {
+  font-size: 2.75rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: var(--z-text);
+}
+
+.sample-zenith-saas .z-pricing__period {
+  font-size: 0.875rem;
+  color: var(--z-muted);
+}
+
+.sample-zenith-saas .z-pricing__desc {
+  font-size: 0.875rem;
+  color: var(--z-muted);
+  margin-bottom: 28px;
+  min-height: 40px;
+}
+
+.sample-zenith-saas .z-pricing__divider {
+  height: 1px;
+  background: var(--z-border);
+  margin-bottom: 24px;
+}
+
+.sample-zenith-saas .z-pricing__features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.sample-zenith-saas .z-pricing__feature {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.875rem;
+}
+
+.sample-zenith-saas .z-pricing__feature-check {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(99,102,241,0.2);
+  border: 1px solid rgba(99,102,241,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.6rem;
+  color: #a5b4fc;
+}
+
+.sample-zenith-saas .z-pricing__cta {
+  width: 100%;
+  padding: 13px;
+  border-radius: 99px;
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.sample-zenith-saas .z-pricing__cta--primary {
+  background: var(--z-grad-cta);
+  color: #fff;
+  box-shadow: 0 0 30px rgba(99,102,241,0.35);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.sample-zenith-saas .z-pricing__cta--primary:hover {
+  box-shadow: 0 0 50px rgba(99,102,241,0.55);
+  transform: translateY(-1px);
+}
+
+.sample-zenith-saas .z-pricing__cta--secondary {
+  background: transparent;
+  color: var(--z-text);
+  border: 1px solid var(--z-border);
+  transition: background 0.2s;
+}
+
+.sample-zenith-saas .z-pricing__cta--secondary:hover {
+  background: rgba(255,255,255,0.06);
+}
+
+@media (max-width: 900px) {
+  .sample-zenith-saas .z-pricing__grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin-inline: auto;
+  }
+  .sample-zenith-saas .z-pricing__card--highlight {
+    transform: none;
+  }
+  .sample-zenith-saas .z-pricing__card--highlight:hover {
+    transform: translateY(-4px);
+  }
+}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.sample-zenith-saas .z-faq__header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.sample-zenith-saas .z-faq__list {
+  max-width: 720px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sample-zenith-saas .z-faq__item {
+  background: var(--z-card);
+  border: 1px solid var(--z-border);
+  border-radius: var(--z-radius);
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.sample-zenith-saas .z-faq__item[data-open="true"] {
+  border-color: rgba(99,102,241,0.4);
+}
+
+.sample-zenith-saas .z-faq__question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--z-text);
+  background: transparent;
+  text-align: left;
+  gap: 16px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.sample-zenith-saas .z-faq__question:hover {
+  background: rgba(255,255,255,0.03);
+}
+
+.sample-zenith-saas .z-faq__chevron {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(99,102,241,0.15);
+  border: 1px solid rgba(99,102,241,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.65rem;
+  color: #a5b4fc;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.sample-zenith-saas .z-faq__item[data-open="true"] .z-faq__chevron {
+  transform: rotate(180deg);
+  background: rgba(99,102,241,0.3);
+}
+
+.sample-zenith-saas .z-faq__answer {
+  padding: 0 24px 20px;
+  font-size: 0.875rem;
+  color: var(--z-muted);
+  line-height: 1.7;
+}
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+.sample-zenith-saas .z-testimonials__header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.sample-zenith-saas .z-testimonials__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.sample-zenith-saas .z-testimonial {
+  background: var(--z-card);
+  border: 1px solid var(--z-border);
+  border-radius: var(--z-radius-lg);
+  padding: 28px;
+  transition: border-color 0.25s, transform 0.25s;
+}
+
+.sample-zenith-saas .z-testimonial:hover {
+  border-color: rgba(99,102,241,0.35);
+  transform: translateY(-4px);
+}
+
+.sample-zenith-saas .z-testimonial__stars {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 16px;
+  font-size: 0.875rem;
+}
+
+.sample-zenith-saas .z-testimonial__quote {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--z-text);
+  margin-bottom: 24px;
+}
+
+.sample-zenith-saas .z-testimonial__author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sample-zenith-saas .z-testimonial__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--z-grad-cta);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.sample-zenith-saas .z-testimonial__name {
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.sample-zenith-saas .z-testimonial__role {
+  font-size: 0.8rem;
+  color: var(--z-muted);
+  margin-top: 2px;
+}
+
+@media (max-width: 900px) {
+  .sample-zenith-saas .z-testimonials__grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin-inline: auto;
+  }
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.sample-zenith-saas .z-footer {
+  border-top: 1px solid var(--z-border);
+  padding-block: 72px 40px;
+}
+
+.sample-zenith-saas .z-footer__top {
+  display: grid;
+  grid-template-columns: 1.5fr repeat(4, 1fr);
+  gap: 48px;
+  margin-bottom: 56px;
+}
+
+.sample-zenith-saas .z-footer__brand-logo {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: var(--z-grad-hero);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  margin-bottom: 12px;
+}
+
+.sample-zenith-saas .z-footer__tagline {
+  font-size: 0.875rem;
+  color: var(--z-muted);
+  max-width: 220px;
+  line-height: 1.6;
+}
+
+.sample-zenith-saas .z-footer__col-heading {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--z-text);
+  margin-bottom: 16px;
+}
+
+.sample-zenith-saas .z-footer__col-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sample-zenith-saas .z-footer__col-links a {
+  font-size: 0.875rem;
+  color: var(--z-muted);
+  transition: color 0.2s;
+}
+
+.sample-zenith-saas .z-footer__col-links a:hover {
+  color: var(--z-text);
+}
+
+.sample-zenith-saas .z-footer__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 32px;
+  border-top: 1px solid var(--z-border);
+  font-size: 0.8rem;
+  color: var(--z-muted);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+@media (max-width: 900px) {
+  .sample-zenith-saas .z-footer__top {
+    grid-template-columns: 1fr 1fr;
+  }
+  .sample-zenith-saas .z-footer__brand {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 500px) {
+  .sample-zenith-saas .z-footer__top {
+    grid-template-columns: 1fr;
+  }
+  .sample-zenith-saas .z-footer__brand {
+    grid-column: span 1;
+  }
+}
+
+/* ============================================================
+   reduced-motion overrides
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .sample-zenith-saas *,
+  .sample-zenith-saas *::before,
+  .sample-zenith-saas *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,745 @@
+/* ============================================================
+   nebula-folio.css
+   ALL selectors scoped under .sample-nebula-folio
+   NO :root / body / html / bare-element selectors
+   ============================================================ */
+
+/* ---------- design tokens (scoped) ---------- */
+.sample-nebula-folio {
+  --nf-bg:          #050a0f;
+  --nf-bg-card:     #0a1520;
+  --nf-bg-card-2:   #0d1a28;
+  --nf-border:      rgba(0, 229, 255, 0.18);
+  --nf-border-hover:rgba(0, 229, 255, 0.55);
+
+  --nf-cyan:        #00e5ff;
+  --nf-cyan-dim:    rgba(0, 229, 255, 0.65);
+  --nf-magenta:     #ff00c8;
+  --nf-magenta-dim: rgba(255, 0, 200, 0.55);
+  --nf-purple:      #7b2fff;
+  --nf-green:       #00ff9d;
+
+  --nf-text:        #c8dde8;
+  --nf-text-muted:  #5a7a8a;
+  --nf-text-bright: #e8f8ff;
+
+  --nf-font-mono:   'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Courier New', monospace;
+  --nf-font-sans:   'Inter', 'Segoe UI', system-ui, sans-serif;
+
+  --nf-glow-cyan:   0 0 8px rgba(0,229,255,0.6), 0 0 24px rgba(0,229,255,0.3), 0 0 48px rgba(0,229,255,0.15);
+  --nf-glow-mag:    0 0 8px rgba(255,0,200,0.6), 0 0 24px rgba(255,0,200,0.3);
+  --nf-glow-card:   0 0 0 1px var(--nf-border), 0 8px 32px rgba(0,0,0,0.6);
+  --nf-glow-card-h: 0 0 0 1px var(--nf-border-hover), 0 0 24px rgba(0,229,255,0.12), 0 8px 40px rgba(0,0,0,0.7);
+
+  --nf-radius:      6px;
+  --nf-transition:  0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ---------- base / reset (scoped) ---------- */
+.sample-nebula-folio *,
+.sample-nebula-folio *::before,
+.sample-nebula-folio *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.sample-nebula-folio {
+  background-color: var(--nf-bg);
+  color: var(--nf-text);
+  font-family: var(--nf-font-sans);
+  font-size: 15px;
+  line-height: 1.65;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ---------- scanline overlay ---------- */
+.sample-nebula-folio .nf-scanlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1000;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.04) 2px,
+    rgba(0, 0, 0, 0.04) 4px
+  );
+}
+
+/* ---------- grid background ---------- */
+.sample-nebula-folio .nf-grid-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(0, 229, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ---------- layout ---------- */
+.sample-nebula-folio .nf-main {
+  position: relative;
+  z-index: 1;
+}
+
+.sample-nebula-folio .nf-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- nav ---------- */
+.sample-nebula-folio .nf-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--nf-border);
+  background: rgba(5, 10, 15, 0.85);
+  backdrop-filter: blur(12px);
+}
+
+.sample-nebula-folio .nf-nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.sample-nebula-folio .nf-nav-logo {
+  font-family: var(--nf-font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--nf-cyan);
+  text-shadow: var(--nf-glow-cyan);
+}
+
+.sample-nebula-folio .nf-nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+
+.sample-nebula-folio .nf-nav-links a {
+  font-family: var(--nf-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--nf-text-muted);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color var(--nf-transition);
+}
+
+.sample-nebula-folio .nf-nav-links a:hover {
+  color: var(--nf-cyan);
+  text-shadow: var(--nf-glow-cyan);
+}
+
+/* ---------- hero ---------- */
+.sample-nebula-folio .nf-hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 24px 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.sample-nebula-folio .nf-hero-glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(80px);
+}
+
+.sample-nebula-folio .nf-hero-glow-orb--cyan {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(0,229,255,0.12) 0%, transparent 70%);
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.sample-nebula-folio .nf-hero-glow-orb--mag {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255,0,200,0.08) 0%, transparent 70%);
+  bottom: 0;
+  right: -100px;
+}
+
+.sample-nebula-folio .nf-hero-badge {
+  display: inline-block;
+  font-family: var(--nf-font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--nf-cyan);
+  border: 1px solid var(--nf-border);
+  background: rgba(0, 229, 255, 0.06);
+  padding: 5px 14px;
+  border-radius: 2px;
+  margin-bottom: 28px;
+}
+
+/* ---------- glow pulse on hero name ---------- */
+@keyframes nf-glow-pulse {
+  from {
+    text-shadow: var(--nf-glow-cyan);
+  }
+  to {
+    text-shadow:
+      0 0 12px rgba(0, 229, 255, 0.9),
+      0 0 36px rgba(0, 229, 255, 0.5),
+      0 0 72px rgba(0, 229, 255, 0.25);
+  }
+}
+
+.sample-nebula-folio .nf-hero-name {
+  font-family: var(--nf-font-mono);
+  font-size: clamp(2.8rem, 8vw, 6.5rem);
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  color: var(--nf-text-bright);
+  text-shadow: var(--nf-glow-cyan);
+  margin-bottom: 16px;
+  animation: nf-glow-pulse 2.5s ease-in-out infinite alternate;
+}
+
+.sample-nebula-folio .nf-hero-name-accent {
+  color: var(--nf-cyan);
+}
+
+/* ---------- neon shimmer text ---------- */
+@keyframes nf-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.sample-nebula-folio .nf-shimmer-text {
+  background: linear-gradient(
+    90deg,
+    #00e5ff 0%,
+    #ff00c8 30%,
+    #7b2fff 60%,
+    #00e5ff 100%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: nf-shimmer 3s linear infinite;
+}
+
+/* ---------- hero SVG accent ---------- */
+.sample-nebula-folio .nf-hero-svg-accent {
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 28px;
+  overflow: visible;
+}
+
+/* ---------- hero role / tagline / meta ---------- */
+.sample-nebula-folio .nf-hero-role {
+  font-family: var(--nf-font-mono);
+  font-size: clamp(0.65rem, 1.8vw, 0.9rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--nf-magenta);
+  text-shadow: var(--nf-glow-mag);
+  margin-bottom: 24px;
+}
+
+.sample-nebula-folio .nf-hero-tagline {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--nf-text-muted);
+  max-width: 480px;
+  margin-bottom: 44px;
+  font-style: italic;
+}
+
+.sample-nebula-folio .nf-hero-meta {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.sample-nebula-folio .nf-hero-meta-item {
+  font-family: var(--nf-font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--nf-text-muted);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sample-nebula-folio .nf-hero-meta-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--nf-green);
+  box-shadow: 0 0 8px var(--nf-green);
+}
+
+/* ---------- section common ---------- */
+.sample-nebula-folio .nf-section {
+  padding: 96px 0;
+}
+
+.sample-nebula-folio .nf-section-header {
+  margin-bottom: 56px;
+}
+
+.sample-nebula-folio .nf-section-label {
+  font-family: var(--nf-font-mono);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--nf-cyan);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sample-nebula-folio .nf-section-label::after {
+  content: '';
+  display: block;
+  height: 1px;
+  width: 48px;
+  background: var(--nf-cyan);
+  box-shadow: 0 0 6px var(--nf-cyan);
+}
+
+.sample-nebula-folio .nf-section-title {
+  font-family: var(--nf-font-mono);
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--nf-text-bright);
+  line-height: 1.15;
+}
+
+/* ---------- about ---------- */
+.sample-nebula-folio .nf-about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+@media (min-width: 768px) {
+  .sample-nebula-folio .nf-about-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+}
+
+.sample-nebula-folio .nf-about-bio {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--nf-text);
+}
+
+.sample-nebula-folio .nf-about-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.sample-nebula-folio .nf-stat-card {
+  background: var(--nf-bg-card);
+  border: 1px solid var(--nf-border);
+  border-radius: var(--nf-radius);
+  padding: 24px 20px;
+  text-align: center;
+}
+
+.sample-nebula-folio .nf-stat-value {
+  font-family: var(--nf-font-mono);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--nf-cyan);
+  text-shadow: var(--nf-glow-cyan);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.sample-nebula-folio .nf-stat-label {
+  font-family: var(--nf-font-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--nf-text-muted);
+}
+
+/* ---------- projects grid ---------- */
+.sample-nebula-folio .nf-projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 600px) {
+  .sample-nebula-folio .nf-projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .sample-nebula-folio .nf-projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.sample-nebula-folio .nf-project-card {
+  background: var(--nf-bg-card);
+  border-radius: var(--nf-radius);
+  padding: 28px 24px;
+  box-shadow: var(--nf-glow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  cursor: default;
+  transition: box-shadow var(--nf-transition);
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+
+.sample-nebula-folio .nf-project-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--nf-radius);
+  border: 1px solid var(--nf-border);
+  pointer-events: none;
+  transition: border-color var(--nf-transition);
+}
+
+.sample-nebula-folio .nf-project-card:hover {
+  box-shadow: var(--nf-glow-card-h);
+}
+
+.sample-nebula-folio .nf-project-card:hover::before {
+  border-color: var(--nf-border-hover);
+}
+
+/* Inner wrapper used for subtle parallax on tilt */
+.sample-nebula-folio .nf-project-card-inner {
+  display: contents;
+}
+
+.sample-nebula-folio .nf-project-year {
+  font-family: var(--nf-font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--nf-magenta);
+  text-shadow: 0 0 6px rgba(255, 0, 200, 0.4);
+}
+
+.sample-nebula-folio .nf-project-title {
+  font-family: var(--nf-font-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--nf-text-bright);
+}
+
+.sample-nebula-folio .nf-project-desc {
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: var(--nf-text-muted);
+  flex: 1;
+}
+
+.sample-nebula-folio .nf-project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.sample-nebula-folio .nf-tag {
+  font-family: var(--nf-font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--nf-cyan);
+  background: rgba(0, 229, 255, 0.07);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  border-radius: 2px;
+  padding: 3px 8px;
+}
+
+/* ---------- skills ---------- */
+.sample-nebula-folio .nf-skills-categories {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+@media (min-width: 768px) {
+  .sample-nebula-folio .nf-skills-categories {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.sample-nebula-folio .nf-skills-group-title {
+  font-family: var(--nf-font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--nf-magenta);
+  margin-bottom: 18px;
+}
+
+.sample-nebula-folio .nf-skill-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.sample-nebula-folio .nf-skill-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.sample-nebula-folio .nf-skill-name {
+  font-family: var(--nf-font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--nf-text);
+}
+
+.sample-nebula-folio .nf-skill-pct {
+  font-family: var(--nf-font-mono);
+  font-size: 10px;
+  color: var(--nf-text-muted);
+}
+
+.sample-nebula-folio .nf-skill-track {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.sample-nebula-folio .nf-skill-bar {
+  height: 100%;
+  width: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--nf-cyan) 0%, var(--nf-purple) 100%);
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+  /* width is now static 100%; scaleX animation handled by framer-motion */
+}
+
+/* ---------- timeline ---------- */
+.sample-nebula-folio .nf-timeline {
+  position: relative;
+  padding-left: 28px;
+}
+
+.sample-nebula-folio .nf-timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: linear-gradient(180deg, var(--nf-cyan), var(--nf-magenta));
+  box-shadow: 0 0 6px rgba(0, 229, 255, 0.4);
+}
+
+.sample-nebula-folio .nf-timeline-entry {
+  position: relative;
+  padding-bottom: 44px;
+}
+
+.sample-nebula-folio .nf-timeline-entry:last-child {
+  padding-bottom: 0;
+}
+
+.sample-nebula-folio .nf-timeline-dot {
+  position: absolute;
+  left: -34px;
+  top: 8px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--nf-bg);
+  border: 2px solid var(--nf-cyan);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
+}
+
+.sample-nebula-folio .nf-timeline-year {
+  font-family: var(--nf-font-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--nf-cyan);
+  margin-bottom: 6px;
+}
+
+.sample-nebula-folio .nf-timeline-role {
+  font-family: var(--nf-font-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--nf-text-bright);
+  line-height: 1.2;
+}
+
+.sample-nebula-folio .nf-timeline-company {
+  font-family: var(--nf-font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--nf-magenta);
+  text-shadow: 0 0 6px rgba(255, 0, 200, 0.3);
+  margin-bottom: 10px;
+  margin-top: 2px;
+}
+
+.sample-nebula-folio .nf-timeline-desc {
+  font-size: 0.875rem;
+  line-height: 1.75;
+  color: var(--nf-text-muted);
+}
+
+/* ---------- contact / footer ---------- */
+.sample-nebula-folio .nf-contact {
+  padding: 80px 0 60px;
+  border-top: 1px solid var(--nf-border);
+  text-align: center;
+}
+
+.sample-nebula-folio .nf-contact-heading {
+  font-family: var(--nf-font-mono);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--nf-text-bright);
+  margin-bottom: 12px;
+}
+
+.sample-nebula-folio .nf-contact-sub {
+  font-size: 0.95rem;
+  color: var(--nf-text-muted);
+  margin-bottom: 40px;
+}
+
+.sample-nebula-folio .nf-contact-links {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 56px;
+}
+
+.sample-nebula-folio .nf-contact-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--nf-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--nf-text-muted);
+  text-decoration: none;
+  border: 1px solid var(--nf-border);
+  padding: 10px 20px;
+  border-radius: var(--nf-radius);
+  background: rgba(0, 229, 255, 0.03);
+  transition:
+    color var(--nf-transition),
+    border-color var(--nf-transition),
+    box-shadow var(--nf-transition),
+    background var(--nf-transition);
+}
+
+.sample-nebula-folio .nf-contact-link:hover {
+  color: var(--nf-cyan);
+  border-color: rgba(0, 229, 255, 0.5);
+  background: rgba(0, 229, 255, 0.08);
+  box-shadow: 0 0 16px rgba(0, 229, 255, 0.15);
+}
+
+.sample-nebula-folio .nf-contact-icon {
+  font-family: var(--nf-font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--nf-cyan);
+}
+
+.sample-nebula-folio .nf-footer-copy {
+  font-family: var(--nf-font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--nf-text-muted);
+  opacity: 0.6;
+}
+
+/* ---------- divider ---------- */
+.sample-nebula-folio .nf-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--nf-border), transparent);
+  margin: 0;
+}
+
+/* ---------- responsive nav ---------- */
+@media (max-width: 600px) {
+  .sample-nebula-folio .nf-nav-links {
+    display: none;
+  }
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .sample-nebula-folio *,
+  .sample-nebula-folio *::before,
+  .sample-nebula-folio *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .sample-nebula-folio .nf-hero-name {
+    animation: none;
+  }
+
+  .sample-nebula-folio .nf-shimmer-text {
+    animation: none;
+    background: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    -webkit-text-fill-color: var(--nf-cyan);
+    color: var(--nf-cyan);
+  }
+}

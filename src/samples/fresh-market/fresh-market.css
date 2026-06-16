@@ -1,0 +1,803 @@
+/* ── Fresh Market — Grocery Marketplace ─────────────────────────────────────
+   All selectors scoped under .sample-fresh-market.
+   No :root / body / html / bare-element selectors.
+   Accent: #16a34a (green-600)
+   ───────────────────────────────────────────────────────────────────────── */
+
+.sample-fresh-market {
+  --fm-green:        #16a34a;
+  --fm-green-light:  #dcfce7;
+  --fm-green-mid:    #bbf7d0;
+  --fm-green-dark:   #15803d;
+  --fm-yellow:       #fbbf24;
+  --fm-bg:           #f9fafb;
+  --fm-surface:      #ffffff;
+  --fm-border:       #e5e7eb;
+  --fm-text:         #111827;
+  --fm-muted:        #6b7280;
+  --fm-faint:        #f3f4f6;
+  --fm-radius-sm:    8px;
+  --fm-radius:       14px;
+  --fm-radius-lg:    20px;
+  --fm-shadow-sm:    0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.04);
+  --fm-shadow:       0 4px 16px rgba(0,0,0,.08);
+  --fm-shadow-lg:    0 8px 32px rgba(0,0,0,.10);
+  --fm-font:         'Inter', system-ui, -apple-system, sans-serif;
+
+  font-family: var(--fm-font);
+  background: var(--fm-bg);
+  color: var(--fm-text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Top bar ──────────────────────────────────────────────────────────────── */
+
+.sample-fresh-market .fm-topbar {
+  background: var(--fm-surface);
+  border-bottom: 1px solid var(--fm-border);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: var(--fm-shadow-sm);
+}
+
+.sample-fresh-market .fm-topbar-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 16px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Logo */
+.sample-fresh-market .fm-logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.sample-fresh-market .fm-logo-leaf {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.sample-fresh-market .fm-logo-text {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--fm-green);
+  letter-spacing: -0.3px;
+}
+
+/* Location */
+.sample-fresh-market .fm-location-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--fm-faint);
+  border: none;
+  border-radius: var(--fm-radius-sm);
+  padding: 6px 10px;
+  cursor: pointer;
+  color: var(--fm-muted);
+  font-size: 12px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+.sample-fresh-market .fm-location-btn:hover {
+  background: var(--fm-green-light);
+  color: var(--fm-green-dark);
+}
+
+.sample-fresh-market .fm-location-label strong {
+  color: var(--fm-text);
+  font-weight: 600;
+}
+
+/* Search */
+.sample-fresh-market .fm-search-wrap {
+  flex: 1;
+  max-width: 480px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--fm-faint);
+  border: 1.5px solid transparent;
+  border-radius: 99px;
+  padding: 0 14px;
+  transition: border-color 0.18s, background 0.18s;
+}
+
+.sample-fresh-market .fm-search-wrap:focus-within {
+  background: var(--fm-surface);
+  border-color: var(--fm-green);
+}
+
+.sample-fresh-market .fm-search-wrap svg {
+  color: var(--fm-muted);
+  flex-shrink: 0;
+}
+
+.sample-fresh-market .fm-search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 14px;
+  color: var(--fm-text);
+  padding: 10px 0;
+  font-family: var(--fm-font);
+}
+
+.sample-fresh-market .fm-search-input::placeholder {
+  color: var(--fm-muted);
+}
+
+/* Cart button */
+.sample-fresh-market .fm-cart-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--fm-green);
+  color: #fff;
+  border: none;
+  border-radius: var(--fm-radius);
+  padding: 9px 14px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  position: relative;
+  flex-shrink: 0;
+  font-family: var(--fm-font);
+  transition: background 0.15s;
+}
+
+.sample-fresh-market .fm-cart-btn:hover {
+  background: var(--fm-green-dark);
+}
+
+.sample-fresh-market .fm-cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: var(--fm-yellow);
+  color: #78350f;
+  font-size: 11px;
+  font-weight: 700;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 99px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  box-shadow: 0 0 0 2px #fff;
+}
+
+.sample-fresh-market .fm-cart-total {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* ── Hero banner ──────────────────────────────────────────────────────────── */
+
+.sample-fresh-market .fm-hero {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 60%, #bbf7d0 100%);
+  overflow: hidden;
+}
+
+.sample-fresh-market .fm-hero-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 48px 24px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.sample-fresh-market .fm-hero-text {
+  max-width: 480px;
+}
+
+.sample-fresh-market .fm-hero-tag {
+  display: inline-flex;
+  align-items: center;
+  background: var(--fm-green);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 99px;
+  margin-bottom: 14px;
+  letter-spacing: 0.2px;
+}
+
+.sample-fresh-market .fm-hero-title {
+  font-size: clamp(26px, 4vw, 40px);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--fm-text);
+  margin: 0 0 10px;
+  letter-spacing: -0.5px;
+}
+
+.sample-fresh-market .fm-hero-title span {
+  color: var(--fm-green);
+}
+
+.sample-fresh-market .fm-hero-sub {
+  font-size: 15px;
+  color: var(--fm-muted);
+  margin: 0 0 24px;
+}
+
+.sample-fresh-market .fm-hero-cta {
+  background: var(--fm-green);
+  color: #fff;
+  border: none;
+  border-radius: var(--fm-radius);
+  padding: 13px 28px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--fm-font);
+  box-shadow: 0 4px 14px rgba(22,163,74,.35);
+  transition: background 0.15s, box-shadow 0.15s;
+}
+
+.sample-fresh-market .fm-hero-cta:hover {
+  background: var(--fm-green-dark);
+  box-shadow: 0 6px 20px rgba(22,163,74,.4);
+}
+
+/* Produce illustration */
+.sample-fresh-market .fm-hero-illustration {
+  position: relative;
+  width: 260px;
+  height: 200px;
+  flex-shrink: 0;
+}
+
+.sample-fresh-market .fm-produce-blob {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(4px);
+  box-shadow: var(--fm-shadow);
+  font-size: 32px;
+  animation: fm-float 3s ease-in-out infinite;
+}
+
+.sample-fresh-market .fm-produce-blob--1 { width: 72px; height: 72px; top: 10px;  left: 30px;  animation-delay: 0s;    }
+.sample-fresh-market .fm-produce-blob--2 { width: 64px; height: 64px; top: 80px;  left: 5px;   animation-delay: 0.5s;  }
+.sample-fresh-market .fm-produce-blob--3 { width: 70px; height: 70px; top: 0px;   left: 120px; animation-delay: 1s;    }
+.sample-fresh-market .fm-produce-blob--4 { width: 60px; height: 60px; top: 110px; left: 100px; animation-delay: 1.5s;  }
+.sample-fresh-market .fm-produce-blob--5 { width: 66px; height: 66px; top: 50px;  left: 190px; animation-delay: 0.7s;  }
+
+@keyframes fm-float {
+  0%, 100% { transform: translateY(0);   }
+  50%       { transform: translateY(-8px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sample-fresh-market .fm-produce-blob {
+    animation: none;
+  }
+}
+
+/* ── Category chips ───────────────────────────────────────────────────────── */
+
+.sample-fresh-market .fm-categories-section {
+  background: var(--fm-surface);
+  border-bottom: 1px solid var(--fm-border);
+  position: sticky;
+  top: 64px;
+  z-index: 40;
+}
+
+.sample-fresh-market .fm-categories-scroll {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 12px 16px;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.sample-fresh-market .fm-categories-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.sample-fresh-market .fm-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--fm-faint);
+  border: 1.5px solid transparent;
+  border-radius: 99px;
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--fm-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: var(--fm-font);
+  transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.1s;
+}
+
+.sample-fresh-market .fm-chip:hover {
+  background: var(--fm-green-light);
+  color: var(--fm-green-dark);
+}
+
+.sample-fresh-market .fm-chip--active {
+  background: var(--fm-green-light);
+  border-color: var(--fm-green);
+  color: var(--fm-green-dark);
+  font-weight: 600;
+}
+
+.sample-fresh-market .fm-chip-emoji {
+  font-size: 15px;
+  line-height: 1;
+}
+
+/* ── Main content ─────────────────────────────────────────────────────────── */
+
+.sample-fresh-market .fm-main {
+  flex: 1;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 28px 16px 48px;
+}
+
+/* Section header */
+.sample-fresh-market .fm-section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.sample-fresh-market .fm-section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--fm-text);
+  margin: 0;
+  letter-spacing: -0.2px;
+}
+
+.sample-fresh-market .fm-section-count {
+  font-size: 13px;
+  color: var(--fm-muted);
+  background: var(--fm-faint);
+  border-radius: 99px;
+  padding: 2px 10px;
+}
+
+.sample-fresh-market .fm-deals-flame {
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* ── Product grid ─────────────────────────────────────────────────────────── */
+
+.sample-fresh-market .fm-product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+  gap: 14px;
+}
+
+/* Product card */
+.sample-fresh-market .fm-product-card {
+  background: var(--fm-surface);
+  border-radius: var(--fm-radius-lg);
+  border: 1.5px solid var(--fm-border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--fm-shadow-sm);
+  transition: box-shadow 0.18s, border-color 0.18s;
+}
+
+.sample-fresh-market .fm-product-card:hover {
+  box-shadow: var(--fm-shadow);
+  border-color: var(--fm-green-mid);
+}
+
+/* Product image area */
+.sample-fresh-market .fm-product-image {
+  background: var(--fm-faint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+  min-height: 100px;
+}
+
+.sample-fresh-market .fm-product-emoji {
+  font-size: 52px;
+  line-height: 1;
+  display: block;
+}
+
+/* Badge */
+.sample-fresh-market .fm-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 3px 7px;
+  border-radius: 99px;
+  text-transform: uppercase;
+}
+
+.sample-fresh-market .fm-badge--sale {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.sample-fresh-market .fm-badge--new {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+
+.sample-fresh-market .fm-badge--organic {
+  background: var(--fm-green-light);
+  color: var(--fm-green-dark);
+  border: 1px solid var(--fm-green-mid);
+}
+
+/* Product body */
+.sample-fresh-market .fm-product-body {
+  padding: 10px 12px 6px;
+  flex: 1;
+}
+
+.sample-fresh-market .fm-product-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fm-text);
+  margin: 0 0 5px;
+  line-height: 1.3;
+}
+
+.sample-fresh-market .fm-product-meta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.sample-fresh-market .fm-stars {
+  color: var(--fm-yellow);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+
+.sample-fresh-market .fm-product-reviews {
+  font-size: 11px;
+  color: var(--fm-muted);
+}
+
+.sample-fresh-market .fm-product-pricing {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.sample-fresh-market .fm-product-price {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--fm-green);
+}
+
+.sample-fresh-market .fm-product-original {
+  font-size: 12px;
+  color: var(--fm-muted);
+  text-decoration: line-through;
+}
+
+.sample-fresh-market .fm-product-unit {
+  font-size: 11px;
+  color: var(--fm-muted);
+}
+
+/* Product action row */
+.sample-fresh-market .fm-product-action {
+  padding: 8px 12px 12px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Add button */
+.sample-fresh-market .fm-add-btn {
+  width: 100%;
+  background: var(--fm-green-light);
+  color: var(--fm-green-dark);
+  border: 1.5px solid var(--fm-green-mid);
+  border-radius: var(--fm-radius-sm);
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--fm-font);
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.sample-fresh-market .fm-add-btn:hover {
+  background: var(--fm-green);
+  border-color: var(--fm-green);
+  color: #fff;
+}
+
+/* Quantity stepper */
+.sample-fresh-market .fm-stepper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--fm-green-light);
+  border: 1.5px solid var(--fm-green-mid);
+  border-radius: var(--fm-radius-sm);
+  padding: 4px 6px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.sample-fresh-market .fm-stepper-btn {
+  background: var(--fm-green);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: background 0.12s, transform 0.1s;
+  font-family: var(--fm-font);
+}
+
+.sample-fresh-market .fm-stepper-btn:hover {
+  background: var(--fm-green-dark);
+}
+
+.sample-fresh-market .fm-stepper-btn:active {
+  transform: scale(0.9);
+}
+
+.sample-fresh-market .fm-stepper-count {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--fm-green-dark);
+  min-width: 20px;
+  text-align: center;
+}
+
+/* Empty state */
+.sample-fresh-market .fm-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 64px 24px;
+  color: var(--fm-muted);
+  font-size: 15px;
+  text-align: center;
+}
+
+.sample-fresh-market .fm-empty-emoji {
+  font-size: 48px;
+  line-height: 1;
+}
+
+/* ── Deals strip ──────────────────────────────────────────────────────────── */
+
+.sample-fresh-market .fm-deals-section {
+  margin-top: 40px;
+}
+
+.sample-fresh-market .fm-deals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.sample-fresh-market .fm-deal-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-radius: var(--fm-radius-lg);
+  padding: 16px 18px;
+  border: 1.5px solid rgba(0,0,0,.06);
+  cursor: pointer;
+  box-shadow: var(--fm-shadow-sm);
+  transition: box-shadow 0.18s;
+}
+
+.sample-fresh-market .fm-deal-card:hover {
+  box-shadow: var(--fm-shadow);
+}
+
+.sample-fresh-market .fm-deal-emoji {
+  font-size: 30px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.sample-fresh-market .fm-deal-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.sample-fresh-market .fm-deal-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--fm-text);
+  margin: 0 0 3px;
+}
+
+.sample-fresh-market .fm-deal-sub {
+  font-size: 12px;
+  color: var(--fm-muted);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sample-fresh-market .fm-deal-badge {
+  flex-shrink: 0;
+  background: var(--fm-green);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+
+/* ── Footer ───────────────────────────────────────────────────────────────── */
+
+.sample-fresh-market .fm-footer {
+  background: var(--fm-surface);
+  border-top: 1px solid var(--fm-border);
+  margin-top: auto;
+}
+
+.sample-fresh-market .fm-footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 28px 16px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.sample-fresh-market .fm-footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sample-fresh-market .fm-footer-links {
+  display: flex;
+  gap: 16px;
+  flex: 1;
+}
+
+.sample-fresh-market .fm-footer-link {
+  font-size: 13px;
+  color: var(--fm-muted);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.sample-fresh-market .fm-footer-link:hover {
+  color: var(--fm-green);
+}
+
+.sample-fresh-market .fm-footer-copy {
+  font-size: 12px;
+  color: var(--fm-muted);
+  margin: 0;
+}
+
+/* ── Responsive — tablet (768px) ─────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .sample-fresh-market .fm-hero-illustration {
+    display: none;
+  }
+
+  .sample-fresh-market .fm-hero-inner {
+    padding: 36px 20px 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sample-fresh-market .fm-location-btn {
+    display: none;
+  }
+
+  .sample-fresh-market .fm-topbar-inner {
+    gap: 10px;
+  }
+
+  .sample-fresh-market .fm-product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
+    gap: 10px;
+  }
+
+  .sample-fresh-market .fm-deals-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sample-fresh-market .fm-footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .sample-fresh-market .fm-footer-links {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+}
+
+/* ── Responsive — mobile (375px) ─────────────────────────────────────────── */
+
+@media (max-width: 480px) {
+  .sample-fresh-market .fm-logo-text {
+    font-size: 16px;
+  }
+
+  .sample-fresh-market .fm-cart-total {
+    display: none;
+  }
+
+  .sample-fresh-market .fm-hero-title {
+    font-size: 22px;
+  }
+
+  .sample-fresh-market .fm-hero-sub {
+    font-size: 13px;
+  }
+
+  .sample-fresh-market .fm-product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .sample-fresh-market .fm-main {
+    padding: 20px 12px 40px;
+  }
+
+  .sample-fresh-market .fm-section-title {
+    font-size: 17px;
+  }
+}

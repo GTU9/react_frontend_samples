@@ -1,0 +1,847 @@
+/* Converse Chat — all selectors scoped under .sample-converse-chat */
+
+.sample-converse-chat {
+  --cc-bg: #f0f2f5;
+  --cc-surface: #ffffff;
+  --cc-surface-alt: #f8f9fa;
+  --cc-border: #e4e6ea;
+  --cc-border-light: #f0f2f5;
+  --cc-text-primary: #111827;
+  --cc-text-secondary: #6b7280;
+  --cc-text-muted: #9ca3af;
+  --cc-accent: #3b82f6;
+  --cc-accent-hover: #2563eb;
+  --cc-accent-light: #eff6ff;
+  --cc-accent-bubble: #3b82f6;
+  --cc-bubble-in: #ffffff;
+  --cc-bubble-out: #3b82f6;
+  --cc-bubble-out-text: #ffffff;
+  --cc-online: #22c55e;
+  --cc-offline: #d1d5db;
+  --cc-unread: #3b82f6;
+  --cc-sidebar-w: 320px;
+  --cc-header-h: 60px;
+  --cc-composer-h: 68px;
+  --cc-radius: 12px;
+  --cc-radius-sm: 8px;
+  --cc-radius-bubble: 18px;
+
+  display: flex;
+  position: relative; /* containing block for mobile absolute panels */
+  height: 100vh;
+  min-height: 0;
+  background: var(--cc-bg);
+  color: var(--cc-text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow: hidden;
+}
+
+/* ── Conversation List (left panel) ─────────────────────────────────────── */
+
+.sample-converse-chat .cc-sidebar {
+  width: var(--cc-sidebar-w);
+  flex-shrink: 0;
+  background: var(--cc-surface);
+  border-right: 1px solid var(--cc-border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.sample-converse-chat .cc-sidebar-header {
+  height: var(--cc-header-h);
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--cc-border);
+  flex-shrink: 0;
+}
+
+.sample-converse-chat .cc-sidebar-logo {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--cc-text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.sample-converse-chat .cc-logo-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--cc-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sample-converse-chat .cc-logo-icon svg {
+  width: 16px;
+  height: 16px;
+  color: #fff;
+}
+
+.sample-converse-chat .cc-new-chat-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid var(--cc-border);
+  background: transparent;
+  color: var(--cc-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+
+.sample-converse-chat .cc-new-chat-btn:hover {
+  background: var(--cc-accent-light);
+  color: var(--cc-accent);
+  border-color: var(--cc-accent);
+}
+
+.sample-converse-chat .cc-new-chat-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Search */
+
+.sample-converse-chat .cc-search-wrap {
+  padding: 10px 12px;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--cc-border-light);
+}
+
+.sample-converse-chat .cc-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--cc-surface-alt);
+  border: 1px solid var(--cc-border);
+  border-radius: 20px;
+  padding: 6px 12px;
+}
+
+.sample-converse-chat .cc-search svg {
+  width: 14px;
+  height: 14px;
+  color: var(--cc-text-muted);
+  flex-shrink: 0;
+}
+
+.sample-converse-chat .cc-search-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 13px;
+  color: var(--cc-text-primary);
+  width: 100%;
+}
+
+.sample-converse-chat .cc-search-input::placeholder {
+  color: var(--cc-text-muted);
+}
+
+/* Conversation items */
+
+.sample-converse-chat .cc-conv-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px 0;
+}
+
+.sample-converse-chat .cc-conv-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sample-converse-chat .cc-conv-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sample-converse-chat .cc-conv-list::-webkit-scrollbar-thumb {
+  background: var(--cc-border);
+  border-radius: 2px;
+}
+
+.sample-converse-chat .cc-conv-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background 0.12s;
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  min-width: 0;
+}
+
+.sample-converse-chat .cc-conv-item:hover {
+  background: var(--cc-surface-alt);
+}
+
+.sample-converse-chat .cc-conv-item.active {
+  background: var(--cc-accent-light);
+}
+
+/* Avatar */
+
+.sample-converse-chat .cc-avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.sample-converse-chat .cc-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.sample-converse-chat .cc-avatar.sm {
+  width: 36px;
+  height: 36px;
+  font-size: 11px;
+}
+
+.sample-converse-chat .cc-online-dot {
+  position: absolute;
+  bottom: 1px;
+  right: 1px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--cc-online);
+  border: 2px solid var(--cc-surface);
+  overflow: visible;
+}
+
+.sample-converse-chat .cc-online-dot-pulse {
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: var(--cc-online);
+  opacity: 0.45;
+  animation: cc-pulse 2s ease-out infinite;
+}
+
+@keyframes cc-pulse {
+  0%   { transform: scale(0.8); opacity: 0.45; }
+  60%  { transform: scale(1.9); opacity: 0; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sample-converse-chat .cc-online-dot-pulse {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+.sample-converse-chat .cc-conv-item.active .cc-online-dot {
+  border-color: var(--cc-accent-light);
+}
+
+/* Conv item text */
+
+.sample-converse-chat .cc-conv-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.sample-converse-chat .cc-conv-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  margin-bottom: 2px;
+}
+
+.sample-converse-chat .cc-conv-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--cc-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sample-converse-chat .cc-conv-time {
+  font-size: 11px;
+  color: var(--cc-text-muted);
+  flex-shrink: 0;
+}
+
+.sample-converse-chat .cc-conv-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.sample-converse-chat .cc-conv-preview {
+  font-size: 13px;
+  color: var(--cc-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+.sample-converse-chat .cc-conv-preview.unread {
+  color: var(--cc-text-primary);
+  font-weight: 500;
+}
+
+.sample-converse-chat .cc-unread-badge {
+  background: var(--cc-unread);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  flex-shrink: 0;
+}
+
+/* ── Chat Thread (center) ────────────────────────────────────────────────── */
+
+.sample-converse-chat .cc-thread {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--cc-bg);
+  position: relative;
+}
+
+/* Thread header */
+
+.sample-converse-chat .cc-thread-header {
+  height: var(--cc-header-h);
+  background: var(--cc-surface);
+  border-bottom: 1px solid var(--cc-border);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+  flex-shrink: 0;
+  z-index: 5;
+}
+
+.sample-converse-chat .cc-back-btn {
+  display: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--cc-border);
+  background: transparent;
+  color: var(--cc-text-secondary);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s;
+  flex-shrink: 0;
+}
+
+.sample-converse-chat .cc-back-btn:hover {
+  background: var(--cc-surface-alt);
+}
+
+.sample-converse-chat .cc-back-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.sample-converse-chat .cc-thread-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.sample-converse-chat .cc-thread-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--cc-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sample-converse-chat .cc-thread-status {
+  font-size: 12px;
+  color: var(--cc-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.sample-converse-chat .cc-thread-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--cc-online);
+  flex-shrink: 0;
+}
+
+.sample-converse-chat .cc-thread-status-dot.offline {
+  background: var(--cc-offline);
+}
+
+.sample-converse-chat .cc-thread-actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.sample-converse-chat .cc-icon-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--cc-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s, color 0.12s;
+}
+
+.sample-converse-chat .cc-icon-btn:hover {
+  background: var(--cc-surface-alt);
+  color: var(--cc-text-primary);
+}
+
+.sample-converse-chat .cc-icon-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Messages area */
+
+.sample-converse-chat .cc-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sample-converse-chat .cc-messages::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sample-converse-chat .cc-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sample-converse-chat .cc-messages::-webkit-scrollbar-thumb {
+  background: var(--cc-border);
+  border-radius: 2px;
+}
+
+/* Day separator */
+
+.sample-converse-chat .cc-day-sep {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0 8px;
+}
+
+.sample-converse-chat .cc-day-sep-line {
+  flex: 1;
+  height: 1px;
+  background: var(--cc-border);
+}
+
+.sample-converse-chat .cc-day-sep-label {
+  font-size: 11px;
+  color: var(--cc-text-muted);
+  font-weight: 500;
+  white-space: nowrap;
+  background: var(--cc-bg);
+  padding: 0 4px;
+}
+
+/* Message row */
+
+.sample-converse-chat .cc-msg-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  max-width: 100%;
+}
+
+.sample-converse-chat .cc-msg-row.out {
+  flex-direction: row-reverse;
+}
+
+.sample-converse-chat .cc-msg-avatar-slot {
+  width: 30px;
+  flex-shrink: 0;
+}
+
+.sample-converse-chat .cc-bubble {
+  max-width: 72%;
+  padding: 9px 13px;
+  border-radius: var(--cc-radius-bubble);
+  font-size: 14px;
+  line-height: 1.5;
+  word-break: break-word;
+  position: relative;
+}
+
+.sample-converse-chat .cc-bubble.in {
+  background: var(--cc-bubble-in);
+  color: var(--cc-text-primary);
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+}
+
+.sample-converse-chat .cc-bubble.out {
+  background: var(--cc-bubble-out);
+  color: var(--cc-bubble-out-text);
+  border-bottom-right-radius: 4px;
+}
+
+.sample-converse-chat .cc-bubble-time {
+  font-size: 10px;
+  margin-top: 3px;
+  display: block;
+  opacity: 0.65;
+}
+
+.sample-converse-chat .cc-bubble.in .cc-bubble-time {
+  color: var(--cc-text-muted);
+}
+
+.sample-converse-chat .cc-bubble.out .cc-bubble-time {
+  color: rgba(255,255,255,0.8);
+  text-align: right;
+}
+
+/* Typing indicator */
+
+.sample-converse-chat .cc-typing-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.sample-converse-chat .cc-typing-bubble {
+  background: var(--cc-bubble-in);
+  border-radius: var(--cc-radius-bubble);
+  border-bottom-left-radius: 4px;
+  padding: 10px 14px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+}
+
+.sample-converse-chat .cc-typing-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cc-text-muted);
+  /* bounce driven by framer-motion — no CSS animation needed */
+  flex-shrink: 0;
+}
+
+/* Composer */
+
+.sample-converse-chat .cc-composer {
+  height: var(--cc-composer-h);
+  background: var(--cc-surface);
+  border-top: 1px solid var(--cc-border);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.sample-converse-chat .cc-composer-icon-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--cc-text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s, color 0.12s;
+  flex-shrink: 0;
+}
+
+.sample-converse-chat .cc-composer-icon-btn:hover {
+  background: var(--cc-surface-alt);
+  color: var(--cc-accent);
+}
+
+.sample-converse-chat .cc-composer-icon-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.sample-converse-chat .cc-composer-input-wrap {
+  flex: 1;
+  background: var(--cc-surface-alt);
+  border: 1px solid var(--cc-border);
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  height: 40px;
+  transition: border-color 0.15s;
+}
+
+.sample-converse-chat .cc-composer-input-wrap:focus-within {
+  border-color: var(--cc-accent);
+}
+
+.sample-converse-chat .cc-composer-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 14px;
+  color: var(--cc-text-primary);
+  line-height: 1.5;
+}
+
+.sample-converse-chat .cc-composer-input::placeholder {
+  color: var(--cc-text-muted);
+}
+
+.sample-converse-chat .cc-send-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: var(--cc-accent);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, transform 0.1s;
+  flex-shrink: 0;
+}
+
+.sample-converse-chat .cc-send-btn:hover {
+  background: var(--cc-accent-hover);
+}
+
+.sample-converse-chat .cc-send-btn:active {
+  transform: scale(0.92);
+}
+
+.sample-converse-chat .cc-send-btn:disabled {
+  background: var(--cc-border);
+  cursor: not-allowed;
+}
+
+.sample-converse-chat .cc-send-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ── Right Info Panel ────────────────────────────────────────────────────── */
+
+.sample-converse-chat .cc-info-panel {
+  width: 260px;
+  flex-shrink: 0;
+  background: var(--cc-surface);
+  border-left: 1px solid var(--cc-border);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  padding: 28px 20px;
+  gap: 12px;
+  overflow-y: auto;
+}
+
+.sample-converse-chat .cc-info-avatar {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.sample-converse-chat .cc-info-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--cc-text-primary);
+  text-align: center;
+}
+
+.sample-converse-chat .cc-info-role {
+  font-size: 12px;
+  color: var(--cc-text-secondary);
+  text-align: center;
+}
+
+.sample-converse-chat .cc-info-status-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--cc-text-secondary);
+  background: var(--cc-surface-alt);
+  border: 1px solid var(--cc-border);
+  border-radius: 20px;
+  padding: 4px 10px;
+}
+
+.sample-converse-chat .cc-info-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--cc-online);
+}
+
+.sample-converse-chat .cc-info-status-dot.offline {
+  background: var(--cc-offline);
+}
+
+.sample-converse-chat .cc-info-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--cc-border-light);
+  margin: 4px 0;
+}
+
+.sample-converse-chat .cc-info-actions {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  justify-content: center;
+}
+
+.sample-converse-chat .cc-info-action-btn {
+  flex: 1;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid var(--cc-border);
+  background: transparent;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--cc-text-secondary);
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.sample-converse-chat .cc-info-action-btn:hover {
+  background: var(--cc-accent-light);
+  color: var(--cc-accent);
+  border-color: var(--cc-accent);
+}
+
+.sample-converse-chat .cc-info-action-btn svg {
+  width: 13px;
+  height: 13px;
+}
+
+.sample-converse-chat .cc-info-section-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--cc-text-muted);
+  align-self: flex-start;
+  width: 100%;
+}
+
+.sample-converse-chat .cc-info-stat {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--cc-text-secondary);
+  padding: 3px 0;
+}
+
+.sample-converse-chat .cc-info-stat span:last-child {
+  font-weight: 500;
+  color: var(--cc-text-primary);
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+
+/* Wide: show info panel */
+@media (min-width: 1200px) {
+  .sample-converse-chat .cc-info-panel {
+    display: flex;
+  }
+}
+
+/* Tablet: hide sidebar when thread active, show back button */
+@media (max-width: 767px) {
+  .sample-converse-chat .cc-sidebar {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    z-index: 20;
+    transition: transform 0.25s ease;
+  }
+
+  .sample-converse-chat .cc-sidebar.hidden {
+    transform: translateX(-100%);
+    pointer-events: none;
+  }
+
+  .sample-converse-chat .cc-thread {
+    position: absolute;
+    inset: 0;
+    z-index: 15;
+    transition: transform 0.25s ease;
+    transform: translateX(100%);
+  }
+
+  .sample-converse-chat .cc-thread.visible {
+    transform: translateX(0);
+  }
+
+  .sample-converse-chat .cc-back-btn {
+    display: flex;
+  }
+}

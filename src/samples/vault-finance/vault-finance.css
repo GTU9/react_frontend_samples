@@ -1,0 +1,867 @@
+/* Vault Finance — all selectors scoped under .sample-vault-finance */
+
+.sample-vault-finance {
+  --vf-bg: #080d14;
+  --vf-surface: #0d1520;
+  --vf-surface-2: #111d2e;
+  --vf-surface-3: #162236;
+  --vf-border: rgba(34, 211, 238, 0.10);
+  --vf-border-subtle: rgba(255, 255, 255, 0.06);
+  --vf-text-primary: #e8f0fe;
+  --vf-text-secondary: #7e96b8;
+  --vf-text-muted: #4a6080;
+  --vf-accent: #22d3ee;
+  --vf-accent-dim: rgba(34, 211, 238, 0.12);
+  --vf-accent-glow: 0 0 16px rgba(34, 211, 238, 0.28);
+  --vf-green: #10b981;
+  --vf-green-dim: rgba(16, 185, 129, 0.12);
+  --vf-red: #ef4444;
+  --vf-red-dim: rgba(239, 68, 68, 0.12);
+  --vf-sidebar-width: 64px;
+  --vf-topbar-height: 60px;
+  --vf-radius: 12px;
+  --vf-radius-sm: 8px;
+
+  display: flex;
+  min-height: 100vh;
+  background: var(--vf-bg);
+  color: var(--vf-text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ── Sidebar ── */
+
+.sample-vault-finance .vf-sidebar {
+  width: var(--vf-sidebar-width);
+  flex-shrink: 0;
+  background: var(--vf-surface);
+  border-right: 1px solid var(--vf-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0 16px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 40;
+  transition: transform 0.25s ease;
+}
+
+.sample-vault-finance .vf-sidebar-logo {
+  width: 100%;
+  height: var(--vf-topbar-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--vf-border);
+  margin-bottom: 12px;
+}
+
+.sample-vault-finance .vf-logo-icon {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #22d3ee, #0ea5e9);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--vf-accent-glow);
+}
+
+.sample-vault-finance .vf-sidebar-nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  width: 100%;
+}
+
+.sample-vault-finance .vf-nav-item {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--vf-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--vf-text-muted);
+  cursor: pointer;
+  background: none;
+  border: none;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+  position: relative;
+}
+
+.sample-vault-finance .vf-nav-item:hover {
+  background: var(--vf-surface-3);
+  color: var(--vf-text-secondary);
+}
+
+.sample-vault-finance .vf-nav-item.active {
+  background: var(--vf-accent-dim);
+  color: var(--vf-accent);
+  box-shadow: var(--vf-accent-glow);
+}
+
+.sample-vault-finance .vf-nav-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.sample-vault-finance .vf-sidebar-footer {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.sample-vault-finance .vf-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #22d3ee22, #22d3ee44);
+  border: 1px solid var(--vf-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--vf-accent);
+  cursor: pointer;
+}
+
+/* ── Overlay ── */
+
+.sample-vault-finance .vf-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 35;
+}
+
+.sample-vault-finance .vf-overlay.open {
+  display: block;
+}
+
+/* ── Main layout ── */
+
+.sample-vault-finance .vf-main {
+  flex: 1;
+  margin-left: var(--vf-sidebar-width);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* ── Top bar ── */
+
+.sample-vault-finance .vf-topbar {
+  height: var(--vf-topbar-height);
+  background: var(--vf-surface);
+  border-bottom: 1px solid var(--vf-border);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+
+.sample-vault-finance .vf-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: var(--vf-text-secondary);
+}
+
+.sample-vault-finance .vf-topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.sample-vault-finance .vf-topbar-brand-name {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--vf-text-primary);
+}
+
+.sample-vault-finance .vf-topbar-brand-name span {
+  color: var(--vf-accent);
+}
+
+.sample-vault-finance .vf-topbar-portfolio {
+  display: flex;
+  flex-direction: column;
+  margin-left: 16px;
+  flex-shrink: 0;
+}
+
+.sample-vault-finance .vf-topbar-total {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--vf-text-primary);
+  line-height: 1.1;
+}
+
+.sample-vault-finance .vf-topbar-change {
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.sample-vault-finance .vf-topbar-change.positive { color: var(--vf-green); }
+.sample-vault-finance .vf-topbar-change.negative { color: var(--vf-red); }
+
+.sample-vault-finance .vf-topbar-search {
+  flex: 1;
+  max-width: 280px;
+  margin-left: auto;
+  position: relative;
+}
+
+.sample-vault-finance .vf-search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  color: var(--vf-text-muted);
+  pointer-events: none;
+}
+
+.sample-vault-finance .vf-search-input {
+  width: 100%;
+  height: 34px;
+  padding: 0 12px 0 32px;
+  border: 1px solid var(--vf-border);
+  border-radius: 20px;
+  background: var(--vf-surface-2);
+  font-size: 13px;
+  color: var(--vf-text-primary);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  box-sizing: border-box;
+}
+
+.sample-vault-finance .vf-search-input::placeholder {
+  color: var(--vf-text-muted);
+}
+
+.sample-vault-finance .vf-search-input:focus {
+  border-color: var(--vf-accent);
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.1);
+}
+
+.sample-vault-finance .vf-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.sample-vault-finance .vf-topbar-icon-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--vf-radius-sm);
+  border: 1px solid var(--vf-border);
+  background: var(--vf-surface-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--vf-text-secondary);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.sample-vault-finance .vf-topbar-icon-btn:hover {
+  border-color: var(--vf-accent);
+  color: var(--vf-accent);
+}
+
+/* ── Page content ── */
+
+.sample-vault-finance .vf-content {
+  flex: 1;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Stat cards row ── */
+
+.sample-vault-finance .vf-stat-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.sample-vault-finance .vf-stat-card {
+  background: var(--vf-surface);
+  border: 1px solid var(--vf-border);
+  border-radius: var(--vf-radius);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.sample-vault-finance .vf-stat-card:hover {
+  border-color: rgba(34, 211, 238, 0.25);
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.06);
+}
+
+.sample-vault-finance .vf-stat-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--vf-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.sample-vault-finance .vf-stat-value {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--vf-text-primary);
+  line-height: 1.1;
+}
+
+.sample-vault-finance .vf-stat-delta {
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 20px;
+  align-self: flex-start;
+}
+
+.sample-vault-finance .vf-stat-delta.positive {
+  background: var(--vf-green-dim);
+  color: var(--vf-green);
+}
+
+.sample-vault-finance .vf-stat-delta.negative {
+  background: var(--vf-red-dim);
+  color: var(--vf-red);
+}
+
+/* ── Main grid row ── */
+
+.sample-vault-finance .vf-main-row {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 20px;
+  align-items: start;
+}
+
+/* ── Card base ── */
+
+.sample-vault-finance .vf-card {
+  background: var(--vf-surface);
+  border: 1px solid var(--vf-border);
+  border-radius: var(--vf-radius);
+  padding: 20px;
+  transition: border-color 0.2s;
+}
+
+.sample-vault-finance .vf-card:hover {
+  border-color: rgba(34, 211, 238, 0.18);
+}
+
+.sample-vault-finance .vf-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.sample-vault-finance .vf-card-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--vf-text-primary);
+  letter-spacing: -0.01em;
+}
+
+.sample-vault-finance .vf-card-subtitle {
+  font-size: 12px;
+  color: var(--vf-text-muted);
+  margin-bottom: 16px;
+}
+
+.sample-vault-finance .vf-card-badge {
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 20px;
+  background: var(--vf-accent-dim);
+  color: var(--vf-accent);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+}
+
+/* ── Balance chart ── */
+
+.sample-vault-finance .vf-balance-chart-wrap {
+  width: 100%;
+  height: 180px;
+  overflow: visible;
+}
+
+.sample-vault-finance .vf-chart-legend {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.sample-vault-finance .vf-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--vf-text-secondary);
+}
+
+.sample-vault-finance .vf-legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── Holdings table ── */
+
+.sample-vault-finance .vf-table-wrap {
+  overflow-x: auto;
+  margin-top: 12px;
+}
+
+.sample-vault-finance .vf-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.sample-vault-finance .vf-table th {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--vf-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--vf-border);
+  white-space: nowrap;
+}
+
+.sample-vault-finance .vf-table th:not(:first-child) {
+  text-align: right;
+}
+
+.sample-vault-finance .vf-table td {
+  padding: 11px 12px;
+  border-bottom: 1px solid var(--vf-border-subtle);
+  font-size: 13px;
+  color: var(--vf-text-primary);
+  white-space: nowrap;
+}
+
+.sample-vault-finance .vf-table td:not(:first-child) {
+  text-align: right;
+}
+
+.sample-vault-finance .vf-table tr:last-child td {
+  border-bottom: none;
+}
+
+.sample-vault-finance .vf-table tbody tr:hover td {
+  background: var(--vf-surface-2);
+}
+
+.sample-vault-finance .vf-asset-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sample-vault-finance .vf-asset-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px currentColor;
+}
+
+.sample-vault-finance .vf-asset-symbol {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--vf-text-primary);
+}
+
+.sample-vault-finance .vf-asset-name {
+  font-size: 11.5px;
+  color: var(--vf-text-muted);
+}
+
+.sample-vault-finance .vf-delta-positive {
+  color: var(--vf-green);
+  font-weight: 600;
+}
+
+.sample-vault-finance .vf-delta-negative {
+  color: var(--vf-red);
+  font-weight: 600;
+}
+
+.sample-vault-finance .vf-sparkline-cell {
+  width: 72px;
+  height: 28px;
+  display: inline-block;
+}
+
+/* ── Right column ── */
+
+.sample-vault-finance .vf-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Donut chart ── */
+
+.sample-vault-finance .vf-donut-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.sample-vault-finance .vf-donut-svg {
+  width: 140px;
+  height: 140px;
+  flex-shrink: 0;
+}
+
+.sample-vault-finance .vf-donut-legend {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sample-vault-finance .vf-donut-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--vf-text-secondary);
+}
+
+.sample-vault-finance .vf-donut-swatch {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.sample-vault-finance .vf-donut-label {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sample-vault-finance .vf-donut-pct {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--vf-text-primary);
+  flex-shrink: 0;
+}
+
+/* ── Watchlist ── */
+
+.sample-vault-finance .vf-watch-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 12px;
+}
+
+.sample-vault-finance .vf-watch-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--vf-border-subtle);
+}
+
+.sample-vault-finance .vf-watch-item:last-child {
+  border-bottom: none;
+}
+
+.sample-vault-finance .vf-watch-sym {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--vf-text-primary);
+  width: 42px;
+  flex-shrink: 0;
+}
+
+.sample-vault-finance .vf-watch-name {
+  flex: 1;
+  font-size: 11.5px;
+  color: var(--vf-text-muted);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sample-vault-finance .vf-watch-sparkline {
+  width: 52px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.sample-vault-finance .vf-watch-price {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--vf-text-primary);
+  text-align: right;
+  width: 60px;
+  flex-shrink: 0;
+}
+
+.sample-vault-finance .vf-watch-delta {
+  font-size: 11px;
+  font-weight: 600;
+  text-align: right;
+  width: 44px;
+  flex-shrink: 0;
+}
+
+/* ── Bottom row ── */
+
+.sample-vault-finance .vf-bottom-row {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 20px;
+}
+
+/* ── Transactions ── */
+
+.sample-vault-finance .vf-tx-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 12px;
+}
+
+.sample-vault-finance .vf-tx-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--vf-border-subtle);
+}
+
+.sample-vault-finance .vf-tx-item:last-child {
+  border-bottom: none;
+}
+
+.sample-vault-finance .vf-tx-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--vf-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.sample-vault-finance .vf-tx-icon.buy {
+  background: var(--vf-green-dim);
+  color: var(--vf-green);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.sample-vault-finance .vf-tx-icon.sell {
+  background: var(--vf-red-dim);
+  color: var(--vf-red);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.sample-vault-finance .vf-tx-icon.deposit {
+  background: var(--vf-accent-dim);
+  color: var(--vf-accent);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+}
+
+.sample-vault-finance .vf-tx-icon.withdraw {
+  background: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.sample-vault-finance .vf-tx-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.sample-vault-finance .vf-tx-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--vf-text-primary);
+  line-height: 1.2;
+}
+
+.sample-vault-finance .vf-tx-meta {
+  font-size: 11.5px;
+  color: var(--vf-text-muted);
+  margin-top: 1px;
+}
+
+.sample-vault-finance .vf-tx-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.sample-vault-finance .vf-tx-value {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.sample-vault-finance .vf-tx-value.buy,
+.sample-vault-finance .vf-tx-value.deposit {
+  color: var(--vf-green);
+}
+
+.sample-vault-finance .vf-tx-value.sell,
+.sample-vault-finance .vf-tx-value.withdraw {
+  color: var(--vf-red);
+}
+
+.sample-vault-finance .vf-tx-time {
+  font-size: 11px;
+  color: var(--vf-text-muted);
+}
+
+.sample-vault-finance .vf-tx-status {
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 10px;
+}
+
+.sample-vault-finance .vf-tx-status.completed {
+  background: var(--vf-green-dim);
+  color: var(--vf-green);
+}
+
+.sample-vault-finance .vf-tx-status.pending {
+  background: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
+}
+
+.sample-vault-finance .vf-tx-status.failed {
+  background: var(--vf-red-dim);
+  color: var(--vf-red);
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 1100px) {
+  .sample-vault-finance .vf-main-row {
+    grid-template-columns: 1fr;
+  }
+
+  .sample-vault-finance .vf-right-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .sample-vault-finance .vf-bottom-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .sample-vault-finance .vf-sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sample-vault-finance .vf-sidebar.open {
+    transform: translateX(0);
+    box-shadow: 4px 0 32px rgba(0, 0, 0, 0.5);
+  }
+
+  .sample-vault-finance .vf-main {
+    margin-left: 0;
+  }
+
+  .sample-vault-finance .vf-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sample-vault-finance .vf-stat-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sample-vault-finance .vf-content {
+    padding: 16px;
+  }
+
+  .sample-vault-finance .vf-topbar {
+    padding: 0 16px;
+  }
+
+  .sample-vault-finance .vf-topbar-portfolio {
+    margin-left: 8px;
+  }
+
+  .sample-vault-finance .vf-right-col {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 479px) {
+  .sample-vault-finance .vf-stat-row {
+    grid-template-columns: 1fr;
+  }
+
+  .sample-vault-finance .vf-topbar-search {
+    display: none;
+  }
+}
+
+/* ── Reduced motion ── */
+
+@media (prefers-reduced-motion: reduce) {
+  .sample-vault-finance * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,697 @@
+/* ============================================================
+   Quill Journal — Editorial / Magazine Styles
+   ALL selectors scoped under .sample-quill-journal
+   NO :root / body / html / bare-element rules
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=Inter:wght@300;400;500&display=swap');
+
+/* ——— Design tokens ——— */
+.sample-quill-journal {
+  --qj-accent:        #b91c1c;
+  --qj-accent-light:  #fef2f2;
+  --qj-ink:           #1a1209;
+  --qj-ink-2:         #3d3326;
+  --qj-ink-3:         #6b5e4e;
+  --qj-ink-4:         #9c8e7e;
+  --qj-paper:         #faf8f4;
+  --qj-paper-2:       #f3f0ea;
+  --qj-rule:          #d6cfc4;
+  --qj-rule-light:    #e8e3db;
+
+  --qj-serif:         'Playfair Display', 'Georgia', 'Times New Roman', serif;
+  --qj-body:          'Source Serif 4', 'Georgia', serif;
+  --qj-sans:          'Inter', system-ui, sans-serif;
+
+  --qj-measure:       65ch;
+  --qj-gap:           2rem;
+  --qj-gap-lg:        3.5rem;
+
+  /* Layout */
+  background-color: var(--qj-paper);
+  color: var(--qj-ink);
+  font-family: var(--qj-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* ——— Masthead ——— */
+.sample-quill-journal .qj-masthead {
+  border-bottom: 3px double var(--qj-rule);
+  padding: 1.5rem 2rem 1rem;
+  text-align: center;
+}
+
+.sample-quill-journal .qj-masthead__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--qj-sans);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--qj-ink-3);
+  margin-bottom: 0.75rem;
+}
+
+.sample-quill-journal .qj-masthead__rule-top {
+  height: 1px;
+  background: var(--qj-rule);
+  margin-bottom: 1rem;
+}
+
+.sample-quill-journal .qj-masthead__title {
+  font-family: var(--qj-serif);
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--qj-ink);
+  margin: 0 0 0.35rem;
+}
+
+.sample-quill-journal .qj-masthead__tagline {
+  font-family: var(--qj-sans);
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--qj-ink-3);
+  margin-bottom: 1.25rem;
+}
+
+/* ——— Nav ——— */
+.sample-quill-journal .qj-nav {
+  border-top: 1px solid var(--qj-rule);
+  border-bottom: 1px solid var(--qj-rule);
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.sample-quill-journal .qj-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.sample-quill-journal .qj-nav__item {
+  font-family: var(--qj-sans);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--qj-ink-2);
+  padding: 0.625rem 1.125rem;
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  background: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+}
+
+.sample-quill-journal .qj-nav__item:hover {
+  color: var(--qj-accent);
+}
+
+.sample-quill-journal .qj-nav__item--active {
+  color: var(--qj-accent);
+  border-bottom-color: var(--qj-accent);
+}
+
+/* ——— Page wrapper ——— */
+.sample-quill-journal .qj-page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ——— Section label ——— */
+.sample-quill-journal .qj-section-label {
+  font-family: var(--qj-sans);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--qj-accent);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.sample-quill-journal .qj-section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--qj-rule);
+}
+
+/* ——— Featured article ——— */
+.sample-quill-journal .qj-featured {
+  padding: var(--qj-gap-lg) 0 var(--qj-gap);
+  border-bottom: 1px solid var(--qj-rule);
+}
+
+.sample-quill-journal .qj-featured__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--qj-gap);
+}
+
+@media (min-width: 768px) {
+  .sample-quill-journal .qj-featured__inner {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: var(--qj-gap-lg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .sample-quill-journal .qj-featured__inner {
+    grid-template-columns: 3fr 2fr;
+  }
+}
+
+.sample-quill-journal .qj-featured__image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 2px;
+  overflow: hidden;
+  order: -1;
+}
+
+@media (min-width: 768px) {
+  .sample-quill-journal .qj-featured__image {
+    order: 1;
+    aspect-ratio: 1 / 1;
+  }
+}
+
+.sample-quill-journal .qj-featured__image-placeholder {
+  width: 100%;
+  height: 100%;
+}
+
+.sample-quill-journal .qj-featured__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sample-quill-journal .qj-category-tag {
+  display: inline-block;
+  font-family: var(--qj-sans);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--qj-accent);
+  margin-bottom: 0.875rem;
+}
+
+.sample-quill-journal .qj-featured__title {
+  font-family: var(--qj-serif);
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--qj-ink);
+  margin: 0 0 0.75rem;
+}
+
+.sample-quill-journal .qj-featured__subtitle {
+  font-family: var(--qj-body);
+  font-size: 1.125rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--qj-ink-2);
+  line-height: 1.5;
+  margin: 0 0 1.25rem;
+}
+
+.sample-quill-journal .qj-byline {
+  font-family: var(--qj-sans);
+  font-size: 0.75rem;
+  color: var(--qj-ink-3);
+  letter-spacing: 0.04em;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sample-quill-journal .qj-byline__name {
+  color: var(--qj-ink-2);
+  font-weight: 500;
+}
+
+.sample-quill-journal .qj-byline__sep {
+  color: var(--qj-rule);
+}
+
+/* Drop cap lede */
+.sample-quill-journal .qj-drop-cap {
+  font-family: var(--qj-body);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--qj-ink-2);
+  max-width: var(--qj-measure);
+}
+
+.sample-quill-journal .qj-drop-cap::first-letter {
+  font-family: var(--qj-serif);
+  font-size: 4.5em;
+  font-weight: 700;
+  float: left;
+  line-height: 0.82;
+  margin: 0.05em 0.1em 0 0;
+  color: var(--qj-ink);
+}
+
+.sample-quill-journal .qj-read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-family: var(--qj-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--qj-accent);
+  margin-top: 1.25rem;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+  cursor: pointer;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  padding: 0;
+}
+
+.sample-quill-journal .qj-read-more:hover {
+  border-bottom-color: var(--qj-accent);
+}
+
+.sample-quill-journal .qj-read-more__arrow {
+  transition: transform 0.2s;
+}
+
+.sample-quill-journal .qj-read-more:hover .qj-read-more__arrow {
+  transform: translateX(3px);
+}
+
+/* ——— Main content + sidebar layout ——— */
+.sample-quill-journal .qj-main-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--qj-gap-lg);
+  padding: var(--qj-gap-lg) 0;
+  border-bottom: 1px solid var(--qj-rule);
+}
+
+@media (min-width: 1024px) {
+  .sample-quill-journal .qj-main-layout {
+    grid-template-columns: 1fr 280px;
+    align-items: start;
+  }
+}
+
+/* ——— Article grid ——— */
+.sample-quill-journal .qj-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+@media (min-width: 640px) {
+  .sample-quill-journal .qj-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sample-quill-journal .qj-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.sample-quill-journal .qj-card {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--qj-rule-light);
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 640px) {
+  .sample-quill-journal .qj-card:nth-child(odd) {
+    padding-right: 1.5rem;
+    border-right: 1px solid var(--qj-rule-light);
+  }
+
+  .sample-quill-journal .qj-card:nth-child(even) {
+    padding-left: 1.5rem;
+  }
+}
+
+.sample-quill-journal .qj-card__image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 1px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.sample-quill-journal .qj-card__image-placeholder {
+  width: 100%;
+  height: 100%;
+}
+
+.sample-quill-journal .qj-card__title {
+  font-family: var(--qj-serif);
+  font-size: 1.375rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--qj-ink);
+  margin: 0 0 0.5rem;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.sample-quill-journal .qj-card__title:hover {
+  color: var(--qj-accent);
+}
+
+.sample-quill-journal .qj-card__excerpt {
+  font-size: 0.9375rem;
+  color: var(--qj-ink-3);
+  line-height: 1.65;
+  margin: 0 0 1rem;
+  flex: 1;
+}
+
+.sample-quill-journal .qj-card__byline {
+  font-family: var(--qj-sans);
+  font-size: 0.6875rem;
+  color: var(--qj-ink-4);
+  letter-spacing: 0.03em;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: auto;
+}
+
+/* ——— Sidebar ——— */
+.sample-quill-journal .qj-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--qj-gap);
+}
+
+.sample-quill-journal .qj-sidebar__section {
+  border-top: 2px solid var(--qj-ink);
+  padding-top: 1rem;
+}
+
+.sample-quill-journal .qj-sidebar__heading {
+  font-family: var(--qj-sans);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--qj-ink-2);
+  margin: 0 0 1.25rem;
+}
+
+/* Most read list */
+.sample-quill-journal .qj-most-read {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.sample-quill-journal .qj-most-read__item {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: 0.75rem;
+  align-items: start;
+  padding: 0.875rem 0;
+  border-bottom: 1px solid var(--qj-rule-light);
+  cursor: pointer;
+}
+
+.sample-quill-journal .qj-most-read__item:last-child {
+  border-bottom: none;
+}
+
+.sample-quill-journal .qj-most-read__rank {
+  font-family: var(--qj-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--qj-rule);
+  line-height: 1;
+  padding-top: 0.1em;
+}
+
+.sample-quill-journal .qj-most-read__title {
+  font-family: var(--qj-serif);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--qj-ink);
+  margin-bottom: 0.2rem;
+  transition: color 0.15s;
+}
+
+.sample-quill-journal .qj-most-read__item:hover .qj-most-read__title {
+  color: var(--qj-accent);
+}
+
+.sample-quill-journal .qj-most-read__meta {
+  font-family: var(--qj-sans);
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--qj-ink-4);
+}
+
+/* ——— Newsletter ——— */
+.sample-quill-journal .qj-newsletter {
+  background: var(--qj-ink);
+  color: var(--qj-paper);
+  padding: var(--qj-gap-lg) 2rem;
+  text-align: center;
+}
+
+.sample-quill-journal .qj-newsletter__ornament {
+  font-family: var(--qj-serif);
+  font-size: 1.5rem;
+  color: var(--qj-accent);
+  letter-spacing: 0.3em;
+  margin-bottom: 1rem;
+}
+
+.sample-quill-journal .qj-newsletter__headline {
+  font-family: var(--qj-serif);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 700;
+  color: var(--qj-paper);
+  margin: 0 0 0.75rem;
+}
+
+.sample-quill-journal .qj-newsletter__body {
+  font-family: var(--qj-body);
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--qj-ink-4);
+  max-width: 44ch;
+  margin: 0 auto 2rem;
+  line-height: 1.65;
+}
+
+.sample-quill-journal .qj-newsletter__form {
+  display: flex;
+  gap: 0;
+  max-width: 420px;
+  margin: 0 auto;
+  border: 1px solid var(--qj-ink-3);
+}
+
+.sample-quill-journal .qj-newsletter__input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--qj-paper);
+  font-family: var(--qj-sans);
+  font-size: 0.875rem;
+  padding: 0.75rem 1rem;
+}
+
+.sample-quill-journal .qj-newsletter__input::placeholder {
+  color: var(--qj-ink-3);
+}
+
+.sample-quill-journal .qj-newsletter__btn {
+  background: var(--qj-accent);
+  border: none;
+  color: #fff;
+  font-family: var(--qj-sans);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.25rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.sample-quill-journal .qj-newsletter__btn:hover {
+  background: #991b1b;
+}
+
+/* ——— Footer ——— */
+.sample-quill-journal .qj-footer {
+  border-top: 3px double var(--qj-rule);
+  padding: 2rem;
+  text-align: center;
+}
+
+.sample-quill-journal .qj-footer__title {
+  font-family: var(--qj-serif);
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  color: var(--qj-ink);
+  margin-bottom: 0.25rem;
+}
+
+.sample-quill-journal .qj-footer__tagline {
+  font-family: var(--qj-sans);
+  font-size: 0.625rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--qj-ink-4);
+  margin-bottom: 1.25rem;
+}
+
+.sample-quill-journal .qj-footer__links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.sample-quill-journal .qj-footer__link {
+  font-family: var(--qj-sans);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--qj-ink-3);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.sample-quill-journal .qj-footer__link:hover {
+  color: var(--qj-accent);
+}
+
+.sample-quill-journal .qj-footer__copy {
+  font-family: var(--qj-sans);
+  font-size: 0.6875rem;
+  color: var(--qj-ink-4);
+}
+
+/* ——— Divider ornament ——— */
+.sample-quill-journal .qj-ornament {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--qj-rule);
+  letter-spacing: 0.4em;
+  padding: 0.5rem 0;
+}
+
+/* ——— Reading progress bar ——— */
+.sample-quill-journal .qj-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--qj-accent);
+  transform-origin: left;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* ——— Word reveal spans ——— */
+.sample-quill-journal .qj-word {
+  display: inline-block;
+}
+
+/* ——— Drop-cap via JS span (replaces ::first-letter) ——— */
+.sample-quill-journal .qj-drop-cap__letter {
+  font-family: var(--qj-serif);
+  font-size: 4.5em;
+  font-weight: 700;
+  float: left;
+  line-height: 0.82;
+  margin: 0.05em 0.1em 0 0;
+  color: var(--qj-ink);
+  display: block;
+}
+
+/* keep original ::first-letter off when JS letter is rendered */
+.sample-quill-journal .qj-drop-cap:has(.qj-drop-cap__letter)::first-letter {
+  font-size: 1em;
+  float: none;
+  margin: 0;
+}
+
+/* ——— Card hover lift ——— */
+.sample-quill-journal .qj-card {
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.sample-quill-journal .qj-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(26, 18, 9, 0.10);
+}
+
+/* ——— Link underline grow on hover ——— */
+.sample-quill-journal .qj-card__title {
+  position: relative;
+  display: inline;
+  background-image: linear-gradient(var(--qj-accent), var(--qj-accent));
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: color 0.15s, background-size 0.3s ease;
+}
+
+.sample-quill-journal .qj-card__title:hover {
+  color: var(--qj-accent);
+  background-size: 100% 1px;
+}
+
+/* ——— Reduced motion ——— */
+@media (prefers-reduced-motion: reduce) {
+  .sample-quill-journal * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .sample-quill-journal .qj-progress-bar {
+    display: none;
+  }
+}

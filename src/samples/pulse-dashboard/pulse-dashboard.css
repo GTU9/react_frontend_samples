@@ -1,0 +1,715 @@
+/* Pulse Dashboard — all selectors scoped under .sample-pulse-dashboard */
+
+.sample-pulse-dashboard {
+  --pd-bg: #f9fafb;
+  --pd-surface: #ffffff;
+  --pd-border: #e5e7eb;
+  --pd-border-light: #f3f4f6;
+  --pd-text-primary: #111827;
+  --pd-text-secondary: #6b7280;
+  --pd-text-muted: #9ca3af;
+  --pd-accent: #10b981;
+  --pd-accent-light: #d1fae5;
+  --pd-accent-muted: #6ee7b7;
+  --pd-danger: #ef4444;
+  --pd-danger-light: #fee2e2;
+  --pd-warning: #f59e0b;
+  --pd-warning-light: #fef3c7;
+  --pd-neutral-light: #f3f4f6;
+  --pd-sidebar-width: 224px;
+  --pd-topbar-height: 56px;
+  --pd-radius: 10px;
+  --pd-radius-sm: 6px;
+
+  display: flex;
+  min-height: 100vh;
+  background: var(--pd-bg);
+  color: var(--pd-text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ── Sidebar ── */
+
+.sample-pulse-dashboard .pd-sidebar {
+  width: var(--pd-sidebar-width);
+  flex-shrink: 0;
+  background: var(--pd-surface);
+  border-right: 1px solid var(--pd-border);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 40;
+  transition: transform 0.25s ease;
+}
+
+.sample-pulse-dashboard .pd-sidebar-logo {
+  height: var(--pd-topbar-height);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--pd-border);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--pd-text-primary);
+}
+
+.sample-pulse-dashboard .pd-logo-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: var(--pd-accent);
+  flex-shrink: 0;
+}
+
+.sample-pulse-dashboard .pd-sidebar-nav {
+  flex: 1;
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow-y: auto;
+}
+
+.sample-pulse-dashboard .pd-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: var(--pd-radius-sm);
+  color: var(--pd-text-secondary);
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+
+.sample-pulse-dashboard .pd-nav-item:hover {
+  background: var(--pd-neutral-light);
+  color: var(--pd-text-primary);
+}
+
+.sample-pulse-dashboard .pd-nav-item.active {
+  background: var(--pd-accent-light);
+  color: var(--pd-accent);
+}
+
+.sample-pulse-dashboard .pd-nav-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.sample-pulse-dashboard .pd-nav-item.active .pd-nav-icon {
+  opacity: 1;
+}
+
+.sample-pulse-dashboard .pd-sidebar-footer {
+  padding: 16px;
+  border-top: 1px solid var(--pd-border);
+}
+
+.sample-pulse-dashboard .pd-avatar-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sample-pulse-dashboard .pd-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--pd-accent-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--pd-accent);
+  flex-shrink: 0;
+}
+
+.sample-pulse-dashboard .pd-avatar-info {
+  min-width: 0;
+}
+
+.sample-pulse-dashboard .pd-avatar-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--pd-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sample-pulse-dashboard .pd-avatar-role {
+  font-size: 11.5px;
+  color: var(--pd-text-muted);
+}
+
+/* ── Main layout ── */
+
+.sample-pulse-dashboard .pd-main {
+  flex: 1;
+  margin-left: var(--pd-sidebar-width);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* ── Top bar ── */
+
+.sample-pulse-dashboard .pd-topbar {
+  height: var(--pd-topbar-height);
+  background: var(--pd-surface);
+  border-bottom: 1px solid var(--pd-border);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+
+.sample-pulse-dashboard .pd-topbar-title {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--pd-text-primary);
+  flex-shrink: 0;
+}
+
+.sample-pulse-dashboard .pd-topbar-search {
+  flex: 1;
+  max-width: 320px;
+  position: relative;
+  margin-left: 8px;
+}
+
+.sample-pulse-dashboard .pd-search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  color: var(--pd-text-muted);
+  pointer-events: none;
+}
+
+.sample-pulse-dashboard .pd-search-input {
+  width: 100%;
+  height: 32px;
+  padding: 0 12px 0 32px;
+  border: 1px solid var(--pd-border);
+  border-radius: 20px;
+  background: var(--pd-bg);
+  font-size: 13px;
+  color: var(--pd-text-primary);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  box-sizing: border-box;
+}
+
+.sample-pulse-dashboard .pd-search-input:focus {
+  border-color: var(--pd-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--pd-accent) 15%, transparent);
+}
+
+.sample-pulse-dashboard .pd-search-input::placeholder {
+  color: var(--pd-text-muted);
+}
+
+.sample-pulse-dashboard .pd-topbar-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sample-pulse-dashboard .pd-topbar-date {
+  font-size: 12px;
+  color: var(--pd-text-muted);
+  white-space: nowrap;
+}
+
+.sample-pulse-dashboard .pd-topbar-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--pd-accent-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--pd-accent);
+  cursor: pointer;
+}
+
+.sample-pulse-dashboard .pd-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: var(--pd-text-secondary);
+}
+
+/* ── Page content ── */
+
+.sample-pulse-dashboard .pd-content {
+  flex: 1;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── KPI row ── */
+
+.sample-pulse-dashboard .pd-kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.sample-pulse-dashboard .pd-kpi-card {
+  background: var(--pd-surface);
+  border: 1px solid var(--pd-border);
+  border-radius: var(--pd-radius);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sample-pulse-dashboard .pd-kpi-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sample-pulse-dashboard .pd-kpi-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--pd-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.sample-pulse-dashboard .pd-kpi-delta {
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 20px;
+}
+
+.sample-pulse-dashboard .pd-kpi-delta.positive {
+  background: var(--pd-accent-light);
+  color: var(--pd-accent);
+}
+
+.sample-pulse-dashboard .pd-kpi-delta.negative {
+  background: var(--pd-danger-light);
+  color: var(--pd-danger);
+}
+
+.sample-pulse-dashboard .pd-kpi-value {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--pd-text-primary);
+  line-height: 1.1;
+}
+
+.sample-pulse-dashboard .pd-sparkline {
+  height: 32px;
+  width: 100%;
+}
+
+/* ── Charts row ── */
+
+.sample-pulse-dashboard .pd-charts-row {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 16px;
+}
+
+.sample-pulse-dashboard .pd-card {
+  background: var(--pd-surface);
+  border: 1px solid var(--pd-border);
+  border-radius: var(--pd-radius);
+  padding: 20px;
+}
+
+.sample-pulse-dashboard .pd-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.sample-pulse-dashboard .pd-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--pd-text-primary);
+  letter-spacing: -0.01em;
+}
+
+.sample-pulse-dashboard .pd-card-subtitle {
+  font-size: 12px;
+  color: var(--pd-text-muted);
+  margin-bottom: 16px;
+}
+
+.sample-pulse-dashboard .pd-card-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 20px;
+  background: var(--pd-neutral-light);
+  color: var(--pd-text-secondary);
+}
+
+.sample-pulse-dashboard .pd-chart-area {
+  width: 100%;
+  height: 180px;
+  overflow: visible;
+}
+
+.sample-pulse-dashboard .pd-chart-legend {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.sample-pulse-dashboard .pd-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--pd-text-secondary);
+}
+
+.sample-pulse-dashboard .pd-legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Bar chart */
+
+.sample-pulse-dashboard .pd-bar-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.sample-pulse-dashboard .pd-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sample-pulse-dashboard .pd-bar-label {
+  font-size: 12px;
+  color: var(--pd-text-secondary);
+  width: 64px;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.sample-pulse-dashboard .pd-bar-track {
+  flex: 1;
+  height: 8px;
+  background: var(--pd-border-light);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.sample-pulse-dashboard .pd-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--pd-accent);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sample-pulse-dashboard .pd-bar-pct {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--pd-text-secondary);
+  width: 32px;
+  flex-shrink: 0;
+}
+
+/* ── Bottom row ── */
+
+.sample-pulse-dashboard .pd-bottom-row {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 16px;
+}
+
+/* ── Data table ── */
+
+.sample-pulse-dashboard .pd-table-wrapper {
+  overflow-x: auto;
+  margin-top: 12px;
+}
+
+.sample-pulse-dashboard .pd-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.sample-pulse-dashboard .pd-table th {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--pd-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--pd-border);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+}
+
+.sample-pulse-dashboard .pd-table th:hover {
+  color: var(--pd-text-secondary);
+}
+
+.sample-pulse-dashboard .pd-table th .sort-arrow {
+  display: inline-block;
+  margin-left: 4px;
+  opacity: 0.4;
+}
+
+.sample-pulse-dashboard .pd-table th.sorted .sort-arrow {
+  opacity: 1;
+  color: var(--pd-accent);
+}
+
+.sample-pulse-dashboard .pd-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--pd-border-light);
+  font-size: 13px;
+  color: var(--pd-text-primary);
+  white-space: nowrap;
+}
+
+.sample-pulse-dashboard .pd-table tr:last-child td {
+  border-bottom: none;
+}
+
+.sample-pulse-dashboard .pd-table tbody tr:hover td {
+  background: var(--pd-bg);
+}
+
+.sample-pulse-dashboard .pd-cell-name {
+  font-weight: 600;
+  color: var(--pd-text-primary);
+}
+
+.sample-pulse-dashboard .pd-cell-channel {
+  color: var(--pd-text-secondary);
+  font-size: 12px;
+}
+
+.sample-pulse-dashboard .pd-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.sample-pulse-dashboard .pd-status-pill.active {
+  background: var(--pd-accent-light);
+  color: var(--pd-accent);
+}
+
+.sample-pulse-dashboard .pd-status-pill.paused {
+  background: var(--pd-warning-light);
+  color: var(--pd-warning);
+}
+
+.sample-pulse-dashboard .pd-status-pill.ended {
+  background: var(--pd-neutral-light);
+  color: var(--pd-text-muted);
+}
+
+.sample-pulse-dashboard .pd-status-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* ── Activity feed ── */
+
+.sample-pulse-dashboard .pd-activity-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 12px;
+}
+
+.sample-pulse-dashboard .pd-activity-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--pd-border-light);
+}
+
+.sample-pulse-dashboard .pd-activity-item:last-child {
+  border-bottom: none;
+}
+
+.sample-pulse-dashboard .pd-activity-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 12px;
+}
+
+.sample-pulse-dashboard .pd-activity-icon.signup {
+  background: var(--pd-accent-light);
+  color: var(--pd-accent);
+}
+
+.sample-pulse-dashboard .pd-activity-icon.purchase {
+  background: #ede9fe;
+  color: #7c3aed;
+}
+
+.sample-pulse-dashboard .pd-activity-icon.alert {
+  background: var(--pd-danger-light);
+  color: var(--pd-danger);
+}
+
+.sample-pulse-dashboard .pd-activity-icon.milestone {
+  background: var(--pd-warning-light);
+  color: var(--pd-warning);
+}
+
+.sample-pulse-dashboard .pd-activity-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.sample-pulse-dashboard .pd-activity-msg {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--pd-text-primary);
+  line-height: 1.3;
+}
+
+.sample-pulse-dashboard .pd-activity-detail {
+  font-size: 12px;
+  color: var(--pd-text-muted);
+  margin-top: 1px;
+}
+
+.sample-pulse-dashboard .pd-activity-time {
+  font-size: 11.5px;
+  color: var(--pd-text-muted);
+  flex-shrink: 0;
+}
+
+/* ── Mobile drawer overlay ── */
+
+.sample-pulse-dashboard .pd-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 35;
+}
+
+.sample-pulse-dashboard .pd-overlay.open {
+  display: block;
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 1024px) {
+  .sample-pulse-dashboard .pd-charts-row {
+    grid-template-columns: 1fr;
+  }
+
+  .sample-pulse-dashboard .pd-bottom-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .sample-pulse-dashboard .pd-sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sample-pulse-dashboard .pd-sidebar.open {
+    transform: translateX(0);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.08);
+  }
+
+  .sample-pulse-dashboard .pd-main {
+    margin-left: 0;
+  }
+
+  .sample-pulse-dashboard .pd-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sample-pulse-dashboard .pd-kpi-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sample-pulse-dashboard .pd-content {
+    padding: 16px;
+  }
+
+  .sample-pulse-dashboard .pd-topbar {
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 479px) {
+  .sample-pulse-dashboard .pd-kpi-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Reduced motion ── */
+
+@media (prefers-reduced-motion: reduce) {
+  .sample-pulse-dashboard * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

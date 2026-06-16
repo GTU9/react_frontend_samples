@@ -1,0 +1,811 @@
+/* ── Pulse Stream — Cinematic Streaming Hub ─────────────────── */
+/* All selectors scoped under .sample-pulse-stream              */
+/* NO :root / body / html / bare-element selectors              */
+
+/* ── Reset & base ────────────────────────────────────────────── */
+.sample-pulse-stream *,
+.sample-pulse-stream *::before,
+.sample-pulse-stream *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.sample-pulse-stream {
+  --ps-bg: #070510;
+  --ps-surface: #0f0d1a;
+  --ps-surface-2: #1a1728;
+  --ps-border: rgba(255, 255, 255, 0.08);
+  --ps-accent: #e11d48;
+  --ps-accent-hover: #f43f5e;
+  --ps-accent-dim: rgba(225, 29, 72, 0.15);
+  --ps-text: #f1f0f5;
+  --ps-text-muted: rgba(241, 240, 245, 0.55);
+  --ps-text-dim: rgba(241, 240, 245, 0.35);
+  --ps-nav-h: 64px;
+  --ps-radius: 6px;
+  --ps-radius-lg: 10px;
+  --ps-card-w: 180px;
+  --ps-card-h: 270px;
+  --ps-card-w-sm: 140px;
+  --ps-card-h-sm: 210px;
+  --ps-top10-w: 240px;
+
+  background-color: var(--ps-bg);
+  color: var(--ps-text);
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── Nav ─────────────────────────────────────────────────────── */
+.ps-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--ps-nav-h);
+  display: flex;
+  align-items: center;
+  padding: 0 4%;
+  background: linear-gradient(to bottom, rgba(7, 5, 16, 0.98) 0%, rgba(7, 5, 16, 0.82) 100%);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--ps-border);
+  gap: 2rem;
+}
+
+.ps-nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.ps-nav-logo-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--ps-accent);
+  border-radius: 4px;
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -1px;
+}
+
+.ps-nav-logo-text {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--ps-text);
+  letter-spacing: -0.5px;
+}
+
+.ps-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  list-style: none;
+}
+
+.ps-nav-links a {
+  display: block;
+  padding: 0.4rem 0.75rem;
+  color: var(--ps-text-muted);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: var(--ps-radius);
+  transition: color 0.2s, background 0.2s;
+}
+
+.ps-nav-links a:hover {
+  color: var(--ps-text);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.ps-nav-links a.ps-nav-active {
+  color: var(--ps-text);
+  font-weight: 600;
+}
+
+.ps-nav-spacer {
+  flex: 1;
+}
+
+.ps-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ps-nav-search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.75rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--ps-border);
+  border-radius: 20px;
+  color: var(--ps-text-muted);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.ps-nav-search:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: var(--ps-text);
+}
+
+.ps-nav-search-icon {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.ps-nav-profile {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e11d48, #9f1239);
+  border: 2px solid rgba(225, 29, 72, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.ps-nav-profile:hover {
+  border-color: var(--ps-accent);
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .ps-nav {
+    padding: 0 5%;
+    gap: 1rem;
+  }
+
+  .ps-nav-links {
+    display: none;
+  }
+
+  .ps-nav-search span:not(.ps-nav-search-icon) {
+    display: none;
+  }
+}
+
+/* ── Hero ─────────────────────────────────────────────────────── */
+.ps-hero {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 4% 5%;
+  overflow: hidden;
+}
+
+.ps-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.ps-hero-art {
+  position: absolute;
+  inset: 0;
+  opacity: 0.6;
+}
+
+.ps-hero-vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(7, 5, 16, 0.95) 0%,
+    rgba(7, 5, 16, 0.65) 50%,
+    rgba(7, 5, 16, 0.15) 100%
+  );
+}
+
+.ps-hero-vignette-bottom {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(7, 5, 16, 1) 0%,
+    rgba(7, 5, 16, 0.5) 30%,
+    transparent 60%
+  );
+}
+
+.ps-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 560px;
+}
+
+.ps-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.75rem;
+  background: var(--ps-accent-dim);
+  border: 1px solid rgba(225, 29, 72, 0.35);
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #f43f5e;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+
+.ps-hero-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ps-accent);
+  animation: ps-pulse 2s ease-in-out infinite;
+}
+
+@keyframes ps-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ps-hero-badge-dot {
+    animation: none;
+  }
+}
+
+.ps-hero-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  color: var(--ps-text);
+  margin-bottom: 1rem;
+}
+
+.ps-hero-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+.ps-hero-score {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #fbbf24;
+  font-weight: 700;
+}
+
+.ps-hero-dot {
+  color: var(--ps-text-dim);
+  font-size: 0.5rem;
+}
+
+.ps-hero-year,
+.ps-hero-duration {
+  color: var(--ps-text-muted);
+}
+
+.ps-hero-rating {
+  padding: 0.1rem 0.4rem;
+  border: 1px solid var(--ps-text-dim);
+  border-radius: 3px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--ps-text-muted);
+}
+
+.ps-hero-genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+}
+
+.ps-hero-genre-tag {
+  padding: 0.2rem 0.6rem;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  font-size: 0.75rem;
+  color: var(--ps-text-muted);
+}
+
+.ps-hero-synopsis {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--ps-text-muted);
+  max-width: 480px;
+  margin-bottom: 1.75rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ps-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.ps-btn-play {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.75rem;
+  background: var(--ps-accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  border: none;
+  border-radius: var(--ps-radius);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.ps-btn-play:hover {
+  background: var(--ps-accent-hover);
+  transform: scale(1.03);
+}
+
+.ps-btn-mylist {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--ps-text);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  border-radius: var(--ps-radius);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+}
+
+.ps-btn-mylist:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: scale(1.03);
+}
+
+@media (max-width: 768px) {
+  .ps-hero {
+    min-height: 60vh;
+    padding: 0 5% 8%;
+  }
+
+  .ps-hero-vignette {
+    background: linear-gradient(
+      to top,
+      rgba(7, 5, 16, 0.98) 0%,
+      rgba(7, 5, 16, 0.6) 50%,
+      rgba(7, 5, 16, 0.25) 100%
+    );
+  }
+}
+
+/* ── Content rows ────────────────────────────────────────────── */
+.ps-rows {
+  padding: 0 0 3rem;
+}
+
+.ps-row {
+  margin-bottom: 2.5rem;
+}
+
+.ps-row-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0 4%;
+  margin-bottom: 0.75rem;
+}
+
+.ps-row-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ps-text);
+  letter-spacing: -0.25px;
+}
+
+.ps-row-see-all {
+  font-size: 0.775rem;
+  color: var(--ps-accent);
+  text-decoration: none;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.ps-row:hover .ps-row-see-all {
+  opacity: 1;
+}
+
+.ps-row-scroll {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem 4%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+}
+
+.ps-row-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Standard poster card ────────────────────────────────────── */
+.ps-card {
+  flex-shrink: 0;
+  width: var(--ps-card-w);
+  border-radius: var(--ps-radius);
+  overflow: visible;
+  cursor: pointer;
+  position: relative;
+}
+
+.ps-card-poster {
+  width: var(--ps-card-w);
+  height: var(--ps-card-h);
+  border-radius: var(--ps-radius);
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ps-card:hover .ps-card-poster {
+  transform: scale(1.07);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(225, 29, 72, 0.3);
+  z-index: 10;
+}
+
+.ps-card-art {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.25s;
+}
+
+.ps-card-shine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.06), transparent);
+  pointer-events: none;
+}
+
+.ps-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, transparent 55%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0.75rem;
+}
+
+.ps-card:hover .ps-card-overlay {
+  opacity: 1;
+}
+
+.ps-card-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.3rem;
+  line-height: 1.2;
+}
+
+.ps-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.ps-card-score {
+  color: #fbbf24;
+  font-weight: 700;
+}
+
+.ps-card-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.7);
+  width: 40px;
+  height: 40px;
+  background: rgba(225, 29, 72, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.ps-card:hover .ps-card-play-btn {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+@media (max-width: 768px) {
+  .ps-card {
+    width: var(--ps-card-w-sm);
+  }
+
+  .ps-card-poster {
+    width: var(--ps-card-w-sm);
+    height: var(--ps-card-h-sm);
+  }
+}
+
+/* ── Top 10 card ─────────────────────────────────────────────── */
+.ps-top10-card {
+  flex-shrink: 0;
+  width: var(--ps-top10-w);
+  position: relative;
+  cursor: pointer;
+}
+
+.ps-top10-numeral {
+  position: absolute;
+  bottom: -10px;
+  left: -14px;
+  font-size: 7rem;
+  font-weight: 900;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 3px rgba(255, 255, 255, 0.12);
+  text-stroke: 3px rgba(255, 255, 255, 0.12);
+  user-select: none;
+  z-index: 1;
+  letter-spacing: -5px;
+  transition: -webkit-text-stroke-color 0.25s;
+}
+
+.ps-top10-card:hover .ps-top10-numeral {
+  -webkit-text-stroke-color: rgba(225, 29, 72, 0.45);
+}
+
+.ps-top10-poster {
+  width: 100%;
+  height: var(--ps-card-h);
+  border-radius: var(--ps-radius);
+  overflow: hidden;
+  position: relative;
+  margin-left: 28px;
+  width: calc(var(--ps-top10-w) - 28px);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ps-top10-card:hover .ps-top10-poster {
+  transform: scale(1.06);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(225, 29, 72, 0.3);
+}
+
+.ps-top10-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, transparent 55%);
+  opacity: 0;
+  transition: opacity 0.25s;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0.75rem;
+}
+
+.ps-top10-card:hover .ps-top10-overlay {
+  opacity: 1;
+}
+
+.ps-top10-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.25rem;
+}
+
+.ps-top10-meta {
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* ── Continue watching card ───────────────────────────────────── */
+.ps-cw-card {
+  flex-shrink: 0;
+  width: var(--ps-card-w);
+  cursor: pointer;
+}
+
+.ps-cw-poster {
+  width: var(--ps-card-w);
+  height: var(--ps-card-h);
+  border-radius: var(--ps-radius);
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ps-cw-card:hover .ps-cw-poster {
+  transform: scale(1.06);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(225, 29, 72, 0.35);
+}
+
+.ps-cw-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 60%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0.75rem;
+}
+
+.ps-cw-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.4rem;
+}
+
+.ps-cw-progress-track {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.ps-cw-progress-fill {
+  height: 100%;
+  background: var(--ps-accent);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.ps-cw-progress-label {
+  font-size: 0.6rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 0.25rem;
+}
+
+/* ── Footer ───────────────────────────────────────────────────── */
+.ps-footer {
+  background: var(--ps-surface);
+  border-top: 1px solid var(--ps-border);
+  padding: 3rem 4%;
+}
+
+.ps-footer-inner {
+  max-width: 900px;
+}
+
+.ps-footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  text-decoration: none;
+}
+
+.ps-footer-logo-mark {
+  width: 28px;
+  height: 28px;
+  background: var(--ps-accent);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 900;
+  color: #fff;
+}
+
+.ps-footer-logo-text {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--ps-text-muted);
+}
+
+.ps-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+  list-style: none;
+  margin-bottom: 1.5rem;
+}
+
+.ps-footer-links a {
+  font-size: 0.8rem;
+  color: var(--ps-text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.ps-footer-links a:hover {
+  color: var(--ps-text);
+}
+
+.ps-footer-copy {
+  font-size: 0.775rem;
+  color: var(--ps-text-dim);
+}
+
+/* ── Shimmer title ───────────────────────────────────────────── */
+.sample-pulse-stream .ps-hero-title--shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--ps-text) 0%,
+    var(--ps-text) 35%,
+    rgba(255, 255, 255, 0.92) 50%,
+    var(--ps-text) 65%,
+    var(--ps-text) 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: ps-shimmer 3.5s ease-in-out 0.6s 1 forwards;
+}
+
+@keyframes ps-shimmer {
+  0%   { background-position: 120% center; }
+  100% { background-position: -20% center; }
+}
+
+/* After shimmer completes, settle to solid text */
+.sample-pulse-stream .ps-hero-title--shimmer::after {
+  content: '';
+}
+
+/* ── Ken Burns — ensure overflow clipped ────────────────────── */
+.sample-pulse-stream .ps-hero-bg {
+  overflow: hidden;
+}
+
+/* ── Card hover glow — framer handles scale, CSS adds glow ─── */
+.sample-pulse-stream .ps-card-poster,
+.sample-pulse-stream .ps-top10-poster,
+.sample-pulse-stream .ps-cw-poster {
+  will-change: transform, box-shadow;
+}
+
+/* ── Reduced motion overrides ───────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .sample-pulse-stream .ps-hero-title--shimmer {
+    animation: none;
+    background: none;
+    -webkit-text-fill-color: var(--ps-text);
+    color: var(--ps-text);
+  }
+  .sample-pulse-stream .ps-hero-art {
+    animation: none !important;
+  }
+}
