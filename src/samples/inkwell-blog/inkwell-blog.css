@@ -1,0 +1,608 @@
+/* ============================================================
+   Inkwell Blog — Minimal Blog Styles
+   ALL selectors scoped under .sample-inkwell-blog
+   NO :root / body / html / bare-element rules
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap');
+
+/* ——— Design tokens ——— */
+.sample-inkwell-blog {
+  --ib-accent:        #2563eb;
+  --ib-accent-hover:  #1d4ed8;
+  --ib-ink:           #111827;
+  --ib-ink-2:         #374151;
+  --ib-ink-3:         #6b7280;
+  --ib-ink-4:         #9ca3af;
+  --ib-bg:            #ffffff;
+  --ib-bg-2:          #f9fafb;
+  --ib-bg-3:          #f3f4f6;
+  --ib-rule:          #e5e7eb;
+  --ib-rule-light:    #f3f4f6;
+  --ib-error:         #dc2626;
+
+  --ib-serif:         'Lora', 'Georgia', serif;
+  --ib-sans:          'Inter', system-ui, sans-serif;
+
+  --ib-max:           1100px;
+  --ib-narrow:        680px;
+  --ib-gap:           1.5rem;
+  --ib-gap-lg:        3rem;
+
+  background-color: var(--ib-bg);
+  color: var(--ib-ink);
+  font-family: var(--ib-sans);
+  font-size: 1rem;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* ——— Top bar ——— */
+.sample-inkwell-blog .ib-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 60px;
+  border-bottom: 1px solid var(--ib-rule);
+  background: var(--ib-bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.sample-inkwell-blog .ib-brand {
+  font-family: var(--ib-serif);
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--ib-ink);
+  letter-spacing: -0.02em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.15s;
+}
+
+.sample-inkwell-blog .ib-brand:hover {
+  opacity: 0.7;
+}
+
+.sample-inkwell-blog .ib-topbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* ——— Buttons ——— */
+.sample-inkwell-blog .ib-btn {
+  font-family: var(--ib-sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 0.5rem 1.125rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, opacity 0.15s;
+  white-space: nowrap;
+}
+
+.sample-inkwell-blog .ib-btn--primary {
+  background: var(--ib-accent);
+  color: #fff;
+  border: 1px solid var(--ib-accent);
+}
+
+.sample-inkwell-blog .ib-btn--primary:hover {
+  background: var(--ib-accent-hover);
+  border-color: var(--ib-accent-hover);
+}
+
+.sample-inkwell-blog .ib-btn--ghost {
+  background: transparent;
+  color: var(--ib-ink-3);
+  border: 1px solid var(--ib-rule);
+}
+
+.sample-inkwell-blog .ib-btn--ghost:hover {
+  color: var(--ib-ink);
+  border-color: var(--ib-ink-3);
+}
+
+.sample-inkwell-blog .ib-btn--publish {
+  background: var(--ib-accent);
+  color: #fff;
+  border: 1px solid var(--ib-accent);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.625rem 2rem;
+  border-radius: 6px;
+}
+
+.sample-inkwell-blog .ib-btn--publish:hover {
+  background: var(--ib-accent-hover);
+  border-color: var(--ib-accent-hover);
+}
+
+/* ——— Main area ——— */
+.sample-inkwell-blog .ib-main {
+  min-height: calc(100vh - 60px);
+}
+
+/* ——— View base ——— */
+.sample-inkwell-blog .ib-view {
+  width: 100%;
+}
+
+/* ——— Container ——— */
+.sample-inkwell-blog .ib-container {
+  max-width: var(--ib-max);
+  margin: 0 auto;
+  padding: var(--ib-gap-lg) 2rem;
+}
+
+.sample-inkwell-blog .ib-container--narrow {
+  max-width: var(--ib-narrow);
+  padding: var(--ib-gap-lg) 1.5rem;
+}
+
+/* ——— Tag pill ——— */
+.sample-inkwell-blog .ib-tag {
+  display: inline-block;
+  font-family: var(--ib-sans);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--ib-accent);
+  background: #eff6ff;
+  border-radius: 4px;
+  padding: 0.2em 0.55em;
+  text-transform: uppercase;
+}
+
+.sample-inkwell-blog .ib-tag--preview {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+
+/* ——— List header ——— */
+.sample-inkwell-blog .ib-list-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--ib-ink);
+}
+
+.sample-inkwell-blog .ib-list-header__title {
+  font-family: var(--ib-serif);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--ib-ink);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.sample-inkwell-blog .ib-list-header__count {
+  font-family: var(--ib-sans);
+  font-size: 0.875rem;
+  color: var(--ib-ink-4);
+  margin: 0;
+}
+
+/* ——— Post list ——— */
+.sample-inkwell-blog .ib-post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ——— Post card ——— */
+.sample-inkwell-blog .ib-card {
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--ib-rule);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sample-inkwell-blog .ib-card:last-child {
+  border-bottom: none;
+}
+
+.sample-inkwell-blog .ib-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(17, 24, 39, 0.06);
+}
+
+.sample-inkwell-blog .ib-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.sample-inkwell-blog .ib-card__dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--ib-ink-4);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.sample-inkwell-blog .ib-card__time {
+  font-size: 0.8125rem;
+  color: var(--ib-ink-4);
+}
+
+.sample-inkwell-blog .ib-card__title {
+  font-family: var(--ib-serif);
+  font-size: clamp(1.25rem, 2.5vw, 1.625rem);
+  font-weight: 700;
+  color: var(--ib-ink);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.6rem;
+  transition: color 0.15s;
+}
+
+.sample-inkwell-blog .ib-card:hover .ib-card__title {
+  color: var(--ib-accent);
+}
+
+.sample-inkwell-blog .ib-card__excerpt {
+  font-size: 0.9375rem;
+  color: var(--ib-ink-3);
+  line-height: 1.65;
+  margin: 0 0 1.25rem;
+  max-width: 68ch;
+}
+
+.sample-inkwell-blog .ib-card__byline {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--ib-ink-4);
+}
+
+.sample-inkwell-blog .ib-card__author {
+  font-weight: 500;
+  color: var(--ib-ink-3);
+}
+
+.sample-inkwell-blog .ib-card__date {
+  color: var(--ib-ink-4);
+}
+
+/* ——— Empty state ——— */
+.sample-inkwell-blog .ib-empty {
+  text-align: center;
+  padding: 5rem 0;
+}
+
+.sample-inkwell-blog .ib-empty__text {
+  font-family: var(--ib-serif);
+  font-size: 1.25rem;
+  color: var(--ib-ink-3);
+  margin: 0 0 0.4rem;
+}
+
+.sample-inkwell-blog .ib-empty__sub {
+  font-size: 0.9375rem;
+  color: var(--ib-ink-4);
+  margin: 0;
+}
+
+/* ——— Back button ——— */
+.sample-inkwell-blog .ib-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-family: var(--ib-sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ib-ink-3);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 2.5rem;
+  transition: color 0.15s;
+}
+
+.sample-inkwell-blog .ib-back-btn:hover {
+  color: var(--ib-accent);
+}
+
+.sample-inkwell-blog .ib-back-btn__arrow {
+  transition: transform 0.15s;
+}
+
+.sample-inkwell-blog .ib-back-btn:hover .ib-back-btn__arrow {
+  transform: translateX(-3px);
+}
+
+/* ——— Article header ——— */
+.sample-inkwell-blog .ib-article-header {
+  margin-bottom: 2.5rem;
+}
+
+.sample-inkwell-blog .ib-article-header__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.sample-inkwell-blog .ib-article-title {
+  font-family: var(--ib-serif);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: var(--ib-ink);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.25rem;
+}
+
+.sample-inkwell-blog .ib-article-byline {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--ib-ink-4);
+  margin-bottom: 1.5rem;
+}
+
+.sample-inkwell-blog .ib-article-byline__author {
+  font-weight: 500;
+  color: var(--ib-ink-2);
+}
+
+.sample-inkwell-blog .ib-article-rule {
+  height: 1px;
+  background: var(--ib-rule);
+}
+
+/* ——— Article body ——— */
+.sample-inkwell-blog .ib-article-body {
+  margin-bottom: 3rem;
+}
+
+.sample-inkwell-blog .ib-article-para {
+  font-family: var(--ib-serif);
+  font-size: 1.0625rem;
+  line-height: 1.85;
+  color: var(--ib-ink-2);
+  margin: 0 0 1.5rem;
+}
+
+.sample-inkwell-blog .ib-article-para:first-child::first-letter {
+  font-size: 3.5em;
+  font-weight: 700;
+  float: left;
+  line-height: 0.8;
+  margin: 0.06em 0.1em 0 0;
+  color: var(--ib-ink);
+}
+
+.sample-inkwell-blog .ib-article-footer {
+  padding-top: 2rem;
+  border-top: 1px solid var(--ib-rule);
+}
+
+/* ——— Write layout ——— */
+.sample-inkwell-blog .ib-write-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  max-width: var(--ib-max);
+  margin: 0 auto;
+  min-height: calc(100vh - 60px);
+}
+
+@media (min-width: 900px) {
+  .sample-inkwell-blog .ib-write-layout {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ——— Composer ——— */
+.sample-inkwell-blog .ib-composer {
+  padding: 2.5rem 2rem;
+  border-right: 1px solid var(--ib-rule);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+@media (max-width: 899px) {
+  .sample-inkwell-blog .ib-composer {
+    border-right: none;
+    border-bottom: 1px solid var(--ib-rule);
+  }
+}
+
+.sample-inkwell-blog .ib-composer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+}
+
+.sample-inkwell-blog .ib-composer__heading {
+  font-family: var(--ib-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ib-ink);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.sample-inkwell-blog .ib-composer__footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 0.5rem;
+}
+
+/* ——— Form fields ——— */
+.sample-inkwell-blog .ib-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.sample-inkwell-blog .ib-field--grow {
+  flex: 1;
+}
+
+.sample-inkwell-blog .ib-field__label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ib-ink-3);
+}
+
+.sample-inkwell-blog .ib-field__input,
+.sample-inkwell-blog .ib-field__select,
+.sample-inkwell-blog .ib-field__textarea {
+  font-family: var(--ib-sans);
+  font-size: 0.9375rem;
+  color: var(--ib-ink);
+  background: var(--ib-bg);
+  border: 1px solid var(--ib-rule);
+  border-radius: 6px;
+  padding: 0.625rem 0.875rem;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sample-inkwell-blog .ib-field__input:focus,
+.sample-inkwell-blog .ib-field__select:focus,
+.sample-inkwell-blog .ib-field__textarea:focus {
+  border-color: var(--ib-accent);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.sample-inkwell-blog .ib-field__input::placeholder,
+.sample-inkwell-blog .ib-field__textarea::placeholder {
+  color: var(--ib-ink-4);
+}
+
+.sample-inkwell-blog .ib-field__textarea {
+  resize: vertical;
+  min-height: 260px;
+  line-height: 1.7;
+}
+
+.sample-inkwell-blog .ib-field__select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.875rem center;
+  padding-right: 2.25rem;
+  cursor: pointer;
+}
+
+/* ——— Error message ——— */
+.sample-inkwell-blog .ib-error {
+  font-size: 0.8125rem;
+  color: var(--ib-error);
+  margin: 0;
+}
+
+/* ——— Preview pane ——— */
+.sample-inkwell-blog .ib-preview {
+  padding: 2.5rem 2rem;
+  background: var(--ib-bg-2);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sample-inkwell-blog .ib-preview__label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ib-ink-4);
+  margin: 0;
+}
+
+.sample-inkwell-blog .ib-preview__inner {
+  background: var(--ib-bg);
+  border: 1px solid var(--ib-rule);
+  border-radius: 8px;
+  padding: 2rem;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.sample-inkwell-blog .ib-preview__title {
+  font-family: var(--ib-serif);
+  font-size: clamp(1.375rem, 2.5vw, 1.875rem);
+  font-weight: 700;
+  color: var(--ib-ink);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.25rem;
+}
+
+.sample-inkwell-blog .ib-preview__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.sample-inkwell-blog .ib-preview__para {
+  font-family: var(--ib-serif);
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--ib-ink-2);
+  margin: 0 0 1.25rem;
+}
+
+.sample-inkwell-blog .ib-preview__placeholder {
+  color: var(--ib-ink-4);
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* ——— Responsive — narrow screens ——— */
+@media (max-width: 480px) {
+  .sample-inkwell-blog .ib-topbar {
+    padding: 0 1rem;
+  }
+
+  .sample-inkwell-blog .ib-container {
+    padding: 2rem 1rem;
+  }
+
+  .sample-inkwell-blog .ib-container--narrow {
+    padding: 2rem 1rem;
+  }
+
+  .sample-inkwell-blog .ib-composer {
+    padding: 1.5rem 1rem;
+  }
+
+  .sample-inkwell-blog .ib-preview {
+    padding: 1.5rem 1rem;
+  }
+
+  .sample-inkwell-blog .ib-card__title {
+    font-size: 1.25rem;
+  }
+}
+
+/* ——— Reduced motion ——— */
+@media (prefers-reduced-motion: reduce) {
+  .sample-inkwell-blog * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

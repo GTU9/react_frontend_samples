@@ -1,0 +1,588 @@
+/* ============================================================
+   Prism Blog — scoped under .sample-prism-blog
+   Glassmorphism blog with write/read functionality.
+   ALL selectors prefixed with .sample-prism-blog or .pb-.
+   No :root / body / html / bare-element rules.
+   ============================================================ */
+
+/* ---------- Root container + gradient backdrop ---------- */
+.sample-prism-blog {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: linear-gradient(135deg, #1a0533 0%, #0d1b3e 40%, #0a2240 70%, #1a0533 100%);
+  color: #e8e0ff;
+  font-family: 'Inter', 'Pretendard', 'Noto Sans KR', system-ui, sans-serif;
+}
+
+/* ---------- Ambient blobs (decorative, pointer-events: none) ---------- */
+.sample-prism-blog .pb-blobs {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.sample-prism-blog .pb-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.38;
+}
+
+.sample-prism-blog .pb-blob-1 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+  top: -180px;
+  left: -120px;
+}
+
+.sample-prism-blog .pb-blob-2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, #6366f1 0%, transparent 70%);
+  top: 50%;
+  right: -80px;
+}
+
+.sample-prism-blog .pb-blob-3 {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, #a78bfa 0%, transparent 70%);
+  bottom: 100px;
+  left: 30%;
+}
+
+/* ---------- Layout wrapper ---------- */
+.sample-prism-blog .pb-layout {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+/* ---------- Glass utility ---------- */
+.sample-prism-blog .pb-glass {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1rem;
+}
+
+.sample-prism-blog .pb-glass-accent {
+  background: rgba(139, 92, 246, 0.1);
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  border: 1px solid rgba(139, 92, 246, 0.28);
+  border-radius: 1rem;
+}
+
+/* ---------- Top bar ---------- */
+.sample-prism-blog .pb-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(15, 8, 40, 0.55);
+  backdrop-filter: blur(22px) saturate(1.6);
+  -webkit-backdrop-filter: blur(22px) saturate(1.6);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.18);
+}
+
+.sample-prism-blog .pb-topbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  gap: 1rem;
+}
+
+.sample-prism-blog .pb-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #fff;
+}
+
+.sample-prism-blog .pb-brand-mark {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 900;
+  color: #fff;
+  box-shadow: 0 0 14px rgba(139, 92, 246, 0.6);
+  flex-shrink: 0;
+}
+
+.sample-prism-blog .pb-topbar-actions {
+  display: flex;
+  gap: 0.625rem;
+  align-items: center;
+}
+
+/* ---------- Buttons ---------- */
+.sample-prism-blog .pb-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.15s, box-shadow 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+
+.sample-prism-blog .pb-btn:active {
+  transform: scale(0.97);
+}
+
+.sample-prism-blog .pb-btn-primary {
+  background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+  color: #fff;
+  box-shadow: 0 0 18px rgba(139, 92, 246, 0.45);
+}
+
+.sample-prism-blog .pb-btn-primary:hover {
+  box-shadow: 0 0 28px rgba(139, 92, 246, 0.7);
+  transform: translateY(-1px);
+}
+
+.sample-prism-blog .pb-btn-ghost {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(232, 224, 255, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.sample-prism-blog .pb-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.24);
+  color: #fff;
+}
+
+.sample-prism-blog .pb-btn-back {
+  background: transparent;
+  border: none;
+  color: rgba(167, 139, 250, 0.9);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.5rem;
+  transition: color 0.15s, background 0.15s;
+}
+
+.sample-prism-blog .pb-btn-back:hover {
+  color: #fff;
+  background: rgba(139, 92, 246, 0.15);
+}
+
+/* ---------- Page scaffold ---------- */
+.sample-prism-blog .pb-page {
+  padding-block: 2.5rem;
+}
+
+/* ---------- Section heading ---------- */
+.sample-prism-blog .pb-section-heading {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: #fff;
+  margin: 0 0 1.5rem;
+}
+
+/* ---------- Post grid (list view) ---------- */
+.sample-prism-blog .pb-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .sample-prism-blog .pb-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .sample-prism-blog .pb-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ---------- Post card ---------- */
+.sample-prism-blog .pb-card {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.sample-prism-blog .pb-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(139, 92, 246, 0.22);
+}
+
+.sample-prism-blog .pb-card-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.7rem;
+  border-radius: 2rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  background: rgba(139, 92, 246, 0.18);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  color: #c4b5fd;
+  align-self: flex-start;
+}
+
+.sample-prism-blog .pb-card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.45;
+  color: #fff;
+  margin: 0;
+  letter-spacing: -0.015em;
+}
+
+.sample-prism-blog .pb-card-excerpt {
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: rgba(232, 224, 255, 0.6);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.sample-prism-blog .pb-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.sample-prism-blog .pb-card-author {
+  font-size: 0.78rem;
+  color: rgba(232, 224, 255, 0.5);
+}
+
+.sample-prism-blog .pb-card-author strong {
+  color: rgba(232, 224, 255, 0.78);
+  font-weight: 600;
+}
+
+.sample-prism-blog .pb-card-likes {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.78rem;
+  color: rgba(167, 139, 250, 0.75);
+}
+
+.sample-prism-blog .pb-card-likes-icon {
+  font-style: normal;
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+/* ---------- Read view ---------- */
+.sample-prism-blog .pb-article-wrap {
+  max-width: 720px;
+  margin-inline: auto;
+  padding-block: 2.5rem;
+}
+
+.sample-prism-blog .pb-article {
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .sample-prism-blog .pb-article {
+    padding: 3rem 2.5rem;
+  }
+}
+
+.sample-prism-blog .pb-article-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.sample-prism-blog .pb-article-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.7rem;
+  border-radius: 2rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  background: rgba(139, 92, 246, 0.18);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  color: #c4b5fd;
+  align-self: flex-start;
+}
+
+.sample-prism-blog .pb-article-title {
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: -0.025em;
+  color: #fff;
+  margin: 0;
+}
+
+.sample-prism-blog .pb-article-byline {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  color: rgba(232, 224, 255, 0.5);
+  flex-wrap: wrap;
+}
+
+.sample-prism-blog .pb-article-byline-author {
+  color: rgba(232, 224, 255, 0.8);
+  font-weight: 600;
+}
+
+.sample-prism-blog .pb-article-byline-sep {
+  opacity: 0.4;
+}
+
+.sample-prism-blog .pb-article-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.sample-prism-blog .pb-article-para {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: rgba(232, 224, 255, 0.75);
+  margin: 0;
+}
+
+.sample-prism-blog .pb-article-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.sample-prism-blog .pb-article-likes {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.875rem;
+  color: rgba(167, 139, 250, 0.85);
+  font-weight: 600;
+}
+
+/* ---------- Compose panel ---------- */
+.sample-prism-blog .pb-compose-wrap {
+  max-width: 800px;
+  margin-inline: auto;
+  padding-block: 2rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .sample-prism-blog .pb-compose-wrap {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+.sample-prism-blog .pb-compose-form {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.sample-prism-blog .pb-compose-heading {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin: 0;
+}
+
+.sample-prism-blog .pb-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.sample-prism-blog .pb-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(196, 181, 253, 0.8);
+  letter-spacing: 0.03em;
+}
+
+.sample-prism-blog .pb-input,
+.sample-prism-blog .pb-textarea {
+  width: 100%;
+  padding: 0.65rem 0.875rem;
+  border-radius: 0.625rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e8e0ff;
+  font-size: 0.9rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.18s, box-shadow 0.18s;
+  box-sizing: border-box;
+}
+
+.sample-prism-blog .pb-input::placeholder,
+.sample-prism-blog .pb-textarea::placeholder {
+  color: rgba(232, 224, 255, 0.3);
+}
+
+.sample-prism-blog .pb-input:focus,
+.sample-prism-blog .pb-textarea:focus {
+  border-color: rgba(139, 92, 246, 0.6);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+}
+
+.sample-prism-blog .pb-textarea {
+  resize: vertical;
+  min-height: 140px;
+  line-height: 1.65;
+}
+
+.sample-prism-blog .pb-field-error {
+  font-size: 0.75rem;
+  color: #f87171;
+  margin-top: 0.2rem;
+}
+
+.sample-prism-blog .pb-compose-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* ---------- Live preview card ---------- */
+.sample-prism-blog .pb-preview-panel {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.sample-prism-blog .pb-preview-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(196, 181, 253, 0.6);
+}
+
+.sample-prism-blog .pb-preview-card {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sample-prism-blog .pb-preview-title {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #fff;
+  margin: 0;
+  min-height: 1.4em;
+}
+
+.sample-prism-blog .pb-preview-excerpt {
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: rgba(232, 224, 255, 0.55);
+  margin: 0;
+  min-height: 3.2em;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.sample-prism-blog .pb-preview-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.625rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.sample-prism-blog .pb-preview-meta {
+  font-size: 0.75rem;
+  color: rgba(232, 224, 255, 0.45);
+}
+
+.sample-prism-blog .pb-preview-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.55rem;
+  border-radius: 2rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  background: rgba(139, 92, 246, 0.18);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  color: #c4b5fd;
+}
+
+.sample-prism-blog .pb-preview-empty {
+  color: rgba(232, 224, 255, 0.25);
+  font-style: italic;
+}
+
+/* ---------- Empty state ---------- */
+.sample-prism-blog .pb-empty {
+  text-align: center;
+  padding: 4rem 1rem;
+  color: rgba(232, 224, 255, 0.4);
+  font-size: 0.95rem;
+}
+
+/* ---------- Reduced motion fallbacks ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .sample-prism-blog .pb-card {
+    transition: none;
+  }
+}

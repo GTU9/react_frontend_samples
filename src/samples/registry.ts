@@ -122,6 +122,14 @@ export const samples: Sample[] = [
   { id: 'pulse-stream', title: 'Stream', description: '시네마틱 영상 스트리밍 허브', category: 'Content & Media', pageType: 'media', visualStyle: 'dark', accent: '#e11d48', Component: lazy(() => import('./pulse-stream')) },
   { id: 'daily-wire', title: 'Daily', description: '정보 밀도 높은 뉴스 포털 1면', category: 'Content & Media', pageType: 'news', visualStyle: 'editorial', accent: '#1d4ed8', Component: lazy(() => import('./daily-wire')) },
 
+  // ── 블로그 (글작성 + 조회) ──────────────────────────────────────
+  { id: 'inkwell-blog', title: 'Inkwell', description: '미니멀 글쓰기 · 읽기 블로그 (작성 + 조회)', category: 'Content & Media', pageType: 'blog', visualStyle: 'minimal', accent: '#2563eb', Component: lazy(() => import('./inkwell-blog')) },
+  { id: 'prism-blog', title: 'Prism', description: '글래스모피즘 블로그 (작성 + 조회)', category: 'Content & Media', pageType: 'blog', visualStyle: 'glassmorphism', accent: '#8b5cf6', Component: lazy(() => import('./prism-blog')) },
+  { id: 'mono-devlog', title: 'Mono', description: '다크 마크다운 개발 블로그 (작성 + 조회)', category: 'Content & Media', pageType: 'blog', visualStyle: 'dark', accent: '#34d399', Component: lazy(() => import('./mono-devlog')) },
+  { id: 'press-brut', title: 'Press', description: '브루탈리즘 블로그 (작성 + 조회)', category: 'Content & Media', pageType: 'blog', visualStyle: 'brutalism', accent: '#ff4d00', Component: lazy(() => import('./press-brut')) },
+  { id: 'velvet-blog', title: 'Velvet', description: '파스텔 그라데이션 퍼스널 블로그 (작성 + 조회)', category: 'Content & Media', pageType: 'blog', visualStyle: 'gradient', accent: '#ec4899', Component: lazy(() => import('./velvet-blog')) },
+  { id: 'halo-neon', title: 'Halo', description: '네온 사이버펑크 블로그 (작성 + 조회)', category: 'Content & Media', pageType: 'blog', visualStyle: 'neon', accent: '#d946ef', Component: lazy(() => import('./halo-neon')) },
+
   // ── 웹앱 · 툴 ──────────────────────────────────────────────────
   { id: 'converse-chat', title: 'Converse', description: '깔끔한 메시징 · 채팅 앱 UI', category: 'Web Apps & Tools', pageType: 'app', visualStyle: 'minimal', accent: '#3b82f6', Component: lazy(() => import('./converse-chat')) },
   { id: 'tempo-music', title: 'Tempo', description: '그라데이션 뮤직 플레이어 웹앱', category: 'Web Apps & Tools', pageType: 'app', visualStyle: 'gradient', accent: '#a855f7', Component: lazy(() => import('./tempo-music')) },

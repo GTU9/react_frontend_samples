@@ -23,8 +23,8 @@ afterEach(() => {
 })
 
 describe('registry integrity', () => {
-  it('has 18 samples across 6 ordered, non-empty categories with unique ids', () => {
-    expect(samples).toHaveLength(18)
+  it('has 24 samples across 6 ordered, non-empty categories with unique ids', () => {
+    expect(samples).toHaveLength(24)
     const ids = new Set(samples.map((s) => s.id))
     expect(ids.size).toBe(samples.length)
 

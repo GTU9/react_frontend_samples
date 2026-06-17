@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A single Vite + React 18 + TypeScript app that showcases **18 self-contained frontend design samples** (each a distinct page type × visual style) grouped into 6 web-purpose categories, browsable through a thumbnail gallery with `react-router-dom` routing. All content is Korean; data is mock-only (no backend/API). Styling is Tailwind v4 (CSS-first) plus a per-sample scoped CSS file; animation uses framer-motion.
+A single Vite + React 18 + TypeScript app that showcases **24 self-contained frontend design samples** (each a distinct page type × visual style) grouped into 6 web-purpose categories, browsable through a thumbnail gallery with `react-router-dom` routing. Six of these are blog samples with working 글작성(compose, live preview, publish) + 조회(list, read) client-side state. All content is Korean; data is mock-only (no backend/API). Styling is Tailwind v4 (CSS-first) plus a per-sample scoped CSS file; animation uses framer-motion.
 
 ## Commands
 
@@ -12,7 +12,7 @@ A single Vite + React 18 + TypeScript app that showcases **18 self-contained fro
 npm run dev        # dev server (http://localhost:5173; auto-bumps port if busy). No "start" script.
 npm run build      # tsc -b (typecheck, all of src) + vite build — the authoritative gate
 npm run typecheck  # tsc -b only
-npm test           # vitest run — jsdom render smoke tests for all 18 samples + gallery
+npm test           # vitest run — jsdom render smoke tests for all 24 samples + gallery
 npx vitest run src/test/samples.smoke.test.tsx -t "flow-crm"   # run a single test by name
 node scripts/visual-qa.mjs http://localhost:4173   # Playwright: screenshot 38 pages + collect per-page console errors (needs `npm run preview` running first; requires `npx playwright install chromium`)
 ```
@@ -46,7 +46,7 @@ Each `src/samples/<slug>/`:
 ## Verification gates
 
 Three layers, all expected green before claiming done:
-1. `npm run build` (types + production build, 18 lazy chunks).
+1. `npm run build` (types + production build, 24 lazy chunks).
 2. `npm test` — `src/test/samples.smoke.test.tsx` mounts every sample in jsdom and asserts **zero `console.error`**. `src/test/setup.ts` polyfills jsdom gaps (matchMedia, IntersectionObserver, ResizeObserver, scrollIntoView); `vitest.config.ts` uses `css: false`, so CSS imports are ignored in tests.
 3. `scripts/visual-qa.mjs` — real Chromium screenshots (desktop 1440 + mobile 390) + per-page console-error capture to `.omc/visual-qa/report.json`. Runs with `reducedMotion: 'reduce'` and scrolls each page so `whileInView` sections are captured.
 

@@ -14,6 +14,8 @@ const sampleIds = [
   'slab-shop', 'lumiere-store', 'fresh-market',
   'nebula-folio', 'atelier-studio', 'lens-gallery',
   'quill-journal', 'pulse-stream', 'daily-wire',
+  'inkwell-blog', 'prism-blog', 'mono-devlog',
+  'press-brut', 'velvet-blog', 'halo-neon',
   'converse-chat', 'tempo-music', 'board-tasks',
 ]
 
