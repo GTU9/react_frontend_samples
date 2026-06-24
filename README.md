@@ -5,7 +5,8 @@ Vite + React 18 + TypeScript로 만든 **24종의 프론트엔드 디자인 샘�
 ## 특징
 
 - **24개 독립 샘플** — 각각 화면 종류 × 비주얼 스타일이 구별되는 React 페이지
-- **카테고리 갤러리** — 6개 웹 목적 카테고리, 스티키 퀵네비, 썸네일 카드 → 클릭 시 라우팅
+- **카테고리 갤러리** — 6개 웹 목적 카테고리, 스티키 퀵네비, 실제 샘플 화면 썸네일 카드 → 클릭 시 라우팅
+- **샘플 미리보기 이미지** — Playwright로 각 샘플 첫 화면을 캡처해 `public/thumbnails/`에 저장
 - **반응형** — 데스크톱/모바일(375·768·1440px) 대응
 - **모던 애니메이션** — 워드 스플릿 리빌, 마그네틱 버튼, 3D 틸트, `@property` 그라데이션, 숫자 카운트업, SVG path draw-on, layout FLIP, Ken Burns 등 (transform/opacity 기반, `prefers-reduced-motion` 존중)
 - **목업 데이터만** — 백엔드/API 없음, 외부 데이터 요청 없음
@@ -47,6 +48,18 @@ npm test         # 렌더 스모크 테스트 (Vitest)
 
 > `npm start` 스크립트는 없습니다. 로컬 실행은 `npm run dev`를 사용하세요.
 
+### 썸네일 생성 (선택)
+
+갤러리 카드는 `public/thumbnails/<sample-id>.png`가 있으면 실제 샘플 화면 캡처를 보여주고, 이미지가 없거나 로드에 실패하면 기존 그라데이션 포스터로 폴백합니다.
+
+```bash
+npx playwright install chromium      # 최초 1회
+npm run dev                          # 또는 npm run preview
+npm run thumbnails -- http://localhost:5173
+```
+
+샘플 UI를 크게 바꾼 뒤에는 위 명령으로 썸네일을 다시 생성하세요.
+
 ### 비주얼 QA (선택)
 
 ```bash
@@ -62,21 +75,27 @@ node scripts/visual-qa.mjs http://localhost:4173
 `src/samples/registry.ts`가 **단일 진실원천**입니다. 갤러리와 라우터 모두 이 레지스트리에서 파생됩니다.
 
 ```
-src/
-├─ main.tsx                    # BrowserRouter 부트스트랩
-├─ App.tsx                     # 라우트: "/" → Gallery, "/sample/:id" → SampleFrame, 그 외 → "/" 리다이렉트
-├─ index.css                   # Tailwind 진입 + 유일하게 전역(:root/body) 허용
-├─ samples/
-│  ├─ registry.ts              # Sample[] + 타입 유니온 + 카테고리/라벨 맵 (백본)
-│  └─ <slug>/                  # 샘플 24개
-│     ├─ index.tsx             #   default export, 루트 className `.sample-<slug>`
-│     ├─ mock.ts               #   샘플 자체 목업 데이터
-│     └─ <slug>.css            #   `.sample-<slug>` 하위로만 스코프된 스타일
-├─ showcase/
-│  ├─ Gallery.tsx              # 카테고리별 그룹 + 퀵네비 + 카드 그리드
-│  └─ SampleFrame.tsx          # 뒤로가기 + ErrorBoundary + Suspense(lazy 샘플)
-├─ components/ErrorBoundary.tsx
-└─ test/                       # vitest 설정 + 렌더 스모크 테스트
+.
+├─ public/
+│  └─ thumbnails/              # 갤러리 카드용 실제 샘플 화면 캡처
+├─ scripts/
+│  ├─ generate-thumbnails.mjs  # 샘플 route 캡처 → public/thumbnails/*.png
+│  └─ visual-qa.mjs            # 실 브라우저 스크린샷 + 콘솔 에러 수집
+└─ src/
+   ├─ main.tsx                 # BrowserRouter 부트스트랩
+   ├─ App.tsx                  # 라우트: "/" → Gallery, "/sample/:id" → SampleFrame, 그 외 → "/" 리다이렉트
+   ├─ index.css                # Tailwind 진입 + 유일하게 전역(:root/body) 허용
+   ├─ samples/
+   │  ├─ registry.ts           # Sample[] + 타입 유니온 + 카테고리/라벨 맵 (백본)
+   │  └─ <slug>/               # 샘플 24개
+   │     ├─ index.tsx          #   default export, 루트 className `.sample-<slug>`
+   │     ├─ mock.ts            #   샘플 자체 목업 데이터
+   │     └─ <slug>.css         #   `.sample-<slug>` 하위로만 스코프된 스타일
+   ├─ showcase/
+   │  ├─ Gallery.tsx           # 카테고리별 그룹 + 퀵네비 + 카드 그리드
+   │  └─ SampleFrame.tsx       # 뒤로가기 + ErrorBoundary + Suspense(lazy 샘플)
+   ├─ components/ErrorBoundary.tsx
+   └─ test/                    # vitest 설정 + 렌더 스모크 테스트
 ```
 
 **샘플 추가**: `src/samples/<slug>/`(index.tsx + mock.ts + `<slug>.css`)를 만들고 `registry.ts`에 한 줄 추가하면 갤러리·라우트에 자동 반영됩니다.
@@ -99,6 +118,7 @@ src/
 |---|---|---|
 | 타입 + 빌드 | `npm run build` | 타입 오류 0, 24개 lazy 청크 |
 | 런타임 렌더 | `npm test` | 24개 샘플 + 갤러리 jsdom 마운트, `console.error` 0 |
+| 썸네일 생성 | `npm run thumbnails -- http://localhost:5173` | 24개 샘플 미리보기 PNG 생성 |
 | 실 브라우저 | `node scripts/visual-qa.mjs` | 50페이지 스크린샷, 콘솔 에러 0 |
 
 ## 라이선스
