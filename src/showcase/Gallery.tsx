@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import {
   samples,
@@ -26,6 +27,30 @@ function hexToRgba(hex: string, alpha: number): string {
 function Poster({ sample }: { sample: Sample }) {
   const { accent } = sample
   const reduceMotion = useReducedMotion()
+  const [thumbnailFailed, setThumbnailFailed] = useState(false)
+  const thumbnail = `/thumbnails/${sample.id}.png`
+
+  if (!thumbnailFailed) {
+    return (
+      <div
+        aria-hidden="true"
+        className="relative h-40 w-full overflow-hidden rounded-xl bg-gray-100 ring-1 ring-gray-900/5"
+      >
+        <img
+          src={thumbnail}
+          alt=""
+          loading="lazy"
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          onError={() => setThumbnailFailed(true)}
+        />
+        <div
+          className="pointer-events-none absolute inset-0 ring-1 ring-inset"
+          style={{ boxShadow: `inset 0 0 0 1px ${hexToRgba(accent, 0.18)}` }}
+        />
+      </div>
+    )
+  }
+
   return (
     <div
       aria-hidden="true"
