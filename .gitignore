@@ -1,5 +1,9 @@
 # 클로드 세션 / OMC 상태·아티팩트
 .omc/*
+CLAUDE.md
+
+# 코덱스 및 에이전트
+AGENTS.md
 
 # 의존성
 node_modules/
