@@ -1,836 +1,432 @@
-/* ============================================================
-   velvet-blog.css — ALL selectors scoped under .sample-velvet-blog
-   No :root / body / html / bare-element selectors
-   ============================================================ */
-
-/* ---------- CSS custom properties (scoped) ---------- */
 .sample-velvet-blog {
-  --vb-pink:       #ec4899;
-  --vb-pink-light: #f9a8d4;
-  --vb-peach:      #fb923c;
-  --vb-peach-light:#fed7aa;
-  --vb-lavender:   #a78bfa;
-  --vb-lavender-light: #ddd6fe;
-  --vb-rose:       #f43f5e;
-
-  --vb-bg:         #fdf4f8;
-  --vb-surface:    #fff9fb;
-  --vb-card:       #ffffff;
-  --vb-border:     rgba(236, 72, 153, 0.12);
-  --vb-border-hover: rgba(236, 72, 153, 0.28);
-  --vb-muted:      #9d8fa0;
-  --vb-text:       #3d2c3a;
-  --vb-text-soft:  #6b5269;
-
-  --vb-grad-bg:    linear-gradient(145deg, #fce7f3 0%, #fef3c7 40%, #ede9fe 100%);
-  --vb-grad-hero:  linear-gradient(135deg, #ec4899 0%, #fb923c 50%, #a78bfa 100%);
-  --vb-grad-btn:   linear-gradient(135deg, #ec4899 0%, #f472b6 100%);
-  --vb-grad-card:  linear-gradient(160deg, rgba(236,72,153,0.04) 0%, rgba(167,139,250,0.04) 100%);
-  --vb-grad-tag:   linear-gradient(90deg, rgba(236,72,153,0.12) 0%, rgba(167,139,250,0.12) 100%);
-
-  --vb-radius-sm:  8px;
-  --vb-radius:     16px;
-  --vb-radius-lg:  24px;
-  --vb-radius-xl:  32px;
-
-  --vb-shadow-sm:  0 2px 8px rgba(236,72,153,0.08);
-  --vb-shadow:     0 8px 32px rgba(236,72,153,0.12);
-  --vb-shadow-lg:  0 20px 60px rgba(236,72,153,0.16);
-
-  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', system-ui, -apple-system, sans-serif;
-  background: var(--vb-grad-bg);
-  color: var(--vb-text);
-  line-height: 1.7;
+  --vb-bg: #fffafa;
+  --vb-paper: #ffffff;
+  --vb-pink: #bd6f7b;
+  --vb-pink-soft: #f3dadd;
+  --vb-ink: #392b2c;
+  --vb-muted: #897477;
+  --vb-line: #ead7da;
+  --vb-rose: #9f2f3e;
+  --vb-serif: Georgia, 'Times New Roman', serif;
+  --vb-sans: 'Pretendard', 'Noto Sans KR', system-ui, sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
+  background: var(--vb-bg);
+  color: var(--vb-ink);
+  font-family: var(--vb-sans);
+  line-height: 1.7;
 }
 
-/* ---------- Box-sizing reset (scoped) ---------- */
 .sample-velvet-blog *,
 .sample-velvet-blog *::before,
 .sample-velvet-blog *::after {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
-.sample-velvet-blog button {
-  font-family: inherit;
-  cursor: pointer;
-  border: none;
-  outline: none;
-}
-
+.sample-velvet-blog button,
 .sample-velvet-blog input,
 .sample-velvet-blog textarea {
   font-family: inherit;
-  outline: none;
 }
 
-/* ---------- Layout ---------- */
+.sample-velvet-blog button {
+  cursor: pointer;
+}
+
 .sample-velvet-blog .vb-container {
   width: 100%;
-  max-width: 860px;
+  max-width: 1040px;
   margin-inline: auto;
   padding-inline: 24px;
 }
 
-/* ============================================================
-   TOP BAR
-   ============================================================ */
 .sample-velvet-blog .vb-topbar {
   position: sticky;
   top: 0;
-  z-index: 100;
-  background: rgba(253, 244, 248, 0.82);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--vb-border);
+  z-index: 20;
+  background: rgba(255, 250, 250, 0.96);
+  border-bottom: 1px solid var(--vb-line);
 }
 
 .sample-velvet-blog .vb-topbar__inner {
   display: flex;
   align-items: center;
-  height: 60px;
-  gap: 12px;
+  justify-content: space-between;
+  min-height: 64px;
+  gap: 14px;
 }
 
 .sample-velvet-blog .vb-topbar__brand {
-  font-size: 1.375rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  background: var(--vb-grad-hero);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  flex: 1;
-  white-space: nowrap;
-}
-
-.sample-velvet-blog .vb-topbar__actions {
-  display: flex;
-  gap: 8px;
-  flex-shrink: 0;
-}
-
-.sample-velvet-blog .vb-btn {
-  padding: 8px 18px;
-  border-radius: 99px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
-  white-space: nowrap;
-}
-
-.sample-velvet-blog .vb-btn--primary {
-  background: var(--vb-grad-btn);
-  color: #fff;
-  box-shadow: 0 4px 16px rgba(236,72,153,0.28);
-}
-
-.sample-velvet-blog .vb-btn--primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(236,72,153,0.38);
-}
-
-.sample-velvet-blog .vb-btn--outline {
-  background: transparent;
   color: var(--vb-pink);
-  border: 1.5px solid var(--vb-pink-light);
-}
-
-.sample-velvet-blog .vb-btn--outline:hover {
-  background: rgba(236,72,153,0.06);
-  border-color: var(--vb-pink);
-}
-
-.sample-velvet-blog .vb-btn--ghost {
-  background: transparent;
-  color: var(--vb-text-soft);
-  padding: 8px 12px;
-}
-
-.sample-velvet-blog .vb-btn--ghost:hover {
-  color: var(--vb-pink);
-}
-
-/* ============================================================
-   HERO / PAGE HEADER
-   ============================================================ */
-.sample-velvet-blog .vb-hero {
-  padding-block: 52px 36px;
-  text-align: center;
-  position: relative;
-}
-
-.sample-velvet-blog .vb-hero__tagline {
-  display: inline-block;
-  padding: 5px 14px;
-  border-radius: 99px;
-  background: var(--vb-grad-tag);
-  border: 1px solid var(--vb-border-hover);
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--vb-pink);
-  margin-bottom: 18px;
-  letter-spacing: 0.02em;
-}
-
-.sample-velvet-blog .vb-hero__title {
-  font-size: clamp(1.75rem, 4vw, 2.75rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.2;
-  color: var(--vb-text);
-  margin-bottom: 12px;
-}
-
-.sample-velvet-blog .vb-hero__sub {
-  font-size: 1rem;
-  color: var(--vb-muted);
-  max-width: 400px;
-  margin-inline: auto;
-}
-
-/* ============================================================
-   POST LIST (조회)
-   ============================================================ */
-.sample-velvet-blog .vb-feed {
-  padding-bottom: 64px;
-}
-
-.sample-velvet-blog .vb-feed__grid {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.sample-velvet-blog .vb-post-card {
-  background: var(--vb-card);
-  border: 1px solid var(--vb-border);
-  border-radius: var(--vb-radius-lg);
-  padding: 28px 32px;
-  cursor: pointer;
-  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
-  background-image: var(--vb-grad-card);
-  position: relative;
-  overflow: hidden;
-}
-
-.sample-velvet-blog .vb-post-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--vb-grad-hero);
-  opacity: 0;
-  transition: opacity 0.22s ease;
-  border-radius: var(--vb-radius-lg) var(--vb-radius-lg) 0 0;
-}
-
-.sample-velvet-blog .vb-post-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--vb-shadow);
-  border-color: var(--vb-border-hover);
-}
-
-.sample-velvet-blog .vb-post-card:hover::before {
-  opacity: 1;
-}
-
-.sample-velvet-blog .vb-post-card__header {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  margin-bottom: 14px;
-}
-
-.sample-velvet-blog .vb-post-card__mood {
-  font-size: 1.75rem;
-  line-height: 1;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.sample-velvet-blog .vb-post-card__meta {
-  flex: 1;
-  min-width: 0;
-}
-
-.sample-velvet-blog .vb-post-card__title {
-  font-size: 1.2rem;
+  font-family: var(--vb-serif);
+  font-size: 2rem;
   font-weight: 700;
-  color: var(--vb-text);
-  letter-spacing: -0.02em;
-  margin-bottom: 6px;
-  line-height: 1.35;
 }
 
-.sample-velvet-blog .vb-post-card__excerpt {
-  font-size: 0.9rem;
-  color: var(--vb-text-soft);
-  line-height: 1.65;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.sample-velvet-blog .vb-post-card__footer {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.sample-velvet-blog .vb-avatar {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--vb-grad-hero);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.7rem;
-  font-weight: 700;
-  color: #fff;
-  flex-shrink: 0;
-}
-
-.sample-velvet-blog .vb-post-card__author {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--vb-text-soft);
-}
-
-.sample-velvet-blog .vb-dot {
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: var(--vb-muted);
-  flex-shrink: 0;
-}
-
-.sample-velvet-blog .vb-post-card__date {
-  font-size: 0.8rem;
-  color: var(--vb-muted);
-}
-
-.sample-velvet-blog .vb-tag {
-  display: inline-flex;
-  align-items: center;
-  padding: 3px 10px;
-  border-radius: 99px;
-  background: var(--vb-grad-tag);
-  border: 1px solid var(--vb-border-hover);
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--vb-pink);
-  white-space: nowrap;
-}
-
-.sample-velvet-blog .vb-post-card__likes {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 0.8rem;
-  color: var(--vb-muted);
-  font-weight: 500;
-}
-
-.sample-velvet-blog .vb-heart-icon {
-  font-size: 0.875rem;
-  color: var(--vb-pink-light);
-}
-
-/* ============================================================
-   READ VIEW (읽기)
-   ============================================================ */
-.sample-velvet-blog .vb-article {
-  padding-bottom: 80px;
-}
-
-.sample-velvet-blog .vb-article__back {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 0;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--vb-pink);
-  background: transparent;
-  border: none;
-  margin-bottom: 8px;
-  transition: opacity 0.15s;
-}
-
-.sample-velvet-blog .vb-article__back:hover {
-  opacity: 0.72;
-}
-
-.sample-velvet-blog .vb-article__header {
-  border-radius: var(--vb-radius-xl);
-  background: var(--vb-grad-hero);
-  padding: 40px 40px 36px;
-  margin-bottom: 32px;
-  position: relative;
-  overflow: hidden;
-}
-
-.sample-velvet-blog .vb-article__header::after {
-  content: '';
-  position: absolute;
-  top: -40px;
-  right: -40px;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.08);
-  pointer-events: none;
-}
-
-.sample-velvet-blog .vb-article__mood {
-  font-size: 2.5rem;
-  display: block;
-  margin-bottom: 14px;
-}
-
-.sample-velvet-blog .vb-article__title {
-  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
-  font-weight: 800;
-  color: #fff;
-  letter-spacing: -0.03em;
-  line-height: 1.25;
-  margin-bottom: 20px;
-}
-
-.sample-velvet-blog .vb-article__byline {
+.sample-velvet-blog .vb-topbar__actions,
+.sample-velvet-blog .vb-post-card__footer,
+.sample-velvet-blog .vb-article__byline,
+.sample-velvet-blog .vb-preview__footer {
   display: flex;
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
 }
 
-.sample-velvet-blog .vb-article__author-name {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: rgba(255,255,255,0.9);
+.sample-velvet-blog .vb-btn,
+.sample-velvet-blog .vb-article__back,
+.sample-velvet-blog .vb-publish-btn,
+.sample-velvet-blog .vb-like-btn {
+  border: 1px solid var(--vb-pink);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--vb-pink);
+  padding: 9px 14px;
+  font-size: 0.86rem;
+  font-weight: 700;
 }
 
-.sample-velvet-blog .vb-article__date {
-  font-size: 0.8rem;
-  color: rgba(255,255,255,0.7);
-}
-
-.sample-velvet-blog .vb-article__tag {
-  padding: 3px 10px;
-  border-radius: 99px;
-  background: rgba(255,255,255,0.2);
-  font-size: 0.72rem;
-  font-weight: 600;
+.sample-velvet-blog .vb-btn--primary,
+.sample-velvet-blog .vb-publish-btn,
+.sample-velvet-blog .vb-like-btn--liked {
+  background: var(--vb-pink);
   color: #fff;
 }
 
-.sample-velvet-blog .vb-article__body {
+.sample-velvet-blog .vb-hero {
+  display: grid;
+  grid-template-columns: 1fr 170px;
+  gap: 32px;
+  align-items: end;
+  padding-block: 48px 30px;
+  border-bottom: 1px solid var(--vb-line);
+}
+
+.sample-velvet-blog .vb-hero__title {
+  margin: 0;
   max-width: 680px;
+  color: var(--vb-ink);
+  font-family: var(--vb-serif);
+  font-size: 3.2rem;
+  line-height: 1.05;
+  font-weight: 700;
+}
+
+.sample-velvet-blog .vb-hero__sub {
+  max-width: 520px;
+  margin: 14px 0 0;
+  color: var(--vb-muted);
+  font-size: 1rem;
+}
+
+.sample-velvet-blog .vb-hero::after {
+  content: '좋은 곳은, 언제나 다시 가고 싶어진다. — Velvet';
+  color: var(--vb-pink);
+  font-family: var(--vb-serif);
+  font-size: 1.1rem;
+  line-height: 1.55;
+}
+
+.sample-velvet-blog .vb-feed {
+  padding-bottom: 70px;
+}
+
+.sample-velvet-blog .vb-feed__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  padding-top: 26px;
+}
+
+.sample-velvet-blog .vb-post-card {
+  border: 1px solid var(--vb-line);
+  background: var(--vb-paper);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.sample-velvet-blog .vb-post-card:first-child {
+  grid-row: span 2;
+}
+
+.sample-velvet-blog .vb-post-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--vb-pink);
+}
+
+.sample-velvet-blog .vb-post-card__header {
+  display: grid;
+}
+
+.sample-velvet-blog .vb-post-card__image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.sample-velvet-blog .vb-post-card:first-child .vb-post-card__image {
+  aspect-ratio: 4 / 4.25;
+}
+
+.sample-velvet-blog .vb-post-card__meta {
+  padding: 18px 18px 10px;
+}
+
+.sample-velvet-blog .vb-post-card__title {
+  margin: 0 0 8px;
+  font-family: var(--vb-serif);
+  font-size: 1.45rem;
+  line-height: 1.22;
+}
+
+.sample-velvet-blog .vb-post-card:first-child .vb-post-card__title {
+  font-size: 2rem;
+}
+
+.sample-velvet-blog .vb-post-card__excerpt {
+  margin: 0;
+  color: var(--vb-muted);
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.sample-velvet-blog .vb-post-card__footer {
+  padding: 0 18px 18px;
+  color: var(--vb-muted);
+  font-size: 0.8rem;
+}
+
+.sample-velvet-blog .vb-avatar {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--vb-pink);
+  border-radius: 50%;
+  color: var(--vb-pink);
+  font-size: 0.78rem;
+}
+
+.sample-velvet-blog .vb-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--vb-line);
+}
+
+.sample-velvet-blog .vb-tag,
+.sample-velvet-blog .vb-place,
+.sample-velvet-blog .vb-article__tag {
+  border-bottom: 1px solid var(--vb-pink);
+  color: var(--vb-pink);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.sample-velvet-blog .vb-post-card__likes {
+  margin-left: auto;
+}
+
+.sample-velvet-blog .vb-article {
+  padding: 28px 0 80px;
+}
+
+.sample-velvet-blog .vb-article__header {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.sample-velvet-blog .vb-article__mood {
+  color: var(--vb-pink);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.sample-velvet-blog .vb-article__image {
+  width: 100%;
+  max-height: 520px;
+  object-fit: cover;
+  border: 1px solid var(--vb-line);
+}
+
+.sample-velvet-blog .vb-article__title {
+  margin: 0;
+  max-width: 780px;
+  font-family: var(--vb-serif);
+  font-size: 3rem;
+  line-height: 1.08;
+}
+
+.sample-velvet-blog .vb-article__body {
+  max-width: 720px;
   margin-inline: auto;
 }
 
 .sample-velvet-blog .vb-article__para {
-  font-size: 1rem;
-  line-height: 1.85;
-  color: var(--vb-text);
-  margin-bottom: 24px;
-}
-
-.sample-velvet-blog .vb-article__para:last-of-type {
-  margin-bottom: 0;
+  margin: 0 0 1.35rem;
+  color: #4a383a;
+  font: 1.05rem/1.9 var(--vb-serif);
 }
 
 .sample-velvet-blog .vb-article__actions {
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 16px;
-  margin-top: 48px;
-  padding-top: 32px;
-  border-top: 1px solid var(--vb-border);
+  margin-top: 38px;
+  padding-top: 24px;
+  border-top: 1px solid var(--vb-line);
 }
 
-.sample-velvet-blog .vb-like-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 24px;
-  border-radius: 99px;
-  background: var(--vb-card);
-  border: 1.5px solid var(--vb-border-hover);
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--vb-text-soft);
-  transition: background 0.18s, border-color 0.18s, color 0.18s, transform 0.18s;
-  box-shadow: var(--vb-shadow-sm);
-}
-
-.sample-velvet-blog .vb-like-btn:hover {
-  border-color: var(--vb-pink);
-  color: var(--vb-pink);
-  transform: translateY(-1px);
-}
-
-.sample-velvet-blog .vb-like-btn--liked {
-  background: linear-gradient(135deg, rgba(236,72,153,0.08) 0%, rgba(244,63,94,0.06) 100%);
-  border-color: var(--vb-pink);
-  color: var(--vb-rose);
-}
-
-.sample-velvet-blog .vb-like-btn__heart {
-  font-size: 1.1rem;
-  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
-  display: inline-block;
-}
-
-.sample-velvet-blog .vb-like-btn--liked .vb-like-btn__heart {
-  transform: scale(1.25);
-}
-
-/* ============================================================
-   COMPOSE VIEW (글작성)
-   ============================================================ */
 .sample-velvet-blog .vb-compose {
-  padding-bottom: 64px;
+  padding-bottom: 70px;
 }
 
 .sample-velvet-blog .vb-compose__layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.85fr);
+  gap: 22px;
   align-items: start;
 }
 
-.sample-velvet-blog .vb-compose__form-card {
-  background: var(--vb-card);
-  border: 1px solid var(--vb-border);
-  border-radius: var(--vb-radius-lg);
-  padding: 28px;
-  box-shadow: var(--vb-shadow-sm);
+.sample-velvet-blog .vb-compose__form-card,
+.sample-velvet-blog .vb-preview-card {
+  border: 1px solid var(--vb-line);
+  background: var(--vb-paper);
+  padding: 22px;
 }
 
-.sample-velvet-blog .vb-compose__form-title {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--vb-text);
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.sample-velvet-blog .vb-compose__label {
-  display: block;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--vb-text-soft);
-  margin-bottom: 6px;
-  letter-spacing: 0.01em;
+.sample-velvet-blog .vb-compose__form-title,
+.sample-velvet-blog .vb-preview-card__label {
+  margin: 0 0 18px;
+  color: var(--vb-pink);
+  font-weight: 800;
 }
 
 .sample-velvet-blog .vb-compose__field {
   margin-bottom: 16px;
 }
 
-.sample-velvet-blog .vb-input {
-  width: 100%;
-  padding: 10px 14px;
-  border: 1.5px solid var(--vb-border);
-  border-radius: var(--vb-radius-sm);
-  background: var(--vb-surface);
-  color: var(--vb-text);
-  font-size: 0.9375rem;
-  transition: border-color 0.18s, box-shadow 0.18s;
-}
-
-.sample-velvet-blog .vb-input:focus {
-  border-color: var(--vb-pink-light);
-  box-shadow: 0 0 0 3px rgba(236,72,153,0.08);
-}
-
-.sample-velvet-blog .vb-input::placeholder {
+.sample-velvet-blog .vb-compose__label {
+  display: block;
+  margin-bottom: 6px;
   color: var(--vb-muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.sample-velvet-blog .vb-input,
+.sample-velvet-blog .vb-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--vb-line);
+  border-radius: 4px;
+  background: #fff;
+  color: var(--vb-ink);
+  padding: 10px 12px;
+  font-size: 0.94rem;
+  line-height: 1.55;
 }
 
 .sample-velvet-blog .vb-textarea {
-  width: 100%;
-  padding: 10px 14px;
-  border: 1.5px solid var(--vb-border);
-  border-radius: var(--vb-radius-sm);
-  background: var(--vb-surface);
-  color: var(--vb-text);
-  font-size: 0.9375rem;
+  min-height: 190px;
   resize: vertical;
-  min-height: 180px;
-  transition: border-color 0.18s, box-shadow 0.18s;
-  line-height: 1.7;
 }
 
+.sample-velvet-blog .vb-input:focus,
 .sample-velvet-blog .vb-textarea:focus {
-  border-color: var(--vb-pink-light);
-  box-shadow: 0 0 0 3px rgba(236,72,153,0.08);
+  outline: 3px solid var(--vb-pink-soft);
+  border-color: var(--vb-pink);
 }
 
-.sample-velvet-blog .vb-textarea::placeholder {
-  color: var(--vb-muted);
-}
-
-/* mood picker */
 .sample-velvet-blog .vb-mood-picker {
   display: flex;
-  gap: 8px;
   flex-wrap: wrap;
+  gap: 7px;
 }
 
 .sample-velvet-blog .vb-mood-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--vb-radius-sm);
-  background: var(--vb-surface);
-  border: 1.5px solid var(--vb-border);
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: border-color 0.18s, transform 0.18s, box-shadow 0.18s;
-  cursor: pointer;
-}
-
-.sample-velvet-blog .vb-mood-btn:hover {
-  border-color: var(--vb-pink-light);
-  transform: scale(1.1);
+  min-width: 48px;
+  height: 34px;
+  border: 1px solid var(--vb-line);
+  border-radius: 4px;
+  background: #fff;
+  color: var(--vb-muted);
+  font-size: 0.78rem;
 }
 
 .sample-velvet-blog .vb-mood-btn--selected {
   border-color: var(--vb-pink);
-  background: rgba(236,72,153,0.06);
-  box-shadow: 0 0 0 3px rgba(236,72,153,0.12);
-}
-
-/* publish button */
-.sample-velvet-blog .vb-publish-btn {
-  width: 100%;
-  padding: 13px;
-  border-radius: var(--vb-radius);
-  background: var(--vb-grad-btn);
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.01em;
-  box-shadow: 0 6px 20px rgba(236,72,153,0.28);
-  transition: transform 0.18s, box-shadow 0.18s, opacity 0.18s;
-  margin-top: 8px;
-}
-
-.sample-velvet-blog .vb-publish-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(236,72,153,0.38);
-}
-
-.sample-velvet-blog .vb-publish-btn:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-  transform: none;
-}
-
-/* validation error */
-.sample-velvet-blog .vb-error {
-  font-size: 0.8rem;
-  color: var(--vb-rose);
-  margin-top: 10px;
-  padding: 8px 12px;
-  background: rgba(244,63,94,0.06);
-  border-radius: var(--vb-radius-sm);
-  border-left: 3px solid var(--vb-rose);
-}
-
-/* ============================================================
-   LIVE PREVIEW CARD
-   ============================================================ */
-.sample-velvet-blog .vb-preview-card {
-  background: var(--vb-card);
-  border: 1px solid var(--vb-border);
-  border-radius: var(--vb-radius-lg);
-  padding: 28px;
-  box-shadow: var(--vb-shadow-sm);
-  position: sticky;
-  top: 80px;
-}
-
-.sample-velvet-blog .vb-preview-card__label {
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
   color: var(--vb-pink);
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  background: var(--vb-pink-soft);
 }
 
-.sample-velvet-blog .vb-preview-card__label-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--vb-pink);
-  animation: vb-pulse 2s ease-in-out infinite;
+.sample-velvet-blog .vb-error {
+  border-left: 3px solid var(--vb-rose);
+  color: var(--vb-rose);
+  padding-left: 10px;
+  font-size: 0.84rem;
 }
 
-@keyframes vb-pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.85); }
+.sample-velvet-blog .vb-preview-card {
+  position: sticky;
+  top: 84px;
 }
 
 .sample-velvet-blog .vb-preview-inner {
-  border: 1px dashed var(--vb-border-hover);
-  border-radius: var(--vb-radius);
-  padding: 20px;
-  min-height: 220px;
-}
-
-.sample-velvet-blog .vb-preview-inner--empty {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--vb-muted);
-  font-size: 0.875rem;
-  text-align: center;
+  min-height: 230px;
+  border: 1px dashed var(--vb-line);
+  padding: 18px;
 }
 
 .sample-velvet-blog .vb-preview__mood {
-  font-size: 1.75rem;
-  margin-bottom: 10px;
-  display: block;
+  color: var(--vb-pink);
+  font-size: 0.85rem;
+  font-weight: 700;
 }
 
 .sample-velvet-blog .vb-preview__title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--vb-text);
-  letter-spacing: -0.02em;
-  margin-bottom: 10px;
-  line-height: 1.35;
+  margin: 10px 0;
+  font-family: var(--vb-serif);
+  font-size: 1.45rem;
+  line-height: 1.22;
 }
 
 .sample-velvet-blog .vb-preview__excerpt {
-  font-size: 0.875rem;
-  color: var(--vb-text-soft);
-  line-height: 1.65;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  margin-bottom: 14px;
-}
-
-.sample-velvet-blog .vb-preview__footer {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.sample-velvet-blog .vb-preview__author {
-  font-size: 0.75rem;
   color: var(--vb-muted);
-  font-weight: 600;
 }
 
-/* ============================================================
-   EMPTY STATE
-   ============================================================ */
 .sample-velvet-blog .vb-empty {
-  text-align: center;
-  padding: 64px 24px;
+  padding: 60px 20px;
   color: var(--vb-muted);
+  text-align: center;
 }
 
-.sample-velvet-blog .vb-empty__icon {
-  font-size: 3rem;
-  margin-bottom: 16px;
-  display: block;
-}
+@media (max-width: 820px) {
+  .sample-velvet-blog .vb-container {
+    padding-inline: 16px;
+  }
 
-.sample-velvet-blog .vb-empty__text {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: var(--vb-text-soft);
-}
-
-.sample-velvet-blog .vb-empty__sub {
-  font-size: 0.875rem;
-}
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-@media (max-width: 768px) {
+  .sample-velvet-blog .vb-hero,
+  .sample-velvet-blog .vb-feed__grid,
   .sample-velvet-blog .vb-compose__layout {
     grid-template-columns: 1fr;
+  }
+
+  .sample-velvet-blog .vb-hero__title,
+  .sample-velvet-blog .vb-article__title {
+    font-size: 2.2rem;
   }
 
   .sample-velvet-blog .vb-preview-card {
     position: static;
   }
-
-  .sample-velvet-blog .vb-article__header {
-    padding: 28px 24px 24px;
-  }
-
-  .sample-velvet-blog .vb-topbar__brand {
-    font-size: 1.125rem;
-  }
 }
 
-@media (max-width: 480px) {
-  .sample-velvet-blog .vb-container {
-    padding-inline: 16px;
-  }
-
-  .sample-velvet-blog .vb-post-card {
-    padding: 20px;
-  }
-
-  .sample-velvet-blog .vb-compose__form-card,
-  .sample-velvet-blog .vb-preview-card {
-    padding: 20px;
-  }
-
-  .sample-velvet-blog .vb-btn {
-    padding: 7px 14px;
-    font-size: 0.8rem;
-  }
-
-  .sample-velvet-blog .vb-hero {
-    padding-block: 36px 24px;
-  }
-}
-
-/* ============================================================
-   REDUCED-MOTION OVERRIDES
-   ============================================================ */
 @media (prefers-reduced-motion: reduce) {
-  .sample-velvet-blog *,
-  .sample-velvet-blog *::before,
-  .sample-velvet-blog *::after {
+  .sample-velvet-blog * {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
-  }
-
-  .sample-velvet-blog .vb-preview-card__label-dot {
-    animation: none !important;
   }
 }

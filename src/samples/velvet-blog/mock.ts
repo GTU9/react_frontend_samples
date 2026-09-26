@@ -9,13 +9,15 @@ export interface Post {
   tag: string
   mood: string
   likes: number
+  image: string
+  imageAlt: string
 }
 
 export const seedPosts: Post[] = [
   {
     id: 'p1',
-    title: '비 오는 날의 카페 순례',
-    excerpt: '빗소리가 창문을 두드리던 오후, 골목 안쪽 작은 카페에서 라떼 한 잔과 함께 보낸 시간들을 기록합니다.',
+    title: '낮선 항구에서 다시, 나를 만나다',
+    excerpt: '지도보다 먼저 바람을 따라 걸었다. 하얀 담장과 바다빛 지붕 사이에서 하루가 천천히 접혔다.',
     body: [
       '장마철이 시작된 어느 화요일, 우산 하나만 들고 서울 서촌 골목을 걸었다. 빗소리는 생각보다 훨씬 다정했다. 발밑에 물웅덩이가 생길 때마다 슬그머니 발을 피하면서, 낡은 간판들을 올려다보는 일이 이렇게 즐거울 수 있다는 걸 새삼 깨달았다.',
       '첫 번째 카페는 계단을 두 개 내려가야 나오는 반지하 공간이었다. 벽에는 빛바랜 영화 포스터가, 테이블 위에는 누군가 놓고 간 책이 펼쳐져 있었다. 사장님은 아무 말 없이 라떼를 내려주셨는데, 그 침묵이 오히려 편안했다.',
@@ -25,9 +27,11 @@ export const seedPosts: Post[] = [
     author: '이서윤',
     authorInitial: '이',
     date: '2026. 6. 12',
-    tag: '카페',
-    mood: '☕',
+    tag: '해안',
+    mood: '바다',
     likes: 47,
+    image: '/media/velvet-blog/coast.jpg',
+    imageAlt: '푸른 바다와 해안 풍경',
   },
   {
     id: 'p2',
@@ -42,9 +46,11 @@ export const seedPosts: Post[] = [
     author: '김도현',
     authorInitial: '김',
     date: '2026. 5. 28',
-    tag: '여행',
-    mood: '✈️',
+    tag: '골목',
+    mood: '산책',
     likes: 83,
+    image: '/media/velvet-blog/canal.jpg',
+    imageAlt: '운하와 오래된 도시 골목',
   },
   {
     id: 'p3',
@@ -60,8 +66,10 @@ export const seedPosts: Post[] = [
     authorInitial: '박',
     date: '2026. 5. 14',
     tag: '독서',
-    mood: '📖',
+    mood: '책',
     likes: 61,
+    image: '/media/velvet-blog/coast.jpg',
+    imageAlt: '여행지에서 바라본 바다',
   },
   {
     id: 'p4',
@@ -77,8 +85,10 @@ export const seedPosts: Post[] = [
     authorInitial: '이',
     date: '2026. 4. 30',
     tag: '일상',
-    mood: '🌅',
+    mood: '아침',
     likes: 38,
+    image: '/media/velvet-blog/canal.jpg',
+    imageAlt: '아침 산책을 닮은 도시 운하',
   },
   {
     id: 'p5',
@@ -94,7 +104,9 @@ export const seedPosts: Post[] = [
     authorInitial: '최',
     date: '2026. 4. 10',
     tag: '취미',
-    mood: '🧶',
+    mood: '손일',
     likes: 55,
+    image: '/media/velvet-blog/coast.jpg',
+    imageAlt: '조용한 해안 풍경',
   },
 ]

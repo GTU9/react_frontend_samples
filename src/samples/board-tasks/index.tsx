@@ -116,24 +116,36 @@ interface TaskCardProps {
   task: Task
   index: number
   columnIndex: number
-  onClick: (task: Task) => void
+  onClick: (task: Task, opener: HTMLElement) => void
+  onMove: (taskId: string, direction: -1 | 1) => void
 }
 
-function TaskCard({ task, index, columnIndex, onClick }: TaskCardProps) {
+function TaskCard({ task, index, columnIndex, onClick, onMove }: TaskCardProps) {
   const doneCount = task.checklist.filter(c => c.done).length
   const totalCount = task.checklist.length
   const shouldReduceMotion = useReducedMotion()
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      onClick(task, e.currentTarget)
+    }
+  }
+
   return (
     <motion.div
       className="bt-card"
+      role="button"
+      tabIndex={0}
+      aria-label={`${task.title} 상세 보기`}
       initial={{ opacity: 0, y: 8, scale: 0.96 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, scale: 0.92, y: -4 }}
       transition={{ duration: 0.22, delay: (columnIndex * 0.06) + (index * 0.04), ease: 'easeOut' }}
       whileHover={shouldReduceMotion ? {} : { y: -3, rotate: 0.4, boxShadow: '0 8px 24px rgba(15,23,42,0.10), 0 2px 6px rgba(15,23,42,0.07)' }}
       whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
-      onClick={() => onClick(task)}
+      onClick={e => onClick(task, e.currentTarget)}
+      onKeyDown={handleKeyDown}
       layout
     >
       {/* Label + priority */}
@@ -173,6 +185,24 @@ function TaskCard({ task, index, columnIndex, onClick }: TaskCardProps) {
           {task.assignee.initials}
         </div>
       </div>
+      <div className="bt-card-move-row" aria-label={`${task.title} 이동`}>
+        <button
+          className="bt-move-card-btn"
+          onClick={e => { e.stopPropagation(); onMove(task.id, -1) }}
+          disabled={columnIndex === 0}
+          aria-label="왼쪽 열로 이동"
+        >
+          이전
+        </button>
+        <button
+          className="bt-move-card-btn"
+          onClick={e => { e.stopPropagation(); onMove(task.id, 1) }}
+          disabled={columnIndex === 3}
+          aria-label="오른쪽 열로 이동"
+        >
+          다음
+        </button>
+      </div>
     </motion.div>
   )
 }
@@ -205,7 +235,7 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
       <textarea
         ref={inputRef}
         className="bt-add-task-input"
-        placeholder="작업 제목… (Enter로 저장)"
+        placeholder="작업 제목… (엔터로 저장)"
         value={value}
         rows={2}
         onChange={e => setValue(e.target.value)}
@@ -231,11 +261,12 @@ function AddTaskForm({ onAdd, onCancel }: AddTaskFormProps) {
 interface KanbanColumnProps {
   column: Column
   colIndex: number
-  onCardClick: (task: Task) => void
+  onCardClick: (task: Task, opener: HTMLElement) => void
   onAddTask: (colId: string, title: string) => void
+  onMoveTask: (taskId: string, direction: -1 | 1) => void
 }
 
-function KanbanColumn({ column, colIndex, onCardClick, onAddTask }: KanbanColumnProps) {
+function KanbanColumn({ column, colIndex, onCardClick, onAddTask, onMoveTask }: KanbanColumnProps) {
   const [adding, setAdding] = useState(false)
 
   const handleAdd = (title: string) => {
@@ -270,6 +301,7 @@ function KanbanColumn({ column, colIndex, onCardClick, onAddTask }: KanbanColumn
               index={i}
               columnIndex={colIndex}
               onClick={onCardClick}
+              onMove={onMoveTask}
             />
           ))}
         </AnimatePresence>
@@ -313,11 +345,19 @@ function KanbanColumn({ column, colIndex, onCardClick, onAddTask }: KanbanColumn
 
 interface TaskPopoverProps {
   task: Task
+  columns: Column[]
   onClose: () => void
+  onMoveToColumn: (taskId: string, columnId: string) => void
 }
 
-function TaskPopover({ task, onClose }: TaskPopoverProps) {
+function TaskPopover({ task, columns, onClose, onMoveToColumn }: TaskPopoverProps) {
   const doneCount = task.checklist.filter(c => c.done).length
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
+  const titleId = `task-title-${task.id}`
+
+  useEffect(() => {
+    closeButtonRef.current?.focus()
+  }, [])
 
   return (
     <motion.div
@@ -327,19 +367,29 @@ function TaskPopover({ task, onClose }: TaskPopoverProps) {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.15 }}
       onClick={e => { if (e.target === e.currentTarget) onClose() }}
+      onKeyDown={e => { if (e.key === 'Escape') onClose() }}
     >
       <motion.div
         className="bt-popover"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
         initial={{ opacity: 0, y: 12, scale: 0.97 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 8, scale: 0.97 }}
         transition={{ duration: 0.2, ease: 'easeOut' }}
         onClick={e => e.stopPropagation()}
+        onKeyDown={e => {
+          if (e.key === 'Escape') {
+            e.stopPropagation()
+            onClose()
+          }
+        }}
       >
         {/* Header */}
         <div className="bt-popover-header">
           <div className="bt-popover-title-group">
-            <div className="bt-popover-title">{task.title}</div>
+            <div className="bt-popover-title" id={titleId}>{task.title}</div>
             <div className="bt-popover-tags">
               <span className={`bt-card-label ${task.label.color}`}>{task.label.text}</span>
               <span className={`bt-priority-badge ${task.priority}`}>
@@ -348,7 +398,7 @@ function TaskPopover({ task, onClose }: TaskPopoverProps) {
               </span>
             </div>
           </div>
-          <button className="bt-popover-close" onClick={onClose} aria-label="닫기">
+          <button ref={closeButtonRef} className="bt-popover-close" onClick={onClose} aria-label="닫기">
             <IconX />
           </button>
         </div>
@@ -386,6 +436,20 @@ function TaskPopover({ task, onClose }: TaskPopoverProps) {
             </div>
           </div>
 
+          <div>
+            <label className="bt-popover-section-title" htmlFor={`move-${task.id}`}>상태 이동</label>
+            <select
+              id={`move-${task.id}`}
+              className="bt-popover-select"
+              value={columns.find(column => column.tasks.some(item => item.id === task.id))?.id ?? ''}
+              onChange={e => onMoveToColumn(task.id, e.target.value)}
+            >
+              {columns.map(column => (
+                <option key={column.id} value={column.id}>{column.title}</option>
+              ))}
+            </select>
+          </div>
+
           {/* Checklist */}
           {task.checklist.length > 0 && (
             <div>
@@ -420,11 +484,17 @@ export default function BoardTasks() {
   const [activeView, setActiveView] = useState('보드')
   const [selectedTask, setSelectedTask] = useState<Task | null>(null)
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [taskSearch, setTaskSearch] = useState('')
+  const [labelFilter, setLabelFilter] = useState('all')
+  const [assigneeFilter, setAssigneeFilter] = useState('all')
+  const searchInputRef = useRef<HTMLInputElement>(null)
+  const taskOpenerRef = useRef<HTMLElement | null>(null)
 
   const toggleSidebar = useCallback(() => setSidebarOpen(p => !p), [])
   const closeSidebar = useCallback(() => setSidebarOpen(false), [])
 
-  const handleCardClick = useCallback((task: Task) => {
+  const handleCardClick = useCallback((task: Task, opener: HTMLElement) => {
+    taskOpenerRef.current = opener
     setSelectedTask(task)
   }, [])
 
@@ -433,7 +503,7 @@ export default function BoardTasks() {
   }, [])
 
   const handleAddTask = useCallback((colId: string, title: string) => {
-    const defaultLabel = { id: `new-${Date.now()}`, text: 'Feature', color: 'blue' as const }
+    const defaultLabel = { id: `new-${Date.now()}`, text: '기획', color: 'blue' as const }
     const priorities: Priority[] = ['low', 'medium', 'high']
     const newTask: Task = {
       id: `new-${Date.now()}`,
@@ -441,7 +511,7 @@ export default function BoardTasks() {
       label: defaultLabel,
       priority: priorities[Math.floor(Math.random() * priorities.length)],
       assignee: members[Math.floor(Math.random() * members.length)],
-      dueDate: 'Jul 30',
+      dueDate: '7월 30일',
       checklist: [],
       comments: 0,
       attachments: 0,
@@ -455,7 +525,51 @@ export default function BoardTasks() {
     )
   }, [])
 
+  const handleMoveTaskToColumn = useCallback((taskId: string, targetColumnId: string) => {
+    setColumns(prev => {
+      const movingTask = prev.flatMap(column => column.tasks).find(task => task.id === taskId)
+      if (!movingTask) return prev
+      return prev.map(column => {
+        const withoutTask = column.tasks.filter(task => task.id !== taskId)
+        if (column.id === targetColumnId) {
+          return { ...column, tasks: [...withoutTask, movingTask] }
+        }
+        return { ...column, tasks: withoutTask }
+      })
+    })
+  }, [])
+
+  const handleMoveTaskByDirection = useCallback((taskId: string, direction: -1 | 1) => {
+    setColumns(prev => {
+      const sourceIndex = prev.findIndex(column => column.tasks.some(task => task.id === taskId))
+      const targetIndex = sourceIndex + direction
+      if (sourceIndex < 0 || targetIndex < 0 || targetIndex >= prev.length) return prev
+      const movingTask = prev[sourceIndex].tasks.find(task => task.id === taskId)
+      if (!movingTask) return prev
+      return prev.map((column, index) => {
+        if (index === sourceIndex) {
+          return { ...column, tasks: column.tasks.filter(task => task.id !== taskId) }
+        }
+        if (index === targetIndex) {
+          return { ...column, tasks: [...column.tasks, movingTask] }
+        }
+        return column
+      })
+    })
+  }, [])
+
   const activeProjectData = projects.find(p => p.id === activeProject) ?? projects[0]
+  const labelOptions = Array.from(new Set(columns.flatMap(column => column.tasks.map(task => task.label.text))))
+  const visibleColumns = columns.map(column => ({
+    ...column,
+    tasks: column.tasks.filter(task => {
+      const q = taskSearch.trim().toLowerCase()
+      const matchesSearch = !q || [task.title, task.label.text, task.assignee.name].some(value => value.toLowerCase().includes(q))
+      const matchesLabel = labelFilter === 'all' || task.label.text === labelFilter
+      const matchesAssignee = assigneeFilter === 'all' || task.assignee.id === assigneeFilter
+      return matchesSearch && matchesLabel && matchesAssignee
+    }),
+  }))
 
   return (
     <div className="sample-board-tasks">
@@ -496,7 +610,7 @@ export default function BoardTasks() {
           <div className="bt-user-row">
             <div className="bt-user-avatar">AJ</div>
             <div className="bt-user-info">
-              <div className="bt-user-name">Alex Johnson</div>
+              <div className="bt-user-name">안지훈</div>
               <div className="bt-user-role">프로덕트 매니저</div>
             </div>
           </div>
@@ -540,36 +654,70 @@ export default function BoardTasks() {
               ))}
             </div>
 
-            <button className="bt-filter-btn">
+            <button className="bt-filter-btn" onClick={() => searchInputRef.current?.focus()}>
               <IconFilter />
               필터
             </button>
 
-            <button className="bt-add-btn">
+            <button
+              className="bt-add-btn"
+              onClick={() => handleAddTask(columns[0].id, '새 작업 정리')}
+            >
               <IconPlus />
               추가
             </button>
           </div>
         </header>
 
+        <div className="bt-filter-row" aria-label="작업 필터">
+          <label className="bt-search-field">
+            <IconFilter />
+            <input
+              ref={searchInputRef}
+              type="search"
+              placeholder="작업을 검색하세요"
+              value={taskSearch}
+              onChange={e => setTaskSearch(e.target.value)}
+            />
+          </label>
+          <select value={assigneeFilter} onChange={e => setAssigneeFilter(e.target.value)} aria-label="담당자 필터">
+            <option value="all">담당자 전체</option>
+            {members.map(member => (
+              <option key={member.id} value={member.id}>{member.name}</option>
+            ))}
+          </select>
+          <select value={labelFilter} onChange={e => setLabelFilter(e.target.value)} aria-label="라벨 필터">
+            <option value="all">라벨 전체</option>
+            {labelOptions.map(label => (
+              <option key={label} value={label}>{label}</option>
+            ))}
+          </select>
+        </div>
+
         {/* Board canvas */}
         <div className="bt-board-canvas">
-          {columns.map((col, i) => (
+          {visibleColumns.map((col, i) => (
             <KanbanColumn
               key={col.id}
               column={col}
               colIndex={i}
               onCardClick={handleCardClick}
               onAddTask={handleAddTask}
+              onMoveTask={handleMoveTaskByDirection}
             />
           ))}
         </div>
       </div>
 
       {/* Task detail popover */}
-      <AnimatePresence>
+      <AnimatePresence onExitComplete={() => taskOpenerRef.current?.focus()}>
         {selectedTask && (
-          <TaskPopover task={selectedTask} onClose={handleClosePopover} />
+          <TaskPopover
+            task={selectedTask}
+            columns={columns}
+            onClose={handleClosePopover}
+            onMoveToColumn={handleMoveTaskToColumn}
+          />
         )}
       </AnimatePresence>
     </div>

@@ -1,131 +1,64 @@
-export const mock = {
+export const softdeck = {
   brand: {
-    name: "SoftDeck",
-    tagline: "The Retro-Powered Deck Builder",
-    year: "© 1994–2026",
-    logo: "SD",
+    name: 'SoftDeck',
+    category: '포터블 오디오 콘솔',
+    image: '/media/softdeck-retro/softdeck-console.png',
   },
-
   nav: [
-    { label: "기능", href: "#features" },
-    { label: "사양", href: "#specs" },
-    { label: "요금제", href: "#pricing" },
-    { label: "문의", href: "#contact" },
+    { label: '제품', href: '#product' },
+    { label: '사양', href: '#specs' },
+    { label: '구성', href: '#bundles' },
+    { label: '지원', href: '#contact' },
   ],
-
   hero: {
-    headline: "Build Decks Like It's 1989",
-    sub: "OHP 이후 가장 손맛 좋고 만족스러운 프레젠테이션 툴. 뉴모픽 컨트롤, 레트로 감성.",
-    cta: "무료로 시작하기",
-    ctaSecondary: "데모 보기",
-    badge: "신규 출시 v2.4",
+    title: 'SoftDeck',
+    subtitle: '어디서나 좋은 사운드를 잡는 포터블 오디오 콘솔',
+    body:
+      '두 개의 프리앰프, 실제 VU 미터, 독립 모니터 노브를 하나의 알루미늄 바디에 담았습니다. 책상, 촬영장, 이동 녹음 모두 같은 손맛으로 다룹니다.',
+    primary: '지금 구매하기',
+    secondary: '기술 사양 보기',
   },
-
-  productPanel: {
-    title: "SoftDeck Studio",
-    description: "나만의 크리에이티브 워크스테이션",
-    stats: [
-      { label: "슬라이드", value: "∞" },
-      { label: "테마", value: "64" },
-      { label: "폰트", value: "128" },
-    ],
-    indicator: "ACTIVE",
-  },
-
-  features: [
-    {
-      icon: "◈",
-      title: "뉴모픽 캔버스",
-      desc: "모든 슬라이드 표면이 같은 소재에서 눌러낸 듯 부드럽고 촉감이 살아있습니다.",
-    },
-    {
-      icon: "◉",
-      title: "레트로 타입 엔진",
-      desc: "그래픽 디자인의 황금기에서 엄선한 128종 이상의 디스플레이 폰트. 슬랩 세리프 포함.",
-    },
-    {
-      icon: "▣",
-      title: "그리드 컴포저",
-      desc: "픽셀 단위 정렬 가이드와 마그네틱 스냅 존이 있는 올드스쿨 모듈식 그리드.",
-    },
-    {
-      icon: "◆",
-      title: "선버스트 FX",
-      desc: "클릭 한 번으로 레트로 방사형 효과, 하프톤 오버레이, 스캔라인 텍스처를 적용해 빈티지 감성을 완성하세요.",
-    },
-    {
-      icon: "◐",
-      title: "소프트 트랜지션",
-      desc: "VHS 디졸브, 필름 와이프, 아날로그 방송 컷에서 영감을 받은 모션 프리셋.",
-    },
-    {
-      icon: "◑",
-      title: "덱 내보내기",
-      desc: "PDF, PPTX, 또는 별도 설치 없이 공유 가능한 레트로 스타일 웹 페이지로 내보내기.",
-    },
-  ],
-
   specs: [
-    { label: "엔진", value: "RetroCore™ v3" },
-    { label: "해상도", value: "최대 8K" },
-    { label: "포맷", value: "PDF, PPTX, HTML" },
-    { label: "플랫폼", value: "Win / Mac / Linux" },
-    { label: "저장소", value: "클라우드 + 로컬" },
-    { label: "협업", value: "실시간" },
+    { label: '입력', value: '콤보 XLR/TRS 2채널' },
+    { label: '컨버터', value: '32-bit / 192 kHz' },
+    { label: '전원', value: 'USB-C 또는 내장 배터리' },
+    { label: '모니터링', value: '헤드폰 2계통, 라인 출력' },
+    { label: '바디', value: '브러시드 알루미늄' },
+    { label: '무게', value: '1.4 kg' },
   ],
-
-  pricing: [
+  controls: [
+    '대형 입력 게인 노브',
+    '좌우 독립 VU 미터',
+    '원터치 모노 체크',
+    '무소음 모니터 감쇄',
+  ],
+  bundles: [
     {
-      tier: "FLOPPY",
-      price: "$0",
-      period: "/월",
-      desc: "혼자 탐험하는 분들을 위해",
-      features: ["덱 5개", "슬라이드 각 20장", "기본 테마", "PNG 내보내기"],
-      cta: "무료로 시작",
-      highlight: false,
+      tier: 'Solo',
+      price: '₩429,000',
+      desc: '보컬, 팟캐스트, 1인 촬영에 적합한 기본 구성',
+      features: ['SoftDeck 본체', 'USB-C 케이블', '휴대용 파우치'],
+      cta: 'Solo 선택',
     },
     {
-      tier: "CASSETTE",
-      price: "$12",
-      period: "/월",
-      desc: "진지한 크리에이터를 위해",
-      features: [
-        "덱 무제한",
-        "전체 테마 + 폰트",
-        "PDF & PPTX 내보내기",
-        "Sunburst FX",
-        "우선 지원",
-      ],
-      cta: "프로로 전환",
-      highlight: true,
+      tier: 'Field',
+      price: '₩589,000',
+      desc: '현장 녹음과 소규모 라이브 스트리밍을 위한 구성',
+      features: ['SoftDeck 본체', '스테레오 브레이크아웃 케이블', '하드 케이스', '레드 노브 세트'],
+      cta: 'Field 선택',
     },
     {
-      tier: "BETAMAX",
-      price: "$39",
-      period: "/월",
-      desc: "팀과 스튜디오를 위해",
-      features: [
-        "Cassette의 모든 기능",
-        "팀 워크스페이스",
-        "화이트라벨 내보내기",
-        "API 접근",
-        "SSO & 감사 로그",
-        "전담 지원",
-      ],
-      cta: "영업팀 문의",
-      highlight: false,
+      tier: 'Studio',
+      price: '₩739,000',
+      desc: '고정 작업실과 이동 세트를 함께 쓰는 팀용 구성',
+      features: ['Field 구성 전체', '데스크 스탠드', '예비 배터리', '2년 우선 지원'],
+      cta: 'Studio 선택',
     },
   ],
-
   newsletter: {
-    heading: "새 소식 받아보기",
-    sub: "레트로 팁, 신규 테마 출시 소식, 베타 기능 얼리 액세스를 가장 먼저 받아보세요.",
-    placeholder: "your@email.com",
-    cta: "구독하기",
-  },
-
-  footer: {
-    links: ["개인정보처리방침", "이용약관", "블로그", "문서", "서비스 상태"],
-    social: ["TW", "GH", "YT"],
+    title: '출고 알림 받기',
+    body: '초도 물량 입고와 펌웨어 업데이트 소식을 메일로 보내드립니다.',
+    placeholder: 'studio@example.com',
+    cta: '알림 신청',
   },
 }

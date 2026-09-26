@@ -1,90 +1,84 @@
-/* ── Lumiere Store — mock data ──────────────────────────────── */
-
 export const navLinks = [
-  { label: '컬렉션', href: '#collections' },
-  { label: '룩북', href: '#lookbook' },
-  { label: '브랜드 소개', href: '#about' },
+  { label: '신상품', href: '#arrivals' },
+  { label: '에디토리얼', href: '#editorial' },
+  { label: '서비스', href: '#service' },
 ]
 
 export const heroData = {
-  season: 'S/S 2025',
-  headline: '절제된 삶의\n미학',
-  subline: '조용한 럭셔리를 소중히 여기는 이들을 위해 엄선한 컬렉션.',
-  cta: '컬렉션 쇼핑하기',
+  headline: 'LUMIERE 초봄 컬렉션',
+  subline: '울 블레이저, 니트, 테일러드 코트처럼 지금 바로 고를 수 있는 신상품을 먼저 보여드립니다.',
+  cta: '신상품 보기',
 }
 
-export const newArrivals = [
+export interface Product {
+  id: string
+  name: string
+  price: number
+  category: string
+  imageIndex: number
+  colors: string[]
+}
+
+export const newArrivals: Product[] = [
   {
-    id: 'na-1',
-    name: 'Silk Georgette Blouse',
-    price: '€ 480',
-    category: '기성복',
-    color: '#e8e0d5',
-  },
-  {
-    id: 'na-2',
-    name: 'Cashmere Wrap Coat',
-    price: '€ 1 240',
+    id: 'olive-blazer',
+    name: '울 블렌드 블레이저',
+    price: 398000,
     category: '아우터',
-    color: '#c8bfb0',
+    imageIndex: 0,
+    colors: ['#5d5a43', '#111111'],
   },
   {
-    id: 'na-3',
-    name: 'Wide-Leg Trousers',
-    price: '€ 620',
-    category: '기성복',
-    color: '#d6cfc5',
+    id: 'rib-knit',
+    name: '리브 니트 스웨터',
+    price: 228000,
+    category: '니트웨어',
+    imageIndex: 1,
+    colors: ['#eee9df', '#111111'],
   },
   {
-    id: 'na-4',
-    name: 'Leather Shoulder Bag',
-    price: '€ 890',
+    id: 'black-coat',
+    name: '롱 테일러드 코트',
+    price: 612000,
+    category: '코트',
+    imageIndex: 2,
+    colors: ['#111111'],
+  },
+  {
+    id: 'wide-trouser',
+    name: '와이드 울 트라우저',
+    price: 259000,
+    category: '팬츠',
+    imageIndex: 3,
+    colors: ['#5d5a43', '#111111'],
+  },
+  {
+    id: 'olive-bag',
+    name: '레더 숄더백',
+    price: 318000,
+    category: '가방',
+    imageIndex: 4,
+    colors: ['#343728', '#111111'],
+  },
+  {
+    id: 'silk-scarf',
+    name: '실크 스카프',
+    price: 148000,
     category: '액세서리',
-    color: '#bfb6a8',
+    imageIndex: 5,
+    colors: ['#f0eadf'],
   },
 ]
 
-export const lookbookCategories = [
-  { id: 'lb-1', label: '이브닝', color: '#2a2520' },
-  { id: 'lb-2', label: '데이웨어', color: '#3d3530' },
-  { id: 'lb-3', label: '리조트', color: '#4a3f38' },
-  { id: 'lb-4', label: '액세서리', color: '#322b26' },
-  { id: 'lb-5', label: '테일러링', color: '#2e2820' },
-]
-
-export const brandStory = {
-  overline: 'Maison Lumière',
-  headline: '의도를 담아\n만들다',
-  body: '1987년 이래, 우리는 하나의 비전을 추구해왔습니다: 계절을 초월해 오래 가는 옷. 각 피스는 소재의 순수함과 고요하고 흔들림 없는 우아함에 대한 우리의 집념을 공유하는 장인들이 소량 제작합니다.',
-  detail: 'Atelier Paris — 1987년 창립',
-}
-
-export const footerColumns = [
+export const edits = [
   {
-    heading: '컬렉션',
-    links: [
-      { label: '신상품', href: '#' },
-      { label: '기성복', href: '#' },
-      { label: '액세서리', href: '#' },
-      { label: '아카이브', href: '#' },
-    ],
+    title: '한 벌의 외투가 한 계절의 태도를 정합니다.',
+    body: '라펠의 각도, 어깨선의 여유, 빛을 머금는 표면감까지. Lumiere는 사진보다 실제 착용 시간을 먼저 생각합니다.',
   },
   {
-    heading: 'Maison',
-    links: [
-      { label: '브랜드 스토리', href: '#' },
-      { label: '아틀리에', href: '#' },
-      { label: '지속가능성', href: '#' },
-      { label: '언론 보도', href: '#' },
-    ],
-  },
-  {
-    heading: '고객 서비스',
-    links: [
-      { label: '문의하기', href: '#' },
-      { label: '배송 및 반품', href: '#' },
-      { label: '사이즈 가이드', href: '#' },
-      { label: '케어 & 수선', href: '#' },
-    ],
+    title: '장식보다 원단, 유행보다 비율.',
+    body: '모든 상품은 모델 컷과 단품 컷을 함께 보여주고, 색상 선택은 실제 소재감이 보이는 순서로 정리했습니다.',
   },
 ]
+
+export const serviceLinks = ['무료 교환 1회', '수선 상담', '예약 피팅', '소량 입고 알림']

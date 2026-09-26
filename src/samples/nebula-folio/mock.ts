@@ -1,16 +1,22 @@
+export type ProjectKind = 'installation' | 'sensing' | 'tool'
+
 export interface Project {
   id: string
   title: string
-  description: string
-  tags: string[]
+  kind: ProjectKind
   year: string
-  link?: string
+  place: string
+  role: string
+  summary: string
+  details: string[]
+  tools: string[]
+  image: string
 }
 
 export interface Skill {
   name: string
-  level: number // 0–100
-  category: 'language' | 'framework' | 'tool' | 'other'
+  level: number
+  category: 'code' | 'hardware' | 'process'
 }
 
 export interface TimelineEntry {
@@ -27,114 +33,86 @@ export interface ContactLink {
 }
 
 export const profile = {
-  name: 'KAI NAKAMURA',
-  role: '풀스택 엔지니어 & 디지털 아키텍트',
-  tagline: '가능성의 경계에서 시스템을 만듭니다.',
-  bio: '고성능 웹 시스템, 인터랙티브 경험, AI 기반 도구를 만듭니다. 깔끔한 아키텍처, 픽셀 퍼펙트 UI, 그리고 실제 프로덕션에서 작동하는 것을 출시하는 데 집착합니다.',
-  location: '도쿄 — 원격',
-  availability: '계약직 구직 중',
+  name: 'Min Jae Ryu',
+  role: '크리에이티브 테크놀로지스트',
+  tagline: '코드, 센서, 빛, 물성을 엮어 관객이 만지는 경험을 설계합니다.',
+  bio: '전시장과 브랜드 공간을 위한 인터랙티브 설치를 만듭니다. 손으로 조립한 프로토타입에서 시작해 센서 입력, 실시간 그래픽, 내구성 있는 운영 도구까지 하나의 작업으로 묶습니다.',
+  location: '서울 / 현장 설치 가능',
+  availability: '2026년 봄 커미션 상담 가능',
+  portrait: '/media/nebula-folio/art-tech-workbench.jpg',
 }
 
 export const projects: Project[] = [
   {
-    id: 'proj-01',
-    title: 'SYNAPSE AI',
-    description:
-      '분산 AI 에이전트 클러스터를 모니터링하는 실시간 신경 인터페이스 대시보드. WebGL 가속 데이터 시각화로 10ms 미만의 렌더링 지연을 실현했습니다.',
-    tags: ['React', 'WebGL', 'WebSocket', 'TypeScript'],
+    id: 'moving-shadow',
+    title: '움직이는 그림자',
+    kind: 'installation',
     year: '2025',
+    place: '문화역서울284',
+    role: '인터랙션 설계 / 실시간 영상 시스템',
+    summary: '관객의 보행을 깊이 카메라로 읽어 벽면의 그림자 입자를 천천히 밀어내는 야간 설치.',
+    details: ['Kinect depth stream을 WebSocket으로 정리', '투사면 3개를 하나의 타임라인으로 동기화', '운영 스태프용 밝기/감도 조정 패널 제작'],
+    tools: ['TouchDesigner', 'TypeScript', 'WebSocket', 'Projection'],
+    image: '/media/nebula-folio/code-installation.jpg',
   },
   {
-    id: 'proj-02',
-    title: 'CIPHER VAULT',
-    description:
-      '종단 간 암호화, 데드맨 스위치, 터미널 스타일 UI를 갖춘 제로 지식 암호화 문서 저장소. 보안에 민감한 전문가를 위해 설계했습니다.',
-    tags: ['Rust', 'WASM', 'AES-256', 'IndexedDB'],
-    year: '2025',
-  },
-  {
-    id: 'proj-03',
-    title: 'NEON GRID',
-    description:
-      '다크 모드 우선 애플리케이션을 위한 오픈소스 CSS 디자인 시스템. 60개 이상의 컴포넌트, 완전한 토큰 시스템, 디자이너를 위한 Figma 플러그인을 제공합니다.',
-    tags: ['CSS', 'Figma API', 'Storybook', 'npm'],
+    id: 'plant-rhythm',
+    title: '식물의 리듬',
+    kind: 'sensing',
     year: '2024',
+    place: '성수동 쇼룸',
+    role: '피지컬 프로토타입 / 데이터 시각화',
+    summary: '화분의 수분, 조도, 진동 데이터를 사운드와 작은 LED 호흡으로 번역한 리테일 윈도 설치.',
+    details: ['토양 센서 18개 캘리브레이션', '식물별 반응 곡선 설계', '매장 조도 변화에 맞춘 자동 디밍'],
+    tools: ['Arduino', 'MQTT', 'p5.js', 'Ableton Link'],
+    image: '/media/nebula-folio/art-tech-workbench.jpg',
   },
   {
-    id: 'proj-04',
-    title: 'DRIFT PROTOCOL',
-    description:
-      'WebRTC를 활용한 P2P 파일 전송 애플리케이션. 자동 릴레이 폴백, 청크 스트리밍을 지원하며 서버 측 저장소가 없습니다.',
-    tags: ['WebRTC', 'Node.js', 'React', 'P2P'],
-    year: '2024',
-  },
-  {
-    id: 'proj-05',
-    title: 'HELIX OS',
-    description:
-      '가상 파일 시스템, 셸 인터프리터, 패키지 매니저를 갖춘 브라우저 기반 Unix 유사 운영체제 시뮬레이션. Worker 내에서 완전히 실행됩니다.',
-    tags: ['TypeScript', 'Web Workers', 'POSIX', 'Canvas'],
+    id: 'archive-table',
+    title: '아카이브 테이블',
+    kind: 'tool',
     year: '2023',
-  },
-  {
-    id: 'proj-06',
-    title: 'GHOST TRACE',
-    description:
-      '자동 스팬 상관 분석, 이상 탐지, 초고속 쿼리 엔진을 갖춘 마이크로서비스용 분산 추적 플랫폼.',
-    tags: ['Go', 'ClickHouse', 'gRPC', 'React'],
-    year: '2023',
+    place: '독립 큐레이터 협업',
+    role: '프로덕트 설계 / 프론트엔드',
+    summary: 'RFID가 부착된 오브제를 테이블에 올리면 관련 인터뷰와 스케치가 열리는 연구 아카이브.',
+    details: ['오브제별 자료 권한과 전시 모드 분리', '오프라인 동작을 위한 로컬 캐시', '큐레이터가 직접 편집하는 JSON 스키마'],
+    tools: ['React', 'RFID', 'IndexedDB', 'Node'],
+    image: '/media/nebula-folio/art-tech-workbench.jpg',
   },
 ]
 
 export const skills: Skill[] = [
-  { name: 'TypeScript', level: 96, category: 'language' },
-  { name: 'Rust', level: 78, category: 'language' },
-  { name: 'Go', level: 72, category: 'language' },
-  { name: 'Python', level: 85, category: 'language' },
-  { name: 'React', level: 95, category: 'framework' },
-  { name: 'Next.js', level: 90, category: 'framework' },
-  { name: 'Node.js', level: 88, category: 'framework' },
-  { name: 'Framer Motion', level: 82, category: 'framework' },
-  { name: 'Docker', level: 80, category: 'tool' },
-  { name: 'Kubernetes', level: 68, category: 'tool' },
-  { name: 'PostgreSQL', level: 84, category: 'tool' },
-  { name: 'Redis', level: 76, category: 'tool' },
+  { name: '실시간 그래픽', level: 94, category: 'code' },
+  { name: '인터랙션 프로토타이핑', level: 91, category: 'hardware' },
+  { name: '센서 캘리브레이션', level: 84, category: 'hardware' },
+  { name: '전시 운영 도구', level: 88, category: 'code' },
+  { name: '공간 리허설', level: 86, category: 'process' },
+  { name: '기술 문서화', level: 82, category: 'process' },
 ]
 
 export const timeline: TimelineEntry[] = [
   {
-    year: '2024–현재',
-    role: '시니어 엔지니어',
-    company: 'NEXUS SYSTEMS',
-    description:
-      '일일 활성 사용자 20만 명 이상의 실시간 트레이딩 플랫폼의 프론트엔드 아키텍처를 리드했습니다. 번들 크기 40% 감소, P99 렌더 지연을 16ms 이하로 개선했습니다.',
+    year: '2023-현재',
+    role: '독립 크리에이티브 테크놀로지스트',
+    company: 'Studio Nebula',
+    description: '미디어아트 전시, 브랜드 쇼룸, 연구 랩을 위한 프로토타입과 현장 운영 시스템을 제작합니다.',
   },
   {
-    year: '2022–2024',
-    role: '풀스택 엔지니어',
-    company: 'QUANTUM IO',
-    description:
-      '데이터베이스 스키마부터 픽셀 퍼펙트 UI까지 6개의 프로덕트 기능을 엔드투엔드로 구축하고 출시했습니다. 타입 기반 API 계약을 도입해 런타임 오류를 70% 줄였습니다.',
+    year: '2020-2023',
+    role: '인터랙티브 개발자',
+    company: 'Signal Room',
+    description: '센서 기반 설치와 실시간 영상 시스템을 담당하며 투어 전시에 필요한 유지보수 구조를 정리했습니다.',
   },
   {
-    year: '2020–2022',
+    year: '2018-2020',
     role: '프론트엔드 엔지니어',
-    company: 'VOID LABS',
-    description:
-      '엔터프라이즈 분석 제품을 위한 인터랙티브 데이터 시각화를 설계하고 개발했습니다. 대표 차트 라이브러리를 구동하는 WebGL 렌더링 엔진 개발에 기여했습니다.',
-  },
-  {
-    year: '2018–2020',
-    role: '주니어 개발자',
-    company: 'PIXEL FORGE',
-    description:
-      '마케팅 사이트와 내부 도구를 개발하는 UI 개발자로 시작했습니다. 컴포넌트 라이브러리를 CSS Modules에서 토큰 기반 시스템으로 마이그레이션하는 작업을 이끌었습니다.',
+    company: 'Archive Lab',
+    description: '문화예술 아카이브 웹 앱과 현장 키오스크를 만들며 접근성, 오프라인 캐시, 편집 도구를 다뤘습니다.',
   },
 ]
 
 export const contactLinks: ContactLink[] = [
+  { label: '작업 문의', href: 'mailto:hello@nebula.kr', icon: '@' },
   { label: '깃허브', href: '#', icon: 'GH' },
-  { label: '링크드인', href: '#', icon: 'LI' },
-  { label: '트위터', href: '#', icon: 'TW' },
-  { label: '이메일', href: 'mailto:kai@nexus.dev', icon: '@' },
+  { label: '노트', href: '#', icon: 'NT' },
 ]

@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useRef } from 'react'
+import { useState, useCallback, useEffect, type CSSProperties } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import './tempo-music.css'
 import {
@@ -10,6 +10,8 @@ import {
   formatDuration,
   type Track,
 } from './mock'
+
+type RangeStyle = CSSProperties & { '--tm-range-value': string }
 
 // ── Inline SVG icons ──────────────────────────────────────────────────────
 
@@ -110,42 +112,34 @@ function IconStar({ size = 12 }: { size?: number }) {
 
 // ── Album art component ────────────────────────────────────────────────────
 
-function AlbumArt({ gradient, size = 'md', isPlaying = false }: { gradient: string; size?: 'sm' | 'md' | 'lg'; isPlaying?: boolean }) {
+function AlbumArt({
+  src,
+  title,
+  size = 'md',
+  isPlaying = false,
+}: {
+  src: string
+  title: string
+  size?: 'sm' | 'md' | 'lg'
+  isPlaying?: boolean
+}) {
   const shouldReduceMotion = useReducedMotion()
   const dims: Record<string, number> = { sm: 48, md: 160, lg: 200 }
   const px = dims[size]
-  const gradId = `alg-${gradient.slice(0, 12).replace(/\s/g, '')}`
 
   return (
-    <motion.svg
+    <motion.div
       className="tm-track-art"
-      viewBox="0 0 160 160"
-      xmlns="http://www.w3.org/2000/svg"
       style={{ width: px, height: px, display: 'block' }}
-      animate={(!shouldReduceMotion && isPlaying) ? { rotate: 360 } : { rotate: 0 }}
+      animate={(!shouldReduceMotion && isPlaying) ? { scale: [1, 1.015, 1] } : { scale: 1 }}
       transition={(!shouldReduceMotion && isPlaying)
-        ? { repeat: Infinity, duration: 4, ease: 'linear' }
+        ? { repeat: Infinity, duration: 4, ease: 'easeInOut' }
         : { duration: 0.6, ease: 'easeOut' }
       }
     >
-      <defs>
-        <linearGradient id={gradId} x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor={extractColor(gradient, 0)} />
-          <stop offset="100%" stopColor={extractColor(gradient, 1)} />
-        </linearGradient>
-      </defs>
-      <rect width="160" height="160" fill={`url(#${gradId})`} />
-      <circle cx="80" cy="80" r="28" fill="rgba(0,0,0,0.25)" />
-      <circle cx="80" cy="80" r="8" fill="rgba(0,0,0,0.4)" />
-      <circle cx="80" cy="80" r="2.5" fill="rgba(255,255,255,0.7)" />
-    </motion.svg>
+      <img src={src} alt={`${title} 커버`} loading="lazy" />
+    </motion.div>
   )
-}
-
-// Simple parser: pulls hex colors from a CSS gradient string
-function extractColor(gradient: string, index: number): string {
-  const matches = gradient.match(/#[0-9a-fA-F]{6}/g) ?? ['#a855f7', '#ec4899']
-  return matches[index] ?? matches[0]
 }
 
 // ── Waveform bars (playing indicator) ─────────────────────────────────────
@@ -186,7 +180,7 @@ function PlayingBars({ isPlaying }: { isPlaying: boolean }) {
           />
         ))}
       </svg>
-      재생 중
+      미리듣기 중
     </motion.span>
   )
 }
@@ -219,7 +213,7 @@ function TrackCard({
       onClick={() => onSelect(track)}
     >
       <div className="tm-track-art-wrap">
-        <AlbumArt gradient={track.gradient} size="md" isPlaying={isActive && isPlaying} />
+        <AlbumArt src={track.artUrl} title={track.album} size="md" isPlaying={isActive && isPlaying} />
         <div className="tm-track-play-overlay">
           <motion.button
             className="tm-track-play-btn"
@@ -235,6 +229,7 @@ function TrackCard({
       </div>
       <div className="tm-track-title">{track.title}</div>
       <div className="tm-track-artist">{track.artist}</div>
+      <div className="tm-track-meta">{track.year} · {track.format}</div>
       <AnimatePresence>
         {isActive && <PlayingBars isPlaying={isPlaying} />}
       </AnimatePresence>
@@ -253,32 +248,23 @@ function ProgressBar({
   duration: number
   onSeek: (p: number) => void
 }) {
-  const trackRef = useRef<HTMLDivElement>(null)
-
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!trackRef.current) return
-    const rect = trackRef.current.getBoundingClientRect()
-    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width))
-    onSeek(ratio)
-  }
-
   const elapsed = Math.floor(progress * duration)
+  const rangeStyle: RangeStyle = { '--tm-range-value': `${progress * 100}%` }
 
   return (
     <div className="tm-progress-row">
       <span className="tm-time">{formatDuration(elapsed)}</span>
-      <div
-        ref={trackRef}
+      <input
         className="tm-progress-track"
-        onClick={handleClick}
-        role="slider"
-        aria-valuemin={0}
-        aria-valuemax={100}
-        aria-valuenow={Math.round(progress * 100)}
-        aria-label="재생 진행률"
-      >
-        <div className="tm-progress-fill" style={{ width: `${progress * 100}%` }} />
-      </div>
+        type="range"
+        min={0}
+        max={100}
+        step={1}
+        value={Math.round(progress * 100)}
+        onChange={e => onSeek(Number(e.currentTarget.value) / 100)}
+        aria-label="미리듣기 진행률"
+        style={rangeStyle}
+      />
       <span className="tm-time end">{formatDuration(duration)}</span>
     </div>
   )
@@ -286,33 +272,41 @@ function ProgressBar({
 
 // ── Volume slider ─────────────────────────────────────────────────────────
 
-function VolumeSlider({ volume, onChange }: { volume: number; onChange: (v: number) => void }) {
-  const trackRef = useRef<HTMLDivElement>(null)
-
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!trackRef.current) return
-    const rect = trackRef.current.getBoundingClientRect()
-    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width))
-    onChange(ratio)
-  }
+function VolumeSlider({
+  volume,
+  muted,
+  onChange,
+  onToggleMute,
+}: {
+  volume: number
+  muted: boolean
+  onChange: (v: number) => void
+  onToggleMute: () => void
+}) {
+  const displayedVolume = muted ? 0 : volume
+  const rangeStyle: RangeStyle = { '--tm-range-value': `${displayedVolume * 100}%` }
 
   return (
     <div className="tm-player-right">
-      <button className="tm-ctrl-btn" aria-label="볼륨">
+      <button
+        className={`tm-ctrl-btn${muted ? ' muted' : ''}`}
+        onClick={onToggleMute}
+        aria-label={muted ? '음소거 해제' : '음소거'}
+        aria-pressed={muted}
+      >
         <IconVolume size={16} />
       </button>
-      <div
-        ref={trackRef}
+      <input
         className="tm-volume-track"
-        onClick={handleClick}
-        role="slider"
-        aria-valuemin={0}
-        aria-valuemax={100}
-        aria-valuenow={Math.round(volume * 100)}
+        type="range"
+        min={0}
+        max={100}
+        step={1}
+        value={Math.round(displayedVolume * 100)}
+        onChange={e => onChange(Number(e.currentTarget.value) / 100)}
         aria-label="볼륨"
-      >
-        <div className="tm-volume-fill" style={{ width: `${volume * 100}%` }} />
-      </div>
+        style={rangeStyle}
+      />
     </div>
   )
 }
@@ -326,6 +320,8 @@ export default function TempoMusic() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [progress, setProgress] = useState(0.27)
   const [volume, setVolume] = useState(0.75)
+  const [muted, setMuted] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
 
   const toggleSidebar = useCallback(() => setSidebarOpen(p => !p), [])
   const closeSidebar = useCallback(() => setSidebarOpen(false), [])
@@ -371,7 +367,20 @@ export default function TempoMusic() {
   }, [currentTrack.id, progress])
 
   const handleSeek = useCallback((ratio: number) => setProgress(ratio), [])
-  const handleVolume = useCallback((v: number) => setVolume(v), [])
+  const handleVolume = useCallback((v: number) => {
+    setVolume(v)
+    setMuted(v === 0)
+  }, [])
+  const handleToggleMute = useCallback(() => setMuted(prev => !prev), [])
+  const showAllRecommendations = useCallback(() => {
+    setSearchQuery('')
+    setActiveNav('library')
+  }, [])
+  const filteredTracks = tracks.filter(track => {
+    const q = searchQuery.trim().toLowerCase()
+    if (!q) return true
+    return [track.title, track.artist, track.album, track.mood].some(value => value.toLowerCase().includes(q))
+  })
 
   return (
     <div className="sample-tempo-music">
@@ -383,7 +392,7 @@ export default function TempoMusic() {
 
       {/* Sidebar */}
       <aside className={`tm-sidebar${sidebarOpen ? ' open' : ''}`}>
-        <div className="tm-sidebar-logo">
+          <div className="tm-sidebar-logo">
           <div className="tm-logo-icon">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <circle cx="8" cy="8" r="4" fill="rgba(255,255,255,0.9)" />
@@ -415,8 +424,16 @@ export default function TempoMusic() {
 
         <div className="tm-sidebar-section-title">플레이리스트</div>
         <div className="tm-library-list">
-          {libraryPlaylists.map(pl => (
-            <button key={pl.id} className="tm-library-item">
+          {libraryPlaylists.map((pl, i) => (
+            <button
+              key={pl.id}
+              className="tm-library-item"
+              onClick={() => {
+                setActiveNav('library')
+                handleSelectTrack(tracks[i % tracks.length])
+                closeSidebar()
+              }}
+            >
               <span>{pl.name}</span>
               <span className="tm-library-item-count">{pl.count}</span>
             </button>
@@ -443,8 +460,10 @@ export default function TempoMusic() {
             <input
               className="tm-search-input"
               type="text"
-              placeholder="어떤 음악을 듣고 싶으세요?"
+              placeholder="아티스트, 앨범, 무드 검색"
               aria-label="음악 검색"
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
             />
           </div>
 
@@ -462,17 +481,18 @@ export default function TempoMusic() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35, ease: 'easeOut' }}
           >
-            좋은 저녁이에요
+            오늘 입고된 독립 음반
           </motion.h1>
+          <p className="tm-intro">실제 음원 없이 로컬 UI 상태로 미리듣기 진행률을 시뮬레이션합니다.</p>
 
           {/* Recently played */}
           <section>
             <div className="tm-section-header">
-              <h2 className="tm-section-title">최근 재생</h2>
-              <button className="tm-section-link">전체 보기</button>
+              <h2 className="tm-section-title">{searchQuery ? '검색 결과' : '새로운 음악'}</h2>
+              <button className="tm-section-link" onClick={() => setSearchQuery('')}>초기화</button>
             </div>
             <div className="tm-recently-grid">
-              {recentlyPlayed.map((track, i) => (
+              {(searchQuery ? filteredTracks : recentlyPlayed).map((track, i) => (
                 <TrackCard
                   key={track.id}
                   track={track}
@@ -490,7 +510,7 @@ export default function TempoMusic() {
           <section>
             <div className="tm-section-header">
               <h2 className="tm-section-title">나를 위한 추천</h2>
-              <button className="tm-section-link">전체 보기</button>
+              <button className="tm-section-link" onClick={showAllRecommendations}>전체 보기</button>
             </div>
             <div className="tm-playlist-grid">
               {madeForYou.map((pl, i) => (
@@ -502,12 +522,10 @@ export default function TempoMusic() {
                   transition={{ duration: 0.32, delay: 0.1 + i * 0.07, ease: 'easeOut' }}
                   onClick={() => handleSelectTrack(tracks[i % tracks.length])}
                 >
-                  <div className="tm-playlist-art" style={{ background: pl.gradient }}>
-                    <span className="tm-playlist-art-label">{pl.name}</span>
-                  </div>
+                  <img className="tm-playlist-art" src={pl.artUrl} alt={`${pl.name} 표지`} loading="lazy" />
                   <div className="tm-playlist-info">
                     <div className="tm-playlist-name">{pl.name}</div>
-                    <div className="tm-playlist-count">{pl.trackCount}곡</div>
+                    <div className="tm-playlist-count">{pl.trackCount}곡 · {pl.description}</div>
                   </div>
                 </motion.button>
               ))}
@@ -517,15 +535,16 @@ export default function TempoMusic() {
           {/* Featured banner */}
           <motion.div
             className="tm-featured-banner"
-            style={{ background: featuredBanner.gradient }}
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.38, delay: 0.3, ease: 'easeOut' }}
             onClick={() => handleSelectTrack(tracks[0])}
           >
+            <img className="tm-featured-image" src={featuredBanner.artUrl} alt={`${featuredBanner.title} 커버`} loading="lazy" />
+            <div className="tm-featured-copy">
             <div className="tm-featured-badge">
               <IconStar size={12} />
-              추천 아티스트
+              에디터 추천
             </div>
             <div className="tm-featured-title">{featuredBanner.title}</div>
             <div className="tm-featured-subtitle">{featuredBanner.subtitle}</div>
@@ -535,8 +554,9 @@ export default function TempoMusic() {
               onClick={e => { e.stopPropagation(); handleSelectTrack(tracks[0]) }}
             >
               <IconPlay size={14} />
-              지금 재생
+              미리듣기
             </button>
+            </div>
           </motion.div>
         </main>
       </div>
@@ -546,7 +566,7 @@ export default function TempoMusic() {
         {/* Now playing */}
         <div className="tm-player-now">
           <div className="tm-player-art">
-            <AlbumArt gradient={currentTrack.gradient} size="sm" isPlaying={isPlaying} />
+            <AlbumArt src={currentTrack.artUrl} title={currentTrack.album} size="sm" isPlaying={isPlaying} />
           </div>
           <div className="tm-player-track-info">
             <AnimatePresence mode="wait">
@@ -558,7 +578,7 @@ export default function TempoMusic() {
                 transition={{ duration: 0.2, ease: 'easeOut' }}
               >
                 <div className="tm-player-track-title">{currentTrack.title}</div>
-                <div className="tm-player-track-artist">{currentTrack.artist}</div>
+                <div className="tm-player-track-artist">{currentTrack.artist} · 미리듣기 시뮬레이션</div>
               </motion.div>
             </AnimatePresence>
           </div>
@@ -580,7 +600,7 @@ export default function TempoMusic() {
               className="tm-ctrl-btn play-pause"
               aria-label={isPlaying ? '일시정지' : '재생'}
               onClick={handlePlayPause}
-              whileHover={{ scale: 1.1, boxShadow: '0 0 0 6px rgba(168,85,247,0.2)' }}
+              whileHover={{ scale: 1.1, boxShadow: '0 0 0 6px rgba(200,79,50,0.22)' }}
               whileTap={{ scale: 0.88 }}
               transition={{ type: 'spring', stiffness: 460, damping: 20 }}
             >
@@ -616,7 +636,12 @@ export default function TempoMusic() {
         </div>
 
         {/* Volume */}
-        <VolumeSlider volume={volume} onChange={handleVolume} />
+        <VolumeSlider
+          volume={volume}
+          muted={muted}
+          onChange={handleVolume}
+          onToggleMute={handleToggleMute}
+        />
       </footer>
     </div>
   )

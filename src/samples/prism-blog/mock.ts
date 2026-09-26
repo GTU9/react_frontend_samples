@@ -1,4 +1,4 @@
-// Mock data for Prism Blog — glassmorphism blog sample
+// Mock data for Prism Blog — visual culture journal sample
 
 export interface Post {
   id: string
@@ -9,24 +9,28 @@ export interface Post {
   date: string
   tag: string
   likes: number
+  image: string
+  imageAlt: string
 }
 
 export const seedPosts: Post[] = [
   {
     id: '1',
-    title: '빛과 그림자: 필름 사진의 재발견',
+    title: '작은 전시가 도시의 시선을 바꾸는 법',
     excerpt:
-      '디지털 시대에 필름 카메라를 다시 꺼내 든 사람들이 늘고 있다. 완벽하지 않아서 오히려 아름다운 필름만의 질감과 그 매력을 탐구한다.',
+      '낡은 상가 2층에서 열린 그래픽 아카이브 전시가 동네의 보행 리듬과 간판의 문법을 다시 보게 만들었다.',
     body: [
-      '필름 카메라를 처음 손에 쥐었을 때의 감각을 아직도 기억한다. 셔터를 누를 때마다 들리는 기계적인 클릭음, 36장이라는 제한 속에서 순간을 고르는 긴장감. 디지털로 수천 장을 찍던 손가락이 갑자기 망설이기 시작했다.',
-      '필름 사진의 매력은 불완전함에 있다. 빛 번짐, 약간의 흔들림, 현상 과정에서 생기는 미묘한 색감 변화. 이 모든 것들이 "실수"가 아니라 사진에 시간의 질감을 새겨 넣는 요소가 된다.',
-      '최근 MZ세대를 중심으로 일회용 카메라와 중고 필름 카메라에 대한 관심이 폭발적으로 증가했다. 완벽하게 보정된 스마트폰 사진에 지친 사람들이 날것의 감각을 찾아 아날로그로 회귀하는 것이다.',
-      '필름 한 롤을 다 쓰고 현상소에서 사진을 받아 들 때의 설렘은 디지털에서는 절대 흉내 낼 수 없는 경험이다. 기다림 끝에 마주하는 그 사진들은 단순한 이미지가 아니라 시간의 조각이 된다.',
+      '전시는 크지 않았다. 접힌 포스터 열두 장, 지역 인쇄소에서 남은 색 교정지, 철거 전 간판을 촬영한 사진 몇 점이 전부였다. 그런데 그 작은 규모가 오히려 시선을 오래 붙잡았다.',
+      '좋은 시각 문화는 거창한 선언보다 구체적인 관찰에서 시작된다. 활자 굵기, 유리문에 붙은 영업시간 스티커, 전봇대에 겹겹이 붙은 공연 전단. 우리가 매일 지나치는 표면들이 도시의 어휘가 된다.',
+      '큐레이터는 작품 설명을 길게 쓰지 않았다. 대신 각 이미지 옆에 제작 연도와 발견 장소만 남겼다. 관람자는 스스로 관계를 만들고, 그 관계 속에서 동네의 시간이 어떻게 축적됐는지 읽게 된다.',
+      '전시장을 나와 골목으로 내려오자 간판들이 전과 다르게 보였다. 누군가의 선택과 비용과 취향이 도시의 얼굴을 만들고 있었다.',
     ],
     author: '김민서',
     date: '2026. 06. 15',
-    tag: '사진',
+    tag: '그래픽',
     likes: 142,
+    image: '/media/prism-blog/architecture-color.jpg',
+    imageAlt: '색채가 강한 현대 건축 외관',
   },
   {
     id: '2',
@@ -43,6 +47,8 @@ export const seedPosts: Post[] = [
     date: '2026. 06. 13',
     tag: '라이프스타일',
     likes: 98,
+    image: '/media/prism-blog/camera-culture.jpg',
+    imageAlt: '작업대 위의 카메라와 창작 도구',
   },
   {
     id: '3',
@@ -59,6 +65,8 @@ export const seedPosts: Post[] = [
     date: '2026. 06. 10',
     tag: '디자인',
     likes: 217,
+    image: '/media/prism-blog/architecture-color.jpg',
+    imageAlt: '도시 건축과 컬러 블록',
   },
   {
     id: '4',
@@ -75,6 +83,8 @@ export const seedPosts: Post[] = [
     date: '2026. 06. 08',
     tag: '예술',
     likes: 183,
+    image: '/media/prism-blog/camera-culture.jpg',
+    imageAlt: '사진 작업을 위한 카메라',
   },
   {
     id: '5',
@@ -91,6 +101,8 @@ export const seedPosts: Post[] = [
     date: '2026. 06. 05',
     tag: '라이프스타일',
     likes: 156,
+    image: '/media/prism-blog/architecture-color.jpg',
+    imageAlt: '디자인 잡지 같은 건축 사진',
   },
   {
     id: '6',
@@ -107,5 +119,7 @@ export const seedPosts: Post[] = [
     date: '2026. 06. 02',
     tag: '디자인',
     likes: 129,
+    image: '/media/prism-blog/camera-culture.jpg',
+    imageAlt: '시각 연구를 위한 카메라 장비',
   },
 ]

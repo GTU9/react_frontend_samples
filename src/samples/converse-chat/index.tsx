@@ -215,11 +215,14 @@ function ConvItem({ conv, isActive, searchQuery, onClick }: ConvItemProps) {
   const lastTime = lastMsg ? lastMsg.timestamp.replace(/^(Today|Yesterday|Mon|Fri)\s/, '') : ''
   const preview = lastMsg ? (lastMsg.senderId === 'me' ? `나: ${lastMsg.text}` : lastMsg.text) : ''
 
-  // Basic search highlight — filter happens in parent
   const name = participant.name
+  const q = searchQuery.trim().toLowerCase()
+  const matchesSearch = !q ||
+    name.toLowerCase().includes(q) ||
+    participant.role?.toLowerCase().includes(q) ||
+    messages.some(msg => msg.text.toLowerCase().includes(q))
 
-  // Dim if search is active and name doesn't match
-  if (searchQuery && !name.toLowerCase().includes(searchQuery.toLowerCase())) return null
+  if (!matchesSearch) return null
 
   return (
     <button
@@ -259,6 +262,7 @@ export default function ConverseChat() {
   const [searchQuery, setSearchQuery] = useState('')
   const [composerText, setComposerText] = useState('')
   const [isTyping, setIsTyping] = useState(false)
+  const [actionNotice, setActionNotice] = useState('')
 
   // mobile: show thread or list
   const [mobileView, setMobileView] = useState<'list' | 'thread'>('list')
@@ -266,8 +270,10 @@ export default function ConverseChat() {
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const composerRef = useRef<HTMLInputElement>(null)
   const typingTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const noticeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const activeConv = convs.find(c => c.id === activeId) ?? convs[0]
+  const participant = activeConv.participant
 
   // Scroll to bottom when messages change
   useEffect(() => {
@@ -282,6 +288,58 @@ export default function ConverseChat() {
     setConvs(prev => prev.map(c => c.id === id ? { ...c, unreadCount: 0 } : c))
   }, [])
 
+  const showActionNotice = useCallback((text: string) => {
+    setActionNotice(text)
+    if (noticeTimerRef.current) clearTimeout(noticeTimerRef.current)
+    noticeTimerRef.current = setTimeout(() => setActionNotice(''), 2600)
+  }, [])
+
+  const handleNewChat = useCallback(() => {
+    const draftId = 'draft-chat'
+    const draft: Conversation = {
+      id: draftId,
+      participant: {
+        id: 'draft',
+        name: '새 대화 초안',
+        avatar: '+',
+        avatarColor: '#2f6f9f',
+        online: true,
+        role: '메시지 작성 중',
+      },
+      unreadCount: 0,
+      messages: [
+        {
+          id: 'draft-start',
+          senderId: 'draft',
+          text: '받는 사람을 정하고 첫 메시지를 작성하세요.',
+          timestamp: '방금',
+          dateMs: Date.now(),
+        },
+      ],
+    }
+
+    setConvs(prev => prev.some(c => c.id === draftId) ? prev : [draft, ...prev])
+    setActiveId(draftId)
+    setSearchQuery('')
+    setMobileView('thread')
+    showActionNotice('새 대화 초안을 열었습니다.')
+    window.setTimeout(() => composerRef.current?.focus(), 0)
+  }, [showActionNotice])
+
+  const handleCallAction = useCallback((kind: 'voice' | 'video') => {
+    const label = kind === 'voice' ? '음성 통화' : '영상 통화'
+    showActionNotice(`${participant.name} ${label} 준비 상태를 표시했습니다.`)
+  }, [participant.name, showActionNotice])
+
+  const handleShowInfo = useCallback(() => {
+    showActionNotice(`${participant.name} 정보 패널을 확인 중입니다.`)
+  }, [participant.name, showActionNotice])
+
+  const appendComposerText = useCallback((snippet: string) => {
+    setComposerText(prev => `${prev}${prev && !prev.endsWith(' ') ? ' ' : ''}${snippet}`)
+    window.setTimeout(() => composerRef.current?.focus(), 0)
+  }, [])
+
   // Handle send message
   const handleSend = useCallback(() => {
     const text = composerText.trim()
@@ -291,7 +349,7 @@ export default function ConverseChat() {
       id: `msg-${Date.now()}`,
       senderId: 'me',
       text,
-      timestamp: 'Just now',
+      timestamp: '방금',
       dateMs: Date.now(),
     }
 
@@ -345,10 +403,9 @@ export default function ConverseChat() {
   useEffect(() => {
     return () => {
       if (typingTimerRef.current) clearTimeout(typingTimerRef.current)
+      if (noticeTimerRef.current) clearTimeout(noticeTimerRef.current)
     }
   }, [])
-
-  const participant = activeConv.participant
 
   return (
     <div className="sample-converse-chat">
@@ -362,7 +419,7 @@ export default function ConverseChat() {
             </div>
             Converse
           </div>
-          <button className="cc-new-chat-btn" aria-label="새 대화">
+          <button className="cc-new-chat-btn" onClick={handleNewChat} aria-label="새 대화">
             <IconPlus />
           </button>
         </div>
@@ -374,7 +431,7 @@ export default function ConverseChat() {
             <input
               className="cc-search-input"
               type="text"
-              placeholder="대화 검색…"
+              placeholder="대화, 파일, 사람 검색"
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
               aria-label="대화 검색"
@@ -384,6 +441,7 @@ export default function ConverseChat() {
 
         {/* Conversation list */}
         <div className="cc-conv-list" role="list">
+          <div className="cc-list-heading">채널</div>
           {convs.map(conv => (
             <ConvItem
               key={conv.id}
@@ -393,6 +451,14 @@ export default function ConverseChat() {
               onClick={() => selectConv(conv.id)}
             />
           ))}
+          {searchQuery && convs.every(conv => {
+            const q = searchQuery.trim().toLowerCase()
+            return !conv.participant.name.toLowerCase().includes(q) &&
+              !conv.participant.role?.toLowerCase().includes(q) &&
+              !conv.messages.some(msg => msg.text.toLowerCase().includes(q))
+          }) && (
+            <div className="cc-empty-result">검색 결과가 없습니다.</div>
+          )}
         </div>
       </div>
 
@@ -425,13 +491,13 @@ export default function ConverseChat() {
           </div>
 
           <div className="cc-thread-actions">
-            <button className="cc-icon-btn" aria-label="음성 통화">
+            <button className="cc-icon-btn" onClick={() => handleCallAction('voice')} aria-label="음성 통화">
               <IconPhone />
             </button>
-            <button className="cc-icon-btn" aria-label="영상 통화">
+            <button className="cc-icon-btn" onClick={() => handleCallAction('video')} aria-label="영상 통화">
               <IconVideo />
             </button>
-            <button className="cc-icon-btn" aria-label="연락처 정보">
+            <button className="cc-icon-btn" onClick={handleShowInfo} aria-label="연락처 정보">
               <IconInfo />
             </button>
           </div>
@@ -487,12 +553,26 @@ export default function ConverseChat() {
           </motion.div>
         </AnimatePresence>
 
+        {actionNotice && (
+          <div className="cc-action-notice" role="status">
+            {actionNotice}
+          </div>
+        )}
+
         {/* Composer */}
         <div className="cc-composer">
-          <button className="cc-composer-icon-btn" aria-label="이모지 추가">
+          <button
+            className="cc-composer-icon-btn"
+            onClick={() => appendComposerText('좋아요')}
+            aria-label="이모지 추가"
+          >
             <IconEmoji />
           </button>
-          <button className="cc-composer-icon-btn" aria-label="파일 첨부">
+          <button
+            className="cc-composer-icon-btn"
+            onClick={() => appendComposerText('[첨부: 회의메모.pdf]')}
+            aria-label="파일 첨부"
+          >
             <IconPaperclip />
           </button>
           <div className="cc-composer-input-wrap">
@@ -541,11 +621,11 @@ export default function ConverseChat() {
         <div className="cc-info-divider" />
 
         <div className="cc-info-actions">
-          <button className="cc-info-action-btn">
+          <button className="cc-info-action-btn" onClick={() => handleCallAction('voice')}>
             <IconPhone />
             전화
           </button>
-          <button className="cc-info-action-btn">
+          <button className="cc-info-action-btn" onClick={() => handleCallAction('video')}>
             <IconVideo />
             영상
           </button>

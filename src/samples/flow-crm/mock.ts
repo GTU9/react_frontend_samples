@@ -1,104 +1,57 @@
-// ── Flow CRM — mock data ──────────────────────────────────────────────────
-
-export type DealStage = 'leads' | 'contacted' | 'proposal' | 'won'
+export type DealStage = 'lead' | 'meeting' | 'proposal' | 'negotiation' | 'contract'
 
 export interface Deal {
   id: string
   company: string
+  contact: string
   amount: number
-  owner: string       // initials
-  ownerColor: string  // bg color for avatar
-  tag: string
-  tagColor: string    // 'violet' | 'blue' | 'green' | 'orange'
-  dueDate: string
+  owner: string
+  industry: string
   stage: DealStage
+  closeDate: string
+  nextAction: string
+  priority: '높음' | '보통' | '낮음'
 }
 
-export interface Contact {
+export interface Activity {
   id: string
-  name: string
   company: string
-  role: string
-  email: string
-  status: 'active' | 'lead' | 'churned'
-  lastContact: string
+  due: string
+  task: string
+  owner: string
 }
 
-export interface StatCard {
-  id: string
-  label: string
-  value: string
-  sub: string
-  positive: boolean
+export const stageLabels: Record<DealStage, string> = {
+  lead: '리드',
+  meeting: '미팅',
+  proposal: '제안',
+  negotiation: '협상',
+  contract: '계약',
 }
 
-// ── Nav ──────────────────────────────────────────────────────────────────
+export const stageOrder: DealStage[] = ['lead', 'meeting', 'proposal', 'negotiation', 'contract']
 
-export const navItems = [
-  { id: 'pipeline', label: '파이프라인', icon: 'kanban' },
-  { id: 'contacts', label: '연락처', icon: 'users' },
-  { id: 'deals', label: '딜', icon: 'briefcase' },
-  { id: 'reports', label: '보고서', icon: 'bar-chart' },
-  { id: 'emails', label: '이메일', icon: 'mail' },
-  { id: 'settings', label: '설정', icon: 'settings' },
+export const owners = ['김지훈', '이수진', '박민준', '정다은']
+
+export const navItems = ['파이프라인', '고객사', '활동', '캘린더', '리포트', '설정']
+
+export const initialDeals: Deal[] = [
+  { id: 'd1', company: '한빛테크', contact: '오세영', amount: 50000000, owner: '김지훈', industry: '제조', stage: 'lead', closeDate: '10월 12일', nextAction: '요구사항 확인 통화', priority: '보통' },
+  { id: 'd2', company: '그린푸드', contact: '박인준', amount: 40000000, owner: '이수진', industry: 'F&B', stage: 'lead', closeDate: '10월 18일', nextAction: '도입 범위 메일 발송', priority: '낮음' },
+  { id: 'd3', company: '코라시스템', contact: '김지훈', amount: 120000000, owner: '김지훈', industry: 'IT서비스', stage: 'meeting', closeDate: '10월 06일', nextAction: '4차 미팅 자료 준비', priority: '높음' },
+  { id: 'd4', company: '스마트교육', contact: '이현아', amount: 70000000, owner: '박민준', industry: '교육', stage: 'meeting', closeDate: '10월 22일', nextAction: '견적서 초안 공유', priority: '보통' },
+  { id: 'd5', company: '넥스트바이오', contact: '김지훈', amount: 200000000, owner: '김지훈', industry: '바이오', stage: 'proposal', closeDate: '10월 15일', nextAction: '제안서 피드백 확인', priority: '높음' },
+  { id: 'd6', company: '에이치케어', contact: '이수진', amount: 180000000, owner: '이수진', industry: '헬스케어', stage: 'proposal', closeDate: '10월 19일', nextAction: '보안 질의 응답', priority: '높음' },
+  { id: 'd7', company: '프라임커머스', contact: '김지훈', amount: 180000000, owner: '정다은', industry: '커머스', stage: 'negotiation', closeDate: '10월 11일', nextAction: '법무 검토 회신', priority: '높음' },
+  { id: 'd8', company: '아이엔지', contact: '이수진', amount: 150000000, owner: '박민준', industry: '물류', stage: 'negotiation', closeDate: '10월 21일', nextAction: '가격 조건 조율', priority: '보통' },
+  { id: 'd9', company: '상화식품', contact: '김지훈', amount: 150000000, owner: '정다은', industry: '식품', stage: 'contract', closeDate: '10월 05일', nextAction: '전자계약 서명', priority: '높음' },
+  { id: 'd10', company: '위드패션', contact: '정다은', amount: 80000000, owner: '정다은', industry: '패션', stage: 'contract', closeDate: '10월 09일', nextAction: '첫 청구서 발행', priority: '낮음' },
 ]
 
-// ── Stats ─────────────────────────────────────────────────────────────────
-
-export const statCards: StatCard[] = [
-  { id: 's1', label: '파이프라인 가치', value: '$284,500', sub: '전월 대비 +12%', positive: true },
-  { id: 's2', label: '성약률', value: '38%', sub: '전월 대비 +4pts', positive: true },
-  { id: 's3', label: '진행 중 딜', value: '24', sub: '이번 주 마감 6건', positive: true },
-  { id: 's4', label: '평균 딜 규모', value: '$11,854', sub: '전월 대비 -2%', positive: false },
-]
-
-// ── Deals ─────────────────────────────────────────────────────────────────
-
-export const deals: Deal[] = [
-  // Leads
-  { id: 'd1', company: 'Acme Corp', amount: 18000, owner: 'JM', ownerColor: '#ede9fe', tag: '엔터프라이즈', tagColor: 'violet', dueDate: 'Jun 28', stage: 'leads' },
-  { id: 'd2', company: 'Brightwave', amount: 7500, owner: 'SK', ownerColor: '#dbeafe', tag: 'SMB', tagColor: 'blue', dueDate: 'Jul 5', stage: 'leads' },
-  { id: 'd3', company: 'Neon Labs', amount: 24000, owner: 'AM', ownerColor: '#d1fae5', tag: '스타트업', tagColor: 'green', dueDate: 'Jul 12', stage: 'leads' },
-
-  // Contacted
-  { id: 'd4', company: 'Redstone AI', amount: 42000, owner: 'JM', ownerColor: '#ede9fe', tag: '엔터프라이즈', tagColor: 'violet', dueDate: 'Jun 22', stage: 'contacted' },
-  { id: 'd5', company: 'Pinepoint', amount: 9200, owner: 'TK', ownerColor: '#fef3c7', tag: '중견기업', tagColor: 'orange', dueDate: 'Jun 30', stage: 'contacted' },
-  { id: 'd6', company: 'Cloudnine', amount: 15800, owner: 'SK', ownerColor: '#dbeafe', tag: 'SMB', tagColor: 'blue', dueDate: 'Jul 8', stage: 'contacted' },
-
-  // Proposal
-  { id: 'd7', company: 'Vantage Group', amount: 56000, owner: 'AM', ownerColor: '#d1fae5', tag: '엔터프라이즈', tagColor: 'violet', dueDate: 'Jun 19', stage: 'proposal' },
-  { id: 'd8', company: 'Solarix', amount: 31000, owner: 'JM', ownerColor: '#ede9fe', tag: '중견기업', tagColor: 'orange', dueDate: 'Jun 24', stage: 'proposal' },
-  { id: 'd9', company: 'Tesseract', amount: 12500, owner: 'TK', ownerColor: '#fef3c7', tag: '스타트업', tagColor: 'green', dueDate: 'Jul 1', stage: 'proposal' },
-
-  // Won
-  { id: 'd10', company: 'Axiom Health', amount: 88000, owner: 'SK', ownerColor: '#dbeafe', tag: '엔터프라이즈', tagColor: 'violet', dueDate: 'Jun 15', stage: 'won' },
-  { id: 'd11', company: 'Driftwood Co.', amount: 14400, owner: 'AM', ownerColor: '#d1fae5', tag: 'SMB', tagColor: 'blue', dueDate: 'Jun 10', stage: 'won' },
-]
-
-// ── Contacts ──────────────────────────────────────────────────────────────
-
-export const contacts: Contact[] = [
-  { id: 'c1', name: 'Diana Reeves', company: 'Acme Corp', role: '영업 부사장', email: 'diana@acme.com', status: 'lead', lastContact: '2일 전' },
-  { id: 'c2', name: 'Marcus Liu', company: 'Redstone AI', role: 'CTO', email: 'marcus@redstone.ai', status: 'active', lastContact: '오늘' },
-  { id: 'c3', name: 'Sofia Mendez', company: 'Vantage Group', role: 'CEO', email: 'sofia@vantage.io', status: 'active', lastContact: '어제' },
-  { id: 'c4', name: 'Oliver Kim', company: 'Axiom Health', role: 'IT 총괄', email: 'oliver@axiomhealth.com', status: 'active', lastContact: '5일 전' },
-  { id: 'c5', name: 'Priya Patel', company: 'Solarix', role: '구매 담당', email: 'priya@solarix.com', status: 'lead', lastContact: '1주일 전' },
-  { id: 'c6', name: 'Ethan Brooks', company: 'Neon Labs', role: '공동 창업자', email: 'ethan@neonlabs.dev', status: 'lead', lastContact: '3일 전' },
-  { id: 'c7', name: 'Claire Novak', company: 'Driftwood Co.', role: '이사', email: 'claire@driftwood.co', status: 'churned', lastContact: '3주 전' },
-]
-
-// ── Kanban column config ──────────────────────────────────────────────────
-
-export interface KanbanColumn {
-  id: DealStage
-  label: string
-  color: string        // accent color for column header dot
-  headerBg: string     // light tint
-}
-
-export const kanbanColumns: KanbanColumn[] = [
-  { id: 'leads',     label: '리드',     color: '#8b5cf6', headerBg: '#f5f3ff' },
-  { id: 'contacted', label: '접촉 완료', color: '#3b82f6', headerBg: '#eff6ff' },
-  { id: 'proposal',  label: '제안 중',  color: '#f59e0b', headerBg: '#fffbeb' },
-  { id: 'won',       label: '성약',     color: '#10b981', headerBg: '#f0fdf4' },
+export const activities: Activity[] = [
+  { id: 'a1', company: '넥스트바이오', due: '오늘', task: '제안서 피드백 확인', owner: '김지훈' },
+  { id: 'a2', company: '프라임커머스', due: '오늘', task: '법무 검토 회신', owner: '정다은' },
+  { id: 'a3', company: '코라시스템', due: '내일', task: '4차 미팅 일정 조율', owner: '김지훈' },
+  { id: 'a4', company: '에이치케어', due: '내일', task: '보안 질의 응답', owner: '이수진' },
+  { id: 'a5', company: '스마트교육', due: '10월 1일', task: '견적서 수정본 발송', owner: '박민준' },
 ]

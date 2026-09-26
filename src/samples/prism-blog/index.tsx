@@ -85,15 +85,17 @@ function PostCard({
   index,
   onClick,
   reduced,
+  featured = false,
 }: {
   post: Post
   index: number
   onClick: () => void
   reduced: boolean
+  featured?: boolean
 }) {
   return (
     <motion.article
-      className="pb-glass pb-card"
+      className={`pb-card${featured ? ' pb-card--featured' : ''}`}
       initial={reduced ? false : { opacity: 0, y: 28 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{
@@ -107,17 +109,19 @@ function PostCard({
       onKeyDown={(e) => e.key === 'Enter' && onClick()}
       aria-label={`${post.title} 읽기`}
     >
-      <span className="pb-card-tag">{post.tag}</span>
-      <h3 className="pb-card-title">{post.title}</h3>
-      <p className="pb-card-excerpt">{post.excerpt}</p>
-      <div className="pb-card-meta">
-        <span className="pb-card-author">
-          <strong>{post.author}</strong> · {post.date}
-        </span>
-        <span className="pb-card-likes" aria-label={`좋아요 ${post.likes}개`}>
-          <i className="pb-card-likes-icon" aria-hidden="true">♥</i>
-          {post.likes}
-        </span>
+      <img className="pb-card-image" src={post.image} alt={post.imageAlt} loading={featured ? 'eager' : 'lazy'} />
+      <div className="pb-card-body">
+        <span className="pb-card-tag">{post.tag}</span>
+        <h3 className="pb-card-title">{post.title}</h3>
+        <p className="pb-card-excerpt">{post.excerpt}</p>
+        <div className="pb-card-meta">
+          <span className="pb-card-author">
+            <strong>{post.author}</strong> · {post.date}
+          </span>
+          <span className="pb-card-likes" aria-label={`저장 ${post.likes}회`}>
+            저장 {post.likes}
+          </span>
+        </div>
       </div>
     </motion.article>
   )
@@ -135,6 +139,7 @@ function ListView({
   reduced: boolean
 }) {
   const vars = fadeSlideVariants(reduced)
+  const [lead, ...rest] = posts
   return (
     <motion.div
       key="list"
@@ -144,16 +149,28 @@ function ListView({
       transition={vars.transition}
     >
       <div className="pb-layout pb-page">
-        <h2 className="pb-section-heading">최신 글</h2>
+        <div className="pb-masthead">
+          <h1 className="pb-section-heading">시각으로 세상을 다시 읽다</h1>
+          <p className="pb-section-note">디자인, 사진, 출판, 도시 문화의 장면을 이미지와 글로 기록합니다.</p>
+        </div>
         {posts.length === 0 ? (
           <div className="pb-empty">아직 게시된 글이 없습니다.</div>
         ) : (
           <div className="pb-grid">
-            {posts.map((post, i) => (
+            {lead && (
+              <PostCard
+                post={lead}
+                index={0}
+                onClick={() => onSelect(lead)}
+                reduced={reduced}
+                featured
+              />
+            )}
+            {rest.map((post, i) => (
               <PostCard
                 key={post.id}
                 post={post}
-                index={i}
+                index={i + 1}
                 onClick={() => onSelect(post)}
                 reduced={reduced}
               />
@@ -197,13 +214,13 @@ function ReadView({
           </button>
 
           <motion.div
-            className="pb-glass pb-article"
-            style={{ marginTop: '1rem' }}
+            className="pb-article"
             initial={reduced ? false : { opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
           >
             <header className="pb-article-header">
+              <img className="pb-article-image" src={post.image} alt={post.imageAlt} />
               <span className="pb-article-tag">{post.tag}</span>
               <h1 className="pb-article-title">{post.title}</h1>
               <div className="pb-article-byline">
@@ -305,7 +322,7 @@ function ComposeView({
       <div className="pb-layout">
         <div className="pb-compose-wrap">
           {/* Form panel */}
-          <div className="pb-glass pb-compose-form">
+          <div className="pb-compose-form">
             <h2 className="pb-compose-heading">새 글 쓰기</h2>
 
             <div className="pb-field">
@@ -374,9 +391,9 @@ function ComposeView({
           </div>
 
           {/* Live preview panel */}
-          <div className="pb-glass-accent pb-preview-panel">
+          <div className="pb-preview-panel">
             <span className="pb-preview-label">미리보기</span>
-            <div className="pb-glass pb-preview-card">
+            <div className="pb-preview-card">
               {fields.tag.trim() && (
                 <span className="pb-preview-tag-pill">{fields.tag.trim()}</span>
               )}
@@ -444,6 +461,8 @@ export default function PrismBlog() {
       date: dateStr,
       tag: fields.tag.trim() || '일반',
       likes: 0,
+      image: '/media/prism-blog/camera-culture.jpg',
+      imageAlt: '새 글의 시각 문화 기본 이미지',
     }
     setPosts((prev) => [newPost, ...prev])
     setMode('list')
@@ -451,14 +470,6 @@ export default function PrismBlog() {
 
   return (
     <div className="sample-prism-blog">
-      {/* Ambient blobs */}
-      <div className="pb-blobs" aria-hidden="true">
-        <div className="pb-blob pb-blob-1" />
-        <div className="pb-blob pb-blob-2" />
-        <div className="pb-blob pb-blob-3" />
-      </div>
-
-      {/* Top bar */}
       <TopBar
         mode={mode}
         onWrite={() => setMode('write')}

@@ -51,21 +51,21 @@ export interface Project {
 // ── Members ────────────────────────────────────────────────────────────────
 
 export const members: Member[] = [
-  { id: 'm1', initials: 'AJ', name: 'Alex Johnson',  color: '#f59e0b' },
-  { id: 'm2', initials: 'SR', name: 'Sara Rivera',   color: '#6366f1' },
-  { id: 'm3', initials: 'TK', name: 'Tom Kim',       color: '#10b981' },
-  { id: 'm4', initials: 'LP', name: 'Lisa Park',     color: '#ec4899' },
-  { id: 'm5', initials: 'DW', name: 'Dan Wright',    color: '#14b8a6' },
+  { id: 'm1', initials: '안', name: '안지훈', color: '#111111' },
+  { id: 'm2', initials: '서', name: '서리나', color: '#7b672a' },
+  { id: 'm3', initials: '김', name: '김태오', color: '#236b4f' },
+  { id: 'm4', initials: '박', name: '박라희', color: '#9b5144' },
+  { id: 'm5', initials: '단', name: '단우석', color: '#3f6f75' },
 ]
 
 // ── Projects sidebar ───────────────────────────────────────────────────────
 
 export const projects: Project[] = [
-  { id: 'p1', name: '웹사이트 리디자인',   emoji: '🌐', taskCount: 18 },
-  { id: 'p2', name: '모바일 앱 v2',        emoji: '📱', taskCount: 31 },
-  { id: 'p3', name: 'API 연동',            emoji: '🔗', taskCount: 12 },
-  { id: 'p4', name: '디자인 시스템',       emoji: '🎨', taskCount: 9  },
-  { id: 'p5', name: '마케팅 스프린트',     emoji: '📣', taskCount: 7  },
+  { id: 'p1', name: '웹사이트 리디자인', emoji: '웹', taskCount: 18 },
+  { id: 'p2', name: '모바일 앱 v2', emoji: '앱', taskCount: 31 },
+  { id: 'p3', name: 'API 연동', emoji: '연', taskCount: 12 },
+  { id: 'p4', name: '디자인 시스템', emoji: '디', taskCount: 9 },
+  { id: 'p5', name: '마케팅 스프린트', emoji: '마', taskCount: 7 },
 ]
 
 // ── Kanban columns ─────────────────────────────────────────────────────────
@@ -82,7 +82,7 @@ export const initialColumns: Column[] = [
         label: { id: 'l1', text: '접근성', color: 'blue' },
         priority: 'medium',
         assignee: members[2],
-        dueDate: 'Jul 10',
+        dueDate: '7월 10일',
         checklist: [
           { id: 'c1', done: false, text: '색상 대비 검사' },
           { id: 'c2', done: false, text: '스크린 리더 테스트' },
@@ -97,7 +97,7 @@ export const initialColumns: Column[] = [
         label: { id: 'l2', text: '리서치', color: 'purple' },
         priority: 'low',
         assignee: members[3],
-        dueDate: 'Jul 15',
+        dueDate: '7월 15일',
         checklist: [
           { id: 'c4', done: true,  text: '상위 5개 경쟁사 선정' },
           { id: 'c5', done: false, text: 'UX 패턴 문서화' },
@@ -108,10 +108,10 @@ export const initialColumns: Column[] = [
       {
         id: 't3',
         title: '오류 모니터링 설정 (Sentry)',
-        label: { id: 'l3', text: 'DevOps', color: 'teal' },
+        label: { id: 'l3', text: '배포', color: 'teal' },
         priority: 'medium',
         assignee: members[4],
-        dueDate: 'Jul 8',
+        dueDate: '7월 8일',
         checklist: [
           { id: 'c6', done: false, text: 'Sentry 프로젝트 생성' },
           { id: 'c7', done: false, text: 'SDK 연동' },
@@ -126,7 +126,7 @@ export const initialColumns: Column[] = [
   {
     id: 'todo',
     title: '할 일',
-    color: '#6366f1',
+    color: '#d7a514',
     tasks: [
       {
         id: 't4',
@@ -134,7 +134,7 @@ export const initialColumns: Column[] = [
         label: { id: 'l4', text: '디자인', color: 'purple' },
         priority: 'high',
         assignee: members[1],
-        dueDate: 'Jun 28',
+        dueDate: '6월 28일',
         checklist: [
           { id: 'c10', done: true,  text: '와이어프레임' },
           { id: 'c11', done: true,  text: '하이파이 목업' },
@@ -149,7 +149,7 @@ export const initialColumns: Column[] = [
         label: { id: 'l5', text: '테스트', color: 'green' },
         priority: 'high',
         assignee: members[0],
-        dueDate: 'Jun 25',
+        dueDate: '6월 25일',
         checklist: [
           { id: 'c13', done: false, text: '로그인 흐름 테스트' },
           { id: 'c14', done: false, text: '토큰 갱신 테스트' },
@@ -164,7 +164,7 @@ export const initialColumns: Column[] = [
         label: { id: 'l6', text: '문서', color: 'orange' },
         priority: 'low',
         assignee: members[2],
-        dueDate: 'Jul 2',
+        dueDate: '7월 2일',
         checklist: [
           { id: 'c16', done: true,  text: '기존 문서 검토' },
           { id: 'c17', done: false, text: '새 엔드포인트 예시 추가' },
@@ -185,7 +185,7 @@ export const initialColumns: Column[] = [
         label: { id: 'l7', text: '프론트엔드', color: 'blue' },
         priority: 'urgent',
         assignee: members[0],
-        dueDate: 'Jun 20',
+        dueDate: '6월 20일',
         checklist: [
           { id: 'c18', done: true,  text: '장바구니 요약 컴포넌트' },
           { id: 'c19', done: true,  text: '배송지 입력 폼' },
@@ -201,7 +201,7 @@ export const initialColumns: Column[] = [
         label: { id: 'l8', text: '백엔드', color: 'teal' },
         priority: 'high',
         assignee: members[4],
-        dueDate: 'Jun 22',
+        dueDate: '6월 22일',
         checklist: [
           { id: 'c22', done: true,  text: '현재 DB 백업' },
           { id: 'c23', done: true,  text: '마이그레이션 스크립트 테스트' },
@@ -217,7 +217,7 @@ export const initialColumns: Column[] = [
         label: { id: 'l9', text: '마케팅', color: 'orange' },
         priority: 'medium',
         assignee: members[3],
-        dueDate: 'Jun 30',
+        dueDate: '6월 30일',
         checklist: [
           { id: 'c26', done: true,  text: '이메일 초안 작성' },
           { id: 'c27', done: false, text: '템플릿 디자인' },
@@ -235,10 +235,10 @@ export const initialColumns: Column[] = [
       {
         id: 't10',
         title: '스테이징 환경 배포',
-        label: { id: 'l10', text: 'DevOps', color: 'teal' },
+        label: { id: 'l10', text: '배포', color: 'teal' },
         priority: 'high',
         assignee: members[4],
-        dueDate: 'Jun 12',
+        dueDate: '6월 12일',
         checklist: [
           { id: 'c28', done: true, text: 'CI/CD 파이프라인 설정' },
           { id: 'c29', done: true, text: '환경 변수 설정' },
@@ -253,7 +253,7 @@ export const initialColumns: Column[] = [
         label: { id: 'l11', text: '디자인', color: 'purple' },
         priority: 'medium',
         assignee: members[1],
-        dueDate: 'Jun 10',
+        dueDate: '6월 10일',
         checklist: [
           { id: 'c31', done: true, text: '색상 팔레트' },
           { id: 'c32', done: true, text: '타이포그래피 스케일' },
@@ -268,7 +268,7 @@ export const initialColumns: Column[] = [
         label: { id: 'l12', text: '리서치', color: 'purple' },
         priority: 'medium',
         assignee: members[3],
-        dueDate: 'Jun 8',
+        dueDate: '6월 8일',
         checklist: [
           { id: 'c34', done: true, text: '인터뷰 8건 진행' },
           { id: 'c35', done: true, text: '친화도 맵핑' },

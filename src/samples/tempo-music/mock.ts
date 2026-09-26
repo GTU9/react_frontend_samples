@@ -1,19 +1,23 @@
-// ── Tempo Music mock data ─────────────────────────────────────────────────
+// Tempo Music mock data
 
 export interface Track {
   id: string
   title: string
   artist: string
   album: string
-  duration: number // seconds
-  gradient: string // CSS gradient for album art
+  duration: number
+  year: string
+  format: string
+  mood: string
+  artUrl: string
 }
 
 export interface Playlist {
   id: string
   name: string
   trackCount: number
-  gradient: string
+  artUrl: string
+  description: string
 }
 
 export interface FeaturedBanner {
@@ -21,116 +25,128 @@ export interface FeaturedBanner {
   title: string
   subtitle: string
   description: string
-  gradient: string
+  artUrl: string
 }
 
-// ── Tracks ────────────────────────────────────────────────────────────────
+const media = '/media/tempo-music'
 
 export const tracks: Track[] = [
   {
     id: 't1',
-    title: 'Neon Drift',
-    artist: 'Synthwave Collective',
-    album: 'After Midnight',
+    title: '따뜻한 바늘',
+    artist: '윤하늘',
+    album: 'Room Tone',
     duration: 212,
-    gradient: 'linear-gradient(135deg, #a855f7 0%, #ec4899 100%)',
+    year: '2024',
+    format: '싱글',
+    mood: 'indie',
+    artUrl: `${media}/turntable-close.jpg`,
   },
   {
     id: 't2',
-    title: 'Violet Hours',
-    artist: 'Luna Sable',
-    album: 'Echoes in Purple',
+    title: '파도는 알고 있다',
+    artist: '서쪽 바다',
+    album: 'Blue Hour Notes',
     duration: 184,
-    gradient: 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
+    year: '2024',
+    format: 'EP',
+    mood: 'ambient',
+    artUrl: `${media}/ocean-waves.jpg`,
   },
   {
     id: 't3',
-    title: 'Crystal Static',
-    artist: 'Prism Audio',
-    album: 'Refraction',
+    title: '먼지 낀 오후',
+    artist: '레코드 클럽',
+    album: 'Bin 12',
     duration: 237,
-    gradient: 'linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%)',
+    year: '2023',
+    format: '앨범',
+    mood: 'folk',
+    artUrl: `${media}/vinyl-store.jpg`,
   },
   {
     id: 't4',
-    title: 'Pulse & Glow',
-    artist: 'Haze Drive',
-    album: 'Signal Night',
+    title: '도시의 밤',
+    artist: '카페 노이즈',
+    album: 'Late Checkout',
     duration: 198,
-    gradient: 'linear-gradient(135deg, #ec4899 0%, #f97316 100%)',
+    year: '2025',
+    format: '싱글',
+    mood: 'city',
+    artUrl: `${media}/vintage-record-store.jpg`,
   },
   {
     id: 't5',
-    title: 'Starfield Echo',
-    artist: 'Cosmo Lens',
-    album: 'Deep Orbit',
+    title: 'LP로 만나는 오늘',
+    artist: '아날로그 식당',
+    album: 'Table Four',
     duration: 256,
-    gradient: 'linear-gradient(135deg, #14b8a6 0%, #6366f1 100%)',
+    year: '2022',
+    format: '앨범',
+    mood: 'jazz',
+    artUrl: `${media}/vinyl-store.jpg`,
   },
   {
     id: 't6',
-    title: 'Midnight Garden',
-    artist: 'Flora System',
-    album: 'Bloom Circuit',
+    title: '작은 방의 노래',
+    artist: '한결',
+    album: 'Window Seat',
     duration: 204,
-    gradient: 'linear-gradient(135deg, #a855f7 0%, #14b8a6 100%)',
+    year: '2024',
+    format: 'EP',
+    mood: 'quiet',
+    artUrl: `${media}/turntable-close.jpg`,
   },
 ]
 
-// ── Recently played ────────────────────────────────────────────────────────
-
 export const recentlyPlayed: Track[] = [tracks[0], tracks[1], tracks[4], tracks[2], tracks[5], tracks[3]]
-
-// ── Made for you playlists ────────────────────────────────────────────────
 
 export const madeForYou: Playlist[] = [
   {
     id: 'p1',
-    name: 'Purple Haze Mix',
+    name: '지금 주목할 인디',
     trackCount: 24,
-    gradient: 'linear-gradient(135deg, #a855f7 0%, #ec4899 100%)',
+    artUrl: `${media}/vinyl-store.jpg`,
+    description: '새 싱글과 작은 레이블 발매작',
   },
   {
     id: 'p2',
-    name: 'Late Night Drive',
+    name: '봄에 듣기 좋은 노래',
     trackCount: 18,
-    gradient: 'linear-gradient(135deg, #1e1b4b 0%, #6366f1 100%)',
+    artUrl: `${media}/vintage-record-store.jpg`,
+    description: '따뜻한 기타와 느린 리듬',
   },
   {
     id: 'p3',
-    name: 'Chillwave Radio',
+    name: '조용한 집중을 위해',
     trackCount: 32,
-    gradient: 'linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%)',
+    artUrl: `${media}/ocean-waves.jpg`,
+    description: '작업대 옆에 둘 낮은 음량',
   },
   {
     id: 'p4',
-    name: 'Synthpop Essentials',
+    name: 'LP로 만나는 오늘',
     trackCount: 15,
-    gradient: 'linear-gradient(135deg, #ec4899 0%, #a855f7 100%)',
+    artUrl: `${media}/turntable-close.jpg`,
+    description: '턴테이블 질감이 살아있는 선곡',
   },
 ]
 
-// ── Library playlists (sidebar) ────────────────────────────────────────────
-
 export const libraryPlaylists = [
-  { id: 'lib1', name: '좋아요 표시한 곡', count: 143 },
-  { id: 'lib2', name: '집중 모드', count: 41 },
-  { id: 'lib3', name: '저녁 감성', count: 28 },
-  { id: 'lib4', name: '운동 비트', count: 33 },
-  { id: 'lib5', name: '일요일 아침', count: 19 },
+  { id: 'lib1', name: '찜한 음반', count: 143 },
+  { id: 'lib2', name: '오늘 산 디지털', count: 41 },
+  { id: 'lib3', name: '로컬 레이블', count: 28 },
+  { id: 'lib4', name: '작업실 플레이', count: 33 },
+  { id: 'lib5', name: '주말 아침', count: 19 },
 ]
-
-// ── Featured banner ────────────────────────────────────────────────────────
 
 export const featuredBanner: FeaturedBanner = {
   id: 'feat1',
-  title: 'Synthwave Collective',
-  subtitle: '새 앨범 발매',
-  description: '"After Midnight" — 네온빛 황홀감이 넘치는 12곡',
-  gradient: 'linear-gradient(135deg, #3b0764 0%, #a855f7 45%, #ec4899 100%)',
+  title: '윤하늘',
+  subtitle: '새 싱글 미리듣기',
+  description: '"따뜻한 바늘" — 실제 음원 없이 UI 상태만 시뮬레이션합니다.',
+  artUrl: `${media}/turntable-close.jpg`,
 }
-
-// ── Helpers ────────────────────────────────────────────────────────────────
 
 export function formatDuration(seconds: number): string {
   const m = Math.floor(seconds / 60)

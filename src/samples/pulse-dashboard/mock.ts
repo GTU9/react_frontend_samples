@@ -1,131 +1,123 @@
-// Mock data for Pulse Dashboard
+export type PeriodKey = '7d' | '30d' | '90d'
 
-export interface KpiCard {
+export interface MetricCard {
   id: string
   label: string
   value: string
   delta: string
-  deltaPositive: boolean
-  sparkline: number[]
+  positive: boolean
 }
 
-export interface TimeSeriesPoint {
+export interface SeriesPoint {
   label: string
-  revenue: number
   sessions: number
+  conversions: number
 }
 
-export interface BarDataPoint {
-  label: string
-  value: number
-}
-
-export interface TableRow {
+export interface PageRow {
   id: string
-  name: string
-  channel: string
-  revenue: number
+  path: string
+  owner: string
   sessions: number
-  conversion: number
-  status: 'active' | 'paused' | 'ended'
+  conversions: number
+  conversionRate: number
+  avgTime: string
+  status: 'healthy' | 'watch' | 'drop'
 }
 
-export interface NavItem {
+export interface EventRow {
   id: string
+  event: string
+  source: string
+  count: number
+  change: number
+}
+
+export interface FunnelStep {
   label: string
-  icon: string
-  active?: boolean
+  count: number
+  rate: number
 }
 
-export interface ActivityItem {
-  id: string
-  type: 'signup' | 'purchase' | 'alert' | 'milestone'
-  message: string
-  time: string
-  detail?: string
+export const periodLabels: Record<PeriodKey, string> = {
+  '7d': '7일',
+  '30d': '30일',
+  '90d': '90일',
 }
 
-export const kpiCards: KpiCard[] = [
-  {
-    id: 'revenue',
-    label: '총 매출',
-    value: '$84,230',
-    delta: '+12.4%',
-    deltaPositive: true,
-    sparkline: [40, 52, 48, 61, 55, 68, 72, 65, 78, 84],
-  },
-  {
-    id: 'sessions',
-    label: '활성 세션',
-    value: '24,810',
-    delta: '+8.1%',
-    deltaPositive: true,
-    sparkline: [60, 55, 63, 58, 70, 66, 74, 69, 80, 82],
-  },
-  {
-    id: 'conversion',
-    label: '전환율',
-    value: '3.47%',
-    delta: '-0.3%',
-    deltaPositive: false,
-    sparkline: [38, 42, 40, 45, 43, 41, 44, 38, 36, 37],
-  },
-  {
-    id: 'churn',
-    label: '이탈율',
-    value: '1.82%',
-    delta: '-0.5%',
-    deltaPositive: true,
-    sparkline: [30, 28, 32, 27, 25, 26, 24, 22, 20, 19],
-  },
+export const metricsByPeriod: Record<PeriodKey, MetricCard[]> = {
+  '7d': [
+    { id: 'sessions', label: '세션', value: '31,284', delta: '+6.8%', positive: true },
+    { id: 'conversion', label: '전환', value: '1,246', delta: '+3.1%', positive: true },
+    { id: 'rate', label: '전환율', value: '3.98%', delta: '-0.2%p', positive: false },
+    { id: 'time', label: '평균 체류', value: '1분 42초', delta: '+12초', positive: true },
+  ],
+  '30d': [
+    { id: 'sessions', label: '세션', value: '128,421', delta: '+12.4%', positive: true },
+    { id: 'conversion', label: '전환', value: '3,842', delta: '+18.7%', positive: true },
+    { id: 'rate', label: '전환율', value: '3.0%', delta: '+0.5%p', positive: true },
+    { id: 'time', label: '평균 체류', value: '1분 26초', delta: '-8초', positive: false },
+  ],
+  '90d': [
+    { id: 'sessions', label: '세션', value: '382,916', delta: '+9.2%', positive: true },
+    { id: 'conversion', label: '전환', value: '10,884', delta: '+11.5%', positive: true },
+    { id: 'rate', label: '전환율', value: '2.84%', delta: '+0.1%p', positive: true },
+    { id: 'time', label: '평균 체류', value: '1분 31초', delta: '+4초', positive: true },
+  ],
+}
+
+export const seriesByPeriod: Record<PeriodKey, SeriesPoint[]> = {
+  '7d': [
+    { label: '9/21', sessions: 3900, conversions: 132 },
+    { label: '9/22', sessions: 4240, conversions: 151 },
+    { label: '9/23', sessions: 4010, conversions: 144 },
+    { label: '9/24', sessions: 4480, conversions: 170 },
+    { label: '9/25', sessions: 4720, conversions: 181 },
+    { label: '9/26', sessions: 5010, conversions: 205 },
+    { label: '9/27', sessions: 4924, conversions: 263 },
+  ],
+  '30d': [
+    { label: '8/29', sessions: 11200, conversions: 284 },
+    { label: '9/02', sessions: 10420, conversions: 302 },
+    { label: '9/06', sessions: 12180, conversions: 341 },
+    { label: '9/10', sessions: 11860, conversions: 319 },
+    { label: '9/14', sessions: 13840, conversions: 406 },
+    { label: '9/18', sessions: 15140, conversions: 449 },
+    { label: '9/22', sessions: 14020, conversions: 423 },
+    { label: '9/26', sessions: 16180, conversions: 512 },
+  ],
+  '90d': [
+    { label: '7월 1주', sessions: 35600, conversions: 901 },
+    { label: '7월 3주', sessions: 39800, conversions: 1032 },
+    { label: '8월 1주', sessions: 42100, conversions: 1114 },
+    { label: '8월 3주', sessions: 39100, conversions: 1078 },
+    { label: '9월 1주', sessions: 45500, conversions: 1292 },
+    { label: '9월 3주', sessions: 48900, conversions: 1451 },
+  ],
+}
+
+export const pages: PageRow[] = [
+  { id: 'home', path: '/', owner: '성장팀', sessions: 32421, conversions: 1240, conversionRate: 3.8, avgTime: '1분 24초', status: 'healthy' },
+  { id: 'product', path: '/product', owner: '제품팀', sessions: 18553, conversions: 642, conversionRate: 3.5, avgTime: '1분 12초', status: 'healthy' },
+  { id: 'pricing', path: '/pricing', owner: '매출팀', sessions: 15220, conversions: 521, conversionRate: 3.4, avgTime: '1분 08초', status: 'watch' },
+  { id: 'blog', path: '/blog', owner: '콘텐츠팀', sessions: 12092, conversions: 318, conversionRate: 2.6, avgTime: '58초', status: 'watch' },
+  { id: 'help', path: '/help', owner: '고객지원', sessions: 8421, conversions: 77, conversionRate: 0.9, avgTime: '2분 35초', status: 'drop' },
+  { id: 'campaign', path: '/campaign/fall', owner: '마케팅', sessions: 6840, conversions: 286, conversionRate: 4.2, avgTime: '1분 18초', status: 'healthy' },
 ]
 
-export const timeSeries: TimeSeriesPoint[] = [
-  { label: 'Jan', revenue: 42000, sessions: 14200 },
-  { label: 'Feb', revenue: 47500, sessions: 15800 },
-  { label: 'Mar', revenue: 45200, sessions: 15100 },
-  { label: 'Apr', revenue: 53000, sessions: 17400 },
-  { label: 'May', revenue: 58700, sessions: 18900 },
-  { label: 'Jun', revenue: 55400, sessions: 18200 },
-  { label: 'Jul', revenue: 62100, sessions: 20100 },
-  { label: 'Aug', revenue: 67300, sessions: 21600 },
-  { label: 'Sep', revenue: 64800, sessions: 20900 },
-  { label: 'Oct', revenue: 71200, sessions: 22800 },
-  { label: 'Nov', revenue: 79400, sessions: 24300 },
-  { label: 'Dec', revenue: 84230, sessions: 24810 },
+export const events: EventRow[] = [
+  { id: 'e1', event: 'checkout_started', source: 'pricing', count: 842, change: 16.2 },
+  { id: 'e2', event: 'demo_requested', source: 'product', count: 418, change: 9.7 },
+  { id: 'e3', event: 'plan_compared', source: 'pricing', count: 1250, change: -4.1 },
+  { id: 'e4', event: 'help_article_opened', source: 'help', count: 2912, change: 21.4 },
+  { id: 'e5', event: 'invite_sent', source: 'workspace', count: 708, change: 5.9 },
 ]
 
-export const barData: BarDataPoint[] = [
-  { label: '자연 검색', value: 34 },
-  { label: '유료 광고', value: 28 },
-  { label: '이메일', value: 18 },
-  { label: '추천', value: 12 },
-  { label: '직접 방문', value: 8 },
+export const funnel: FunnelStep[] = [
+  { label: '방문', count: 128421, rate: 100 },
+  { label: '제품 확인', count: 46320, rate: 36 },
+  { label: '가격 비교', count: 15220, rate: 12 },
+  { label: '체크아웃', count: 3842, rate: 3 },
 ]
 
-export const tableRows: TableRow[] = [
-  { id: '1', name: 'Q4 성장 캠페인', channel: '유료 검색', revenue: 22400, sessions: 6120, conversion: 4.2, status: 'active' },
-  { id: '2', name: '뉴스레터 재유입', channel: '이메일', revenue: 14300, sessions: 4870, conversion: 3.8, status: 'active' },
-  { id: '3', name: '자연 검색 SEO 강화', channel: '자연 검색', revenue: 18700, sessions: 8340, conversion: 2.9, status: 'active' },
-  { id: '4', name: '파트너 추천', channel: '추천', revenue: 9800, sessions: 2960, conversion: 4.5, status: 'paused' },
-  { id: '5', name: '소셜 인지도', channel: '유료 소셜', revenue: 7200, sessions: 3810, conversion: 1.8, status: 'active' },
-  { id: '6', name: '여름 프로모션', channel: '이메일', revenue: 11500, sessions: 3200, conversion: 3.4, status: 'ended' },
-]
-
-export const navItems: NavItem[] = [
-  { id: 'dashboard', label: '대시보드', icon: 'grid', active: true },
-  { id: 'analytics', label: '분석', icon: 'bar-chart' },
-  { id: 'campaigns', label: '캠페인', icon: 'target' },
-  { id: 'customers', label: '고객', icon: 'users' },
-  { id: 'reports', label: '보고서', icon: 'file-text' },
-  { id: 'settings', label: '설정', icon: 'settings' },
-]
-
-export const activityFeed: ActivityItem[] = [
-  { id: '1', type: 'milestone', message: '매출 마일스톤 달성', time: '2분 전', detail: '$84k 월간 최고 기록' },
-  { id: '2', type: 'signup', message: '신규 엔터프라이즈 가입', time: '14분 전', detail: 'Acme Corp — Pro 플랜' },
-  { id: '3', type: 'purchase', message: '대형 주문 처리 완료', time: '31분 전', detail: '$4,200 · 주문 #8821' },
-  { id: '4', type: 'alert', message: '전환율 하락', time: '1시간 전', detail: '유료 소셜 전일 대비 -0.6%' },
-  { id: '5', type: 'signup', message: '신규 가입 3건', time: '2시간 전', detail: '자연 검색 유입' },
-  { id: '6', type: 'purchase', message: '구독 갱신 완료', time: '3시간 전', detail: 'NovaTech — 연간 플랜' },
-]
+export const navItems = ['대시보드', '분석 리포트', '사용자', '이벤트', '콘텐츠', '설정']

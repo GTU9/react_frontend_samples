@@ -1,148 +1,81 @@
-export interface NavLink {
-  label: string
-  href: string
-}
-
-export interface Feature {
-  icon: string
-  title: string
-  description: string
-}
-
-export interface PricingTier {
-  name: string
-  price: string
-  period: string
-  description: string
-  features: string[]
-  cta: string
-  highlighted: boolean
-}
-
-export interface Testimonial {
-  quote: string
-  author: string
-  role: string
-  avatar: string
-}
-
-export interface LogoItem {
-  name: string
-  abbr: string
-}
-
-export const navLinks: NavLink[] = [
-  { label: '제품', href: '#product' },
-  { label: '기능', href: '#features' },
-  { label: '요금제', href: '#pricing' },
-  { label: '소개', href: '#about' },
-]
-
-export const heroData = {
-  badge: '퍼블릭 베타 출시',
-  headline: '팀의 업무 방식,\n새롭게 바뀝니다.',
-  subheadline:
-    'Aurora는 AI 기반 협업, 실시간 인사이트, 그리고 불필요한 마찰 없이 팀을 하나로 연결합니다. 더 빠르게 출시하고, 더 명확하게 사고하고, 더 스마트하게 일하세요.',
-  primaryCta: '무료로 시작하기',
-  secondaryCta: '어떻게 작동하나요',
-  mockupStats: [
-    { label: '완료된 작업', value: '2,418' },
-    { label: '절약된 시간', value: '34시간' },
-    { label: '팀 속도', value: '+62%' },
+export const aurora = {
+  nav: [
+    { label: '제품', href: '#product' },
+    { label: '릴리스 플랜', href: '#plan' },
+    { label: '운영 방식', href: '#workflow' },
+    { label: '요금', href: '#pricing' },
+  ],
+  hero: {
+    title: 'Aurora',
+    category: '릴리스 협업 워크스페이스',
+    copy:
+      '기획, 디자인, 개발, QA가 하나의 출시 계획 위에서 같은 결정을 보게 합니다. 회의록보다 실행 항목이 먼저 남는 협업 제품입니다.',
+    primary: '릴리스 플랜 열기',
+    secondary: '데모 보기',
+  },
+  releaseRows: [
+    {
+      id: 'r1',
+      task: '결제 API 인증 이슈',
+      owner: '김서연',
+      team: 'Backend',
+      due: '4월 26일',
+      status: '차단',
+      detail:
+        '외부 결제 승인 콜백이 스테이징에서 간헐적으로 실패합니다. 보안 검토 전까지 배포 잠금.',
+    },
+    {
+      id: 'r2',
+      task: '모바일 온보딩 개선',
+      owner: '이준호',
+      team: 'Product',
+      due: '5월 3일',
+      status: '진행 중',
+      detail:
+        '가입 후 첫 프로젝트 생성까지의 빈 화면을 줄이고, 기존 고객 데이터로 체크리스트를 구성합니다.',
+    },
+    {
+      id: 'r3',
+      task: '릴리스 노트 초안',
+      owner: '박다은',
+      team: 'Marketing',
+      due: '5월 10일',
+      status: '검토',
+      detail:
+        'Q2 고객군별 메시지를 정리했습니다. 제품 스크린샷 교체와 법무 문구 확인이 남았습니다.',
+    },
+    {
+      id: 'r4',
+      task: '관리자 권한 로그',
+      owner: '최민재',
+      team: 'Security',
+      due: '5월 17일',
+      status: '계획됨',
+      detail:
+        '릴리스 후 감사 대응을 위해 권한 변경 이력을 별도 스트림으로 노출합니다.',
+    },
+  ],
+  comments: [
+    { author: '김서연', time: '오늘 10:24', body: '결제사 응답 예외를 재현했습니다. 오후에 패치 후보를 올립니다.' },
+    { author: '이준호', time: '오늘 11:03', body: '온보딩 문구는 확정. 디자인 QA만 끝나면 병합 가능합니다.' },
+  ],
+  workflow: [
+    {
+      title: '결정이 묻히지 않게',
+      body: '회의에서 정한 범위, 담당자, 마감일을 릴리스 행에 바로 연결합니다.',
+    },
+    {
+      title: '막힌 항목을 먼저',
+      body: '차단 상태와 의존성을 상단에 올려 다음 회의 전에 해결 경로를 만듭니다.',
+    },
+    {
+      title: '출시 문맥 유지',
+      body: '릴리스 노트, QA 체크, 고객 안내 문구가 같은 계획 안에서 이어집니다.',
+    },
+  ],
+  pricing: [
+    { name: 'Pilot', price: '무료', body: '릴리스 2개, 팀원 8명, 기본 코멘트 기록' },
+    { name: 'Team', price: '₩18,000', body: '릴리스 무제한, 의존성 보기, 승인 흐름' },
+    { name: 'Studio', price: '맞춤', body: 'SSO, 감사 로그, 보안 검토 워크플로' },
   ],
 }
-
-export const logos: LogoItem[] = [
-  { name: 'Vercel', abbr: 'VC' },
-  { name: 'Linear', abbr: 'LN' },
-  { name: 'Figma', abbr: 'FG' },
-  { name: 'Notion', abbr: 'NT' },
-  { name: 'Stripe', abbr: 'ST' },
-  { name: 'Loom', abbr: 'LM' },
-]
-
-export const features: Feature[] = [
-  {
-    icon: '⚡',
-    title: '즉각적인 동기화',
-    description:
-      '변경 사항이 50ms 이내에 팀 전체에 전파됩니다. 새로고침도 필요 없습니다 — Aurora는 언제나 모든 팀원을 동일한 상태로 유지합니다.',
-  },
-  {
-    icon: '🧠',
-    title: 'AI 코파일럿',
-    description:
-      '팀의 히스토리를 기반으로 한 상황 인식 제안을 제공합니다. Aurora는 여러분의 워크플로우를 학습하고, 필요한 것을 먼저 알아서 제안합니다.',
-  },
-  {
-    icon: '🔒',
-    title: '제로 트러스트 보안',
-    description:
-      '종단간 암호화, SOC 2 Type II 인증, 세분화된 권한 관리가 처음부터 내장되어 있습니다 — 나중에 덧붙인 기능이 아닙니다.',
-  },
-]
-
-export const pricingTiers: PricingTier[] = [
-  {
-    name: 'Starter',
-    price: '$0',
-    period: '영구 무료',
-    description: '개인 메이커와 소규모 사이드 프로젝트에 최적화된 플랜.',
-    features: [
-      '프로젝트 3개까지',
-      '저장 공간 5GB',
-      '기본 AI 제안',
-      '커뮤니티 지원',
-    ],
-    cta: '무료로 시작하기',
-    highlighted: false,
-  },
-  {
-    name: 'Pro',
-    price: '$24',
-    period: '사용자 / 월',
-    description: '빠르게 성장하며 자주 출시하는 팀을 위한 플랜.',
-    features: [
-      '프로젝트 무제한',
-      '저장 공간 100GB',
-      '고급 AI 코파일럿',
-      '우선 지원',
-      '커스텀 연동',
-      '분석 대시보드',
-    ],
-    cta: '무료 체험 시작',
-    highlighted: true,
-  },
-  {
-    name: 'Enterprise',
-    price: '맞춤 견적',
-    period: '문의하기',
-    description: '대규모 조직을 위한 전용 인프라와 컴플라이언스 지원.',
-    features: [
-      'Pro의 모든 기능 포함',
-      '저장 공간 무제한',
-      'SSO / SAML',
-      'SLA 보장',
-      '전담 성공 매니저',
-      '맞춤 계약',
-    ],
-    cta: '영업팀 문의',
-    highlighted: false,
-  },
-]
-
-export const testimonial = {
-  quote:
-    '"Aurora 덕분에 매주 3시간씩 걸리던 계획 회의가 20분으로 줄었어요. AI가 다음에 무엇이 필요한지 그냥 알고 있는 것 같더라고요. 마케팅 문구처럼 들릴 수도 있겠지만, 솔직히 그만큼 좋습니다."',
-  author: 'Priya Mehta',
-  role: 'Head of Product, Lumen Labs',
-  avatar: 'PM',
-}
-
-export const footerLinks = [
-  { label: '개인정보처리방침', href: '#' },
-  { label: '이용약관', href: '#' },
-  { label: '보안', href: '#' },
-  { label: '서비스 상태', href: '#' },
-  { label: '블로그', href: '#' },
-]

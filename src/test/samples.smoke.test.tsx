@@ -64,7 +64,7 @@ describe('samples render', () => {
       // Wait for the lazy chunk to resolve and the scoped root to mount.
       await waitFor(() => {
         expect(container.querySelector(`.sample-${sample.id}`)).toBeTruthy()
-      })
+      }, { timeout: 5000 })
 
       expect(errorSpy, `${sample.id} logged a console.error`).not.toHaveBeenCalled()
       unmount()

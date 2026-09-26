@@ -5,10 +5,11 @@ Vite + React 18 + TypeScript로 만든 **24종의 프론트엔드 디자인 샘�
 ## 특징
 
 - **24개 독립 샘플** — 각각 화면 종류 × 비주얼 스타일이 구별되는 React 페이지
-- **카테고리 갤러리** — 6개 웹 목적 카테고리, 스티키 퀵네비, 실제 샘플 화면 썸네일 카드 → 클릭 시 라우팅
+- **검색 가능한 아카이브** — 6개 웹 목적 카테고리, 이름·분야 검색, 실제 샘플 화면 썸네일 → 클릭 시 라우팅
 - **샘플 미리보기 이미지** — Playwright로 각 샘플 첫 화면을 캡처해 `public/thumbnails/`에 저장
-- **반응형** — 데스크톱/모바일(375·768·1440px) 대응
-- **모던 애니메이션** — 워드 스플릿 리빌, 마그네틱 버튼, 3D 틸트, `@property` 그라데이션, 숫자 카운트업, SVG path draw-on, layout FLIP, Ken Burns 등 (transform/opacity 기반, `prefers-reduced-motion` 존중)
+- **반응형** — 모바일 390px / 데스크톱 1440px 실 브라우저 검증
+- **분야별 아트 디렉션** — 운영 도구의 표와 필터, 쇼핑몰의 상품 사진, 매체의 편집 위계, 포트폴리오의 작업물 중심 구성
+- **절제된 모션** — 선택·전환·피드백에 필요한 애니메이션과 `prefers-reduced-motion` 지원
 - **목업 데이터만** — 백엔드/API 없음, 외부 데이터 요청 없음
 - **3중 검증** — 빌드(타입), jsdom 렌더 테스트, 실 브라우저 비주얼 QA
 
@@ -16,15 +17,19 @@ Vite + React 18 + TypeScript로 만든 **24종의 프론트엔드 디자인 샘�
 
 | 카테고리 | 샘플 | 스타일 |
 |---|---|---|
-| **마케팅 · 랜딩** | Aurora · Softdeck · Zenith | 글래스모피즘 · 레트로+뉴모피즘 · 그라데이션 |
-| **대시보드 · 관리자** | Pulse · Vault · Flow | 미니멀 · 다크 핀테크 · 칸반 CRM |
-| **이커머스 · 리테일** | Slab · Lumière · Fresh | 브루탈리즘 · 럭셔리 · 친근 마켓 |
-| **포트폴리오 · 퍼스널** | Nebula · Atelier · Lens | 네온/사이버 · 스위스 에디토리얼 · 사진 메이슨리 |
-| **콘텐츠 · 미디어** | Quill · Stream · Daily | 에디토리얼 매거진 · 시네마틱 스트리밍 · 뉴스 포털 |
-| **블로그 (작성 + 조회)** | Inkwell · Prism · Mono · Press · Velvet · Halo | 미니멀 · 글래스모피즘 · 다크 마크다운 · 브루탈리즘 · 파스텔 그라데이션 · 네온 |
-| **웹앱 · 툴** | Converse · Tempo · Board | 채팅 · 뮤직 플레이어 · 칸반 태스크 |
+| **마케팅 · 랜딩** | Aurora · Softdeck · Zenith | 출시 협업 · 오디오 하드웨어 · 리소스 플래닝 |
+| **대시보드 · 관리자** | Pulse · Vault · Flow | 제품 분석 · 기업 금융 장부 · 영업 파이프라인 |
+| **이커머스 · 리테일** | Slab · Lumière · Fresh | 생활 도구 편집숍 · 패션 카탈로그 · 동네 식료품 마켓 |
+| **포트폴리오 · 퍼스널** | Nebula · Atelier · Lens | 크리에이티브 테크 · 건축/그래픽 스튜디오 · 사진 콘택트 시트 |
+| **콘텐츠 · 미디어** | Quill · Frame · 데일리 서울 | 문화 저널 · 독립영화 큐레이션 · 지역 신문 |
+| **블로그 (작성 + 조회)** | Inkwell · Prism · Mono · Press · Velvet · Halo | 문학 노트 · 시각문화 · 개발 기록 · 시민 오피니언 · 여행 · 음악 진 |
+| **웹앱 · 툴** | Converse · Tempo · Board | 업무용 메신저 · 음반 라이브러리 · 작업 보드 |
 
 대시보드/차트(Pulse·Vault), 칸반(Flow·Board), 라이트박스(Lens), 채팅 전송(Converse), 재생 토글(Tempo) 등 인터랙션은 모두 클라이언트 상태로 실제 동작합니다. 블로그 6종은 **글작성(라이브 프리뷰)·발행·목록 조회·글 읽기**를 모두 클라이언트 상태로 처리합니다(블로그는 모두 `콘텐츠 · 미디어` 카테고리에 속합니다).
+
+Frame은 작품 소개·검색·보관함을 제공하며 실제 영상을 스트리밍하지 않습니다. Tempo의 재생 UI는 오디오 없는 미리듣기 시뮬레이션입니다. 주문·구독·게시물은 로컬 데모이며 실제 결제, 발송, 서버 저장으로 연결되지 않습니다.
+
+리디자인의 조사 출처, 샘플별 결정과 이미지 출처는 [리디자인 문서](docs/redesign/README.md)에 정리했습니다. 기존 24개 URL은 유지됩니다.
 
 ## 기술 스택
 
@@ -43,14 +48,14 @@ npm install      # 의존성 설치
 npm run dev      # 개발 서버 → http://localhost:5173 (포트 사용 중이면 자동 증가)
 npm run build    # 타입체크(tsc -b) + 프로덕션 빌드
 npm run preview  # 빌드 결과 미리보기 → http://localhost:4173
-npm test         # 렌더 스모크 테스트 (Vitest)
+npm test         # 렌더 + 검색/보관함 + 블로그 발행 테스트 (Vitest)
 ```
 
 > `npm start` 스크립트는 없습니다. 로컬 실행은 `npm run dev`를 사용하세요.
 
 ### 썸네일 생성 (선택)
 
-갤러리 카드는 `public/thumbnails/<sample-id>.png`가 있으면 실제 샘플 화면 캡처를 보여주고, 이미지가 없거나 로드에 실패하면 기존 그라데이션 포스터로 폴백합니다.
+갤러리 카드는 `public/thumbnails/<sample-id>.png`가 있으면 실제 샘플 화면 캡처를 보여주고, 이미지가 없거나 로드에 실패하면 단색 바탕에 샘플 이름을 표시합니다.
 
 ```bash
 npx playwright install chromium      # 최초 1회
@@ -68,7 +73,9 @@ npm run preview                      # 프리뷰 서버 먼저 기동
 node scripts/visual-qa.mjs http://localhost:4173
 ```
 
-25개 화면을 데스크톱/모바일로 캡처하고 페이지별 콘솔 에러를 수집해 `.omc/visual-qa/`에 저장합니다.
+25개 화면을 데스크톱/모바일로 캡처하고 콘솔 에러, 이미지 로딩 실패, 가로 넘침, 빈 화면을 점검해 `.omc/visual-qa/`에 저장합니다. 실패가 있으면 종료 코드 1을 반환합니다. 세 번째 인수로 `quill-journal,pulse-stream`처럼 경로 ID를 지정하면 해당 샘플만 점검합니다.
+
+`VISUAL_QA_OUT` 환경 변수로 출력 폴더를 바꿀 수 있습니다. 일부 화면만 재검증할 때 전체 검사 결과를 보존하는 용도로 사용합니다.
 
 ## 아키텍처
 
@@ -77,6 +84,7 @@ node scripts/visual-qa.mjs http://localhost:4173
 ```
 .
 ├─ public/
+│  ├─ media/                   # 로컬 사진과 생성 제품 이미지
 │  └─ thumbnails/              # 갤러리 카드용 실제 샘플 화면 캡처
 ├─ scripts/
 │  ├─ generate-thumbnails.mjs  # 샘플 route 캡처 → public/thumbnails/*.png
@@ -92,7 +100,7 @@ node scripts/visual-qa.mjs http://localhost:4173
    │     ├─ mock.ts            #   샘플 자체 목업 데이터
    │     └─ <slug>.css         #   `.sample-<slug>` 하위로만 스코프된 스타일
    ├─ showcase/
-   │  ├─ Gallery.tsx           # 카테고리별 그룹 + 퀵네비 + 카드 그리드
+   │  ├─ Gallery.tsx           # 검색 + 카테고리 필터 + 이미지 인덱스
    │  └─ SampleFrame.tsx       # 뒤로가기 + ErrorBoundary + Suspense(lazy 샘플)
    ├─ components/ErrorBoundary.tsx
    └─ test/                    # vitest 설정 + 렌더 스모크 테스트
@@ -117,7 +125,7 @@ node scripts/visual-qa.mjs http://localhost:4173
 | 게이트 | 명령 | 확인 내용 |
 |---|---|---|
 | 타입 + 빌드 | `npm run build` | 타입 오류 0, 24개 lazy 청크 |
-| 런타임 렌더 | `npm test` | 24개 샘플 + 갤러리 jsdom 마운트, `console.error` 0 |
+| 렌더 + 상호작용 | `npm test` | 36개 테스트: 렌더 26개, 검색/보관함 4개, 블로그 발행 6개 |
 | 썸네일 생성 | `npm run thumbnails -- http://localhost:5173` | 24개 샘플 미리보기 PNG 생성 |
 | 실 브라우저 | `node scripts/visual-qa.mjs` | 50페이지 스크린샷, 콘솔 에러 0 |
 

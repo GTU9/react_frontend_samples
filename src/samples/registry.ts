@@ -98,42 +98,42 @@ export interface Sample {
 
 export const samples: Sample[] = [
   // ── 마케팅 · 랜딩 ──────────────────────────────────────────────
-  { id: 'aurora-landing', title: 'Aurora', description: '프로스트 글래스 패널의 SaaS 랜딩', category: 'Marketing & Landing', pageType: 'landing', visualStyle: 'glassmorphism', accent: '#7c5cff', Component: lazy(() => import('./aurora-landing')) },
-  { id: 'softdeck-retro', title: 'Softdeck', description: '레트로 + 뉴모피즘 제품 페이지', category: 'Marketing & Landing', pageType: 'landing', visualStyle: 'retro', accent: '#e8a13a', Component: lazy(() => import('./softdeck-retro')) },
-  { id: 'zenith-saas', title: 'Zenith', description: '모던 그라데이션 SaaS 랜딩 페이지', category: 'Marketing & Landing', pageType: 'landing', visualStyle: 'gradient', accent: '#6366f1', Component: lazy(() => import('./zenith-saas')) },
+  { id: 'aurora-landing', title: 'Aurora', description: '팀의 출시 일정과 작업을 연결하는 협업 서비스', category: 'Marketing & Landing', pageType: 'landing', visualStyle: 'minimal', accent: '#2257c8', Component: lazy(() => import('./aurora-landing')) },
+  { id: 'softdeck-retro', title: 'Softdeck', description: '휴대용 오디오 콘솔의 제품 소개와 사양', category: 'Marketing & Landing', pageType: 'landing', visualStyle: 'retro', accent: '#b92c2f', Component: lazy(() => import('./softdeck-retro')) },
+  { id: 'zenith-saas', title: 'Zenith', description: '팀의 가용 시간과 일정을 정리하는 프로젝트 플래너', category: 'Marketing & Landing', pageType: 'landing', visualStyle: 'minimal', accent: '#185847', Component: lazy(() => import('./zenith-saas')) },
 
   // ── 대시보드 · 관리자 ───────────────────────────────────────────
-  { id: 'pulse-dashboard', title: 'Pulse', description: '미니멀하고 중립적인 분석 대시보드', category: 'Dashboards & Admin', pageType: 'dashboard', visualStyle: 'minimal', accent: '#10b981', Component: lazy(() => import('./pulse-dashboard')) },
-  { id: 'vault-finance', title: 'Vault', description: '다크 테마 금융 · 크립토 대시보드', category: 'Dashboards & Admin', pageType: 'dashboard', visualStyle: 'dark', accent: '#22d3ee', Component: lazy(() => import('./vault-finance')) },
-  { id: 'flow-crm', title: 'Flow', description: '컬러풀한 CRM · 칸반 관리 보드', category: 'Dashboards & Admin', pageType: 'dashboard', visualStyle: 'minimal', accent: '#8b5cf6', Component: lazy(() => import('./flow-crm')) },
+  { id: 'pulse-dashboard', title: 'Pulse', description: '기간별 지표와 페이지별 성과를 살펴보는 분석 워크스페이스', category: 'Dashboards & Admin', pageType: 'dashboard', visualStyle: 'minimal', accent: '#147b70', Component: lazy(() => import('./pulse-dashboard')) },
+  { id: 'vault-finance', title: 'Vault', description: '기업 계좌와 거래 내역을 검토하는 금융 장부', category: 'Dashboards & Admin', pageType: 'dashboard', visualStyle: 'minimal', accent: '#424945', Component: lazy(() => import('./vault-finance')) },
+  { id: 'flow-crm', title: 'Flow', description: '고객사별 거래와 다음 액션을 관리하는 영업 파이프라인', category: 'Dashboards & Admin', pageType: 'dashboard', visualStyle: 'minimal', accent: '#4357b6', Component: lazy(() => import('./flow-crm')) },
 
   // ── 이커머스 · 리테일 ──────────────────────────────────────────
-  { id: 'slab-shop', title: 'Slab', description: '브루탈리즘 이커머스 상품 페이지', category: 'E-commerce & Retail', pageType: 'ecommerce', visualStyle: 'brutalism', accent: '#ff5c00', Component: lazy(() => import('./slab-shop')) },
-  { id: 'lumiere-store', title: 'Lumière', description: '럭셔리 미니멀 패션 스토어프런트', category: 'E-commerce & Retail', pageType: 'ecommerce', visualStyle: 'luxury', accent: '#c2a14d', Component: lazy(() => import('./lumiere-store')) },
-  { id: 'fresh-market', title: 'Fresh', description: '친근한 식료품 마켓플레이스 그리드', category: 'E-commerce & Retail', pageType: 'ecommerce', visualStyle: 'minimal', accent: '#16a34a', Component: lazy(() => import('./fresh-market')) },
+  { id: 'slab-shop', title: 'Slab', description: '소재와 규격으로 고르는 생활 도구 편집숍', category: 'E-commerce & Retail', pageType: 'ecommerce', visualStyle: 'brutalism', accent: '#c52b2e', Component: lazy(() => import('./slab-shop')) },
+  { id: 'lumiere-store', title: 'Lumière', description: '실루엣과 소재에 집중한 독립 패션 카탈로그', category: 'E-commerce & Retail', pageType: 'ecommerce', visualStyle: 'luxury', accent: '#5a6348', Component: lazy(() => import('./lumiere-store')) },
+  { id: 'fresh-market', title: 'Fresh', description: '제철 식재료를 담는 동네 식료품 마켓', category: 'E-commerce & Retail', pageType: 'ecommerce', visualStyle: 'minimal', accent: '#21754d', Component: lazy(() => import('./fresh-market')) },
 
   // ── 포트폴리오 · 퍼스널 ─────────────────────────────────────────
-  { id: 'nebula-folio', title: 'Nebula', description: '네온 사이버펑크 포트폴리오', category: 'Portfolio & Personal', pageType: 'portfolio', visualStyle: 'neon', accent: '#00e5ff', Component: lazy(() => import('./nebula-folio')) },
-  { id: 'atelier-studio', title: 'Atelier', description: '스위스 에디토리얼 디자인 스튜디오', category: 'Portfolio & Personal', pageType: 'portfolio', visualStyle: 'editorial', accent: '#111827', Component: lazy(() => import('./atelier-studio')) },
-  { id: 'lens-gallery', title: 'Lens', description: '미니멀 사진 메이슨리 포트폴리오', category: 'Portfolio & Personal', pageType: 'portfolio', visualStyle: 'minimal', accent: '#0ea5e9', Component: lazy(() => import('./lens-gallery')) },
+  { id: 'nebula-folio', title: 'Nebula', description: '물성과 기술을 탐구하는 크리에이티브 작업 아카이브', category: 'Portfolio & Personal', pageType: 'portfolio', visualStyle: 'dark', accent: '#b7ca62', Component: lazy(() => import('./nebula-folio')) },
+  { id: 'atelier-studio', title: 'Atelier', description: '공간과 그래픽을 다루는 디자인 스튜디오의 작업집', category: 'Portfolio & Personal', pageType: 'portfolio', visualStyle: 'editorial', accent: '#ba292d', Component: lazy(() => import('./atelier-studio')) },
+  { id: 'lens-gallery', title: 'Lens', description: '사진가의 콘택트 시트와 풍경 아카이브', category: 'Portfolio & Personal', pageType: 'portfolio', visualStyle: 'minimal', accent: '#373737', Component: lazy(() => import('./lens-gallery')) },
 
   // ── 콘텐츠 · 미디어 ────────────────────────────────────────────
-  { id: 'quill-journal', title: 'Quill', description: '에디토리얼 매거진 · 블로그', category: 'Content & Media', pageType: 'blog', visualStyle: 'editorial', accent: '#b91c1c', Component: lazy(() => import('./quill-journal')) },
-  { id: 'pulse-stream', title: 'Stream', description: '시네마틱 영상 스트리밍 허브', category: 'Content & Media', pageType: 'media', visualStyle: 'dark', accent: '#e11d48', Component: lazy(() => import('./pulse-stream')) },
-  { id: 'daily-wire', title: 'Daily', description: '정보 밀도 높은 뉴스 포털 1면', category: 'Content & Media', pageType: 'news', visualStyle: 'editorial', accent: '#1d4ed8', Component: lazy(() => import('./daily-wire')) },
+  { id: 'quill-journal', title: 'Quill', description: '도시와 일상을 오래 읽는 독립 문화 저널', category: 'Content & Media', pageType: 'blog', visualStyle: 'editorial', accent: '#ad292b', Component: lazy(() => import('./quill-journal')) },
+  { id: 'pulse-stream', title: 'Frame', description: '세 편의 이야기로 만나는 독립영화 큐레이션', category: 'Content & Media', pageType: 'media', visualStyle: 'dark', accent: '#b7c95f', Component: lazy(() => import('./pulse-stream')) },
+  { id: 'daily-wire', title: '데일리 서울', description: '도시의 변화와 동네의 일상을 기록하는 지역 신문', category: 'Content & Media', pageType: 'news', visualStyle: 'editorial', accent: '#742e3c', Component: lazy(() => import('./daily-wire')) },
 
   // ── 블로그 (글작성 + 조회) ──────────────────────────────────────
-  { id: 'inkwell-blog', title: 'Inkwell', description: '미니멀 글쓰기 · 읽기 블로그 (작성 + 조회)', category: 'Content & Media', pageType: 'blog', visualStyle: 'minimal', accent: '#2563eb', Component: lazy(() => import('./inkwell-blog')) },
-  { id: 'prism-blog', title: 'Prism', description: '글래스모피즘 블로그 (작성 + 조회)', category: 'Content & Media', pageType: 'blog', visualStyle: 'glassmorphism', accent: '#8b5cf6', Component: lazy(() => import('./prism-blog')) },
-  { id: 'mono-devlog', title: 'Mono', description: '다크 마크다운 개발 블로그 (작성 + 조회)', category: 'Content & Media', pageType: 'blog', visualStyle: 'dark', accent: '#34d399', Component: lazy(() => import('./mono-devlog')) },
-  { id: 'press-brut', title: 'Press', description: '브루탈리즘 블로그 (작성 + 조회)', category: 'Content & Media', pageType: 'blog', visualStyle: 'brutalism', accent: '#ff4d00', Component: lazy(() => import('./press-brut')) },
-  { id: 'velvet-blog', title: 'Velvet', description: '파스텔 그라데이션 퍼스널 블로그 (작성 + 조회)', category: 'Content & Media', pageType: 'blog', visualStyle: 'gradient', accent: '#ec4899', Component: lazy(() => import('./velvet-blog')) },
-  { id: 'halo-neon', title: 'Halo', description: '네온 사이버펑크 블로그 (작성 + 조회)', category: 'Content & Media', pageType: 'blog', visualStyle: 'neon', accent: '#d946ef', Component: lazy(() => import('./halo-neon')) },
+  { id: 'inkwell-blog', title: 'Inkwell', description: '문장과 여백을 중심에 둔 문학 노트', category: 'Content & Media', pageType: 'blog', visualStyle: 'minimal', accent: '#2856a3', Component: lazy(() => import('./inkwell-blog')) },
+  { id: 'prism-blog', title: 'Prism', description: '사진과 그래픽 장면을 전면에 둔 시각문화 저널', category: 'Content & Media', pageType: 'blog', visualStyle: 'editorial', accent: '#ac8b13', Component: lazy(() => import('./prism-blog')) },
+  { id: 'mono-devlog', title: 'Mono', description: '배포와 장애 대응을 기록하는 엔지니어링 필드 로그', category: 'Content & Media', pageType: 'blog', visualStyle: 'dark', accent: '#6eae86', Component: lazy(() => import('./mono-devlog')) },
+  { id: 'press-brut', title: 'Press', description: '시민의 의제를 다루는 독립 오피니언 신문', category: 'Content & Media', pageType: 'blog', visualStyle: 'brutalism', accent: '#a32428', Component: lazy(() => import('./press-brut')) },
+  { id: 'velvet-blog', title: 'Velvet', description: '여행지의 빛과 장소를 사진으로 남기는 개인 저널', category: 'Content & Media', pageType: 'blog', visualStyle: 'editorial', accent: '#a8546e', Component: lazy(() => import('./velvet-blog')) },
+  { id: 'halo-neon', title: 'Halo', description: '클럽과 레이블, 음악을 기록하는 언더그라운드 진', category: 'Content & Media', pageType: 'blog', visualStyle: 'dark', accent: '#b2c444', Component: lazy(() => import('./halo-neon')) },
 
   // ── 웹앱 · 툴 ──────────────────────────────────────────────────
-  { id: 'converse-chat', title: 'Converse', description: '깔끔한 메시징 · 채팅 앱 UI', category: 'Web Apps & Tools', pageType: 'app', visualStyle: 'minimal', accent: '#3b82f6', Component: lazy(() => import('./converse-chat')) },
-  { id: 'tempo-music', title: 'Tempo', description: '그라데이션 뮤직 플레이어 웹앱', category: 'Web Apps & Tools', pageType: 'app', visualStyle: 'gradient', accent: '#a855f7', Component: lazy(() => import('./tempo-music')) },
-  { id: 'board-tasks', title: 'Board', description: '칸반 작업 관리 웹앱', category: 'Web Apps & Tools', pageType: 'app', visualStyle: 'minimal', accent: '#f59e0b', Component: lazy(() => import('./board-tasks')) },
+  { id: 'converse-chat', title: 'Converse', description: '팀 채널과 대화를 검색하는 업무용 메신저', category: 'Web Apps & Tools', pageType: 'app', visualStyle: 'minimal', accent: '#35697d', Component: lazy(() => import('./converse-chat')) },
+  { id: 'tempo-music', title: 'Tempo', description: '독립 음반 라이브러리와 미리듣기 시뮬레이션', category: 'Web Apps & Tools', pageType: 'app', visualStyle: 'dark', accent: '#b7614d', Component: lazy(() => import('./tempo-music')) },
+  { id: 'board-tasks', title: 'Board', description: '담당자와 상태별로 정리하는 프로젝트 작업 보드', category: 'Web Apps & Tools', pageType: 'app', visualStyle: 'minimal', accent: '#a88425', Component: lazy(() => import('./board-tasks')) },
 ]
 
 export const getSample = (id: string | undefined) => samples.find((s) => s.id === id)

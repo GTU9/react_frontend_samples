@@ -1,206 +1,78 @@
-export const mock = {
+export const zenith = {
+  brand: {
+    name: 'Zenith',
+    category: '리소스 계획 서비스',
+    image: '/media/zenith-saas/forest-planning.jpg',
+  },
+  nav: [
+    { label: '제품', href: '#product' },
+    { label: '일정', href: '#schedule' },
+    { label: '운영', href: '#ops' },
+    { label: '요금', href: '#pricing' },
+  ],
   hero: {
-    badge: "신규 — v2.0 출시",
-    headline: "AI 기반 플랫폼으로\n더 빠르게\n배포하세요",
-    subCopy:
-      "Zenith는 팀의 워크플로우, 분석, 배포를 하나의 원활한 워크스페이스로 통합합니다. 릴리스 주기를 절반으로 줄이고 자신 있게 출시하세요.",
-    cta: { primary: "무료로 시작하기", secondary: "실제 동작 보기" },
-    stats: [
-      { value: "10x", label: "빠른 배포" },
-      { value: "99.9%", label: "가동률 SLA" },
-      { value: "50ms", label: "평균 지연시간" },
-    ],
+    title: 'Zenith',
+    subtitle: '사람과 프로젝트가 조화를 이루는 방식',
+    body:
+      '역량, 휴가, 의존성을 한 화면에 놓고 다음 분기의 일정을 현실적으로 조정합니다. 더 많이 넣는 도구가 아니라, 가능한 계획을 고르는 도구입니다.',
+    primary: '계획 시작하기',
+    secondary: '데모 보기',
   },
-
-  logos: [
-    { name: "Stripe", abbr: "S" },
-    { name: "Notion", abbr: "N" },
-    { name: "Vercel", abbr: "V" },
-    { name: "Linear", abbr: "L" },
-    { name: "Figma", abbr: "F" },
-    { name: "Supabase", abbr: "Su" },
-  ],
-
-  features: [
+  filters: ['전체', '제품', '디자인', '엔지니어링'],
+  people: [
     {
-      id: "f1",
-      size: "large",
-      icon: "⚡",
-      title: "즉각적인 배포",
-      body: "main에 푸시하면 30초 이내에 앱이 라이브로 올라갑니다. 다운타임 없는 블루-그린 배포가 기본 내장.",
-      accent: "#6366f1",
+      name: '김민지',
+      role: '프로덕트 리드',
+      team: '제품',
+      capacity: 100,
+      bars: [
+        { label: '모바일 앱 리디자인', start: 1, span: 3, tone: 'blue' },
+        { label: '브랜드 가이드', start: 5, span: 2, tone: 'gray' },
+      ],
     },
     {
-      id: "f2",
-      size: "small",
-      icon: "🔒",
-      title: "SOC 2 Type II",
-      body: "기업급 보안이 기본으로 제공됩니다.",
-      accent: "#8b5cf6",
+      name: '이호준',
+      role: '프론트엔드 개발',
+      team: '엔지니어링',
+      capacity: 80,
+      bars: [
+        { label: '웹 대시보드 고도화', start: 2, span: 4, tone: 'green' },
+      ],
     },
     {
-      id: "f3",
-      size: "small",
-      icon: "📊",
-      title: "실시간 분석",
-      body: "중요한 모든 지표를 실시간으로 확인하세요.",
-      accent: "#a855f7",
+      name: '박서연',
+      role: '데이터 엔지니어',
+      team: '엔지니어링',
+      capacity: 60,
+      bars: [
+        { label: '데이터 파이프라인', start: 1, span: 4, tone: 'moss' },
+        { label: '분석 리포트', start: 6, span: 2, tone: 'gray' },
+      ],
     },
     {
-      id: "f4",
-      size: "medium",
-      icon: "🤖",
-      title: "AI 코파일럿",
-      body: "코드베이스를 학습하는 상황 인식 제안으로 프로덕션에 닿기 전에 회귀를 감지합니다.",
-      accent: "#c026d3",
-    },
-    {
-      id: "f5",
-      size: "medium",
-      icon: "🌐",
-      title: "글로벌 엣지 네트워크",
-      body: "6개 대륙 300개 이상의 PoP. 사용자는 언제나 가장 가까운 노드에 연결됩니다.",
-      accent: "#7c3aed",
-    },
-    {
-      id: "f6",
-      size: "small",
-      icon: "🔄",
-      title: "GitOps 네이티브",
-      body: "모든 변경이 추적·롤백·감사 가능합니다.",
-      accent: "#6366f1",
+      name: '최영민',
+      role: '브랜드 디자이너',
+      team: '디자인',
+      capacity: 50,
+      bars: [
+        { label: '런칭 캠페인', start: 1, span: 3, tone: 'ochre' },
+        { label: '고객 인터뷰', start: 5, span: 2, tone: 'gray' },
+      ],
     },
   ],
-
-  stats: [
-    { value: "1.2B+", label: "일일 처리 요청 수" },
-    { value: "40,000+", label: "전 세계 팀" },
-    { value: "99.99%", label: "역대 가동률" },
-    { value: "<30s", label: "중간 배포 시간" },
+  dependencies: [
+    { from: '데이터 파이프라인', to: '웹 대시보드 고도화', date: '4월 18일' },
+    { from: '런칭 캠페인', to: '모바일 앱 리디자인', date: '4월 25일' },
+    { from: '분석 리포트', to: '데이터 파이프라인', date: '5월 2일' },
   ],
-
+  ops: [
+    { title: '역량 기준 계획', body: '사람별 가능한 시간을 먼저 계산하고 프로젝트를 배치합니다.' },
+    { title: '의존성 표시', body: '일정표 아래에서 막히는 관계를 바로 확인합니다.' },
+    { title: '운영 업무 반영', body: '휴가, 온콜, 교육처럼 계획을 흔드는 일을 별도 용량으로 잡습니다.' },
+  ],
   pricing: [
-    {
-      name: "Starter",
-      price: "$0",
-      period: "/ 월",
-      description: "사이드 프로젝트와 개인 사이트에 딱 맞는 플랜.",
-      features: [
-        "프로젝트 3개",
-        "대역폭 5GB",
-        "커뮤니티 지원",
-        "기본 분석",
-        "팀원 1명",
-      ],
-      cta: "무료로 시작하기",
-      highlight: false,
-    },
-    {
-      name: "Pro",
-      price: "$49",
-      period: "/ 월",
-      description: "빠르게 성장하는 스타트업이 필요한 모든 것.",
-      features: [
-        "프로젝트 무제한",
-        "대역폭 200GB",
-        "우선 지원",
-        "고급 분석",
-        "팀원 10명",
-        "AI 코파일럿",
-        "커스텀 도메인",
-      ],
-      cta: "무료 체험 시작",
-      highlight: true,
-    },
-    {
-      name: "Enterprise",
-      price: "맞춤 견적",
-      period: "",
-      description: "복잡한 요구사항을 가진 대규모 팀을 위한 맞춤형 플랜.",
-      features: [
-        "모든 것 무제한",
-        "전용 인프라",
-        "24/7 SLA 지원",
-        "SSO / SAML",
-        "감사 로그",
-        "커스텀 SLA",
-        "온보딩 엔지니어",
-      ],
-      cta: "영업팀 문의",
-      highlight: false,
-    },
+    { name: 'Team', price: '₩24,000', body: '팀 1개, 월간 계획, CSV 내보내기' },
+    { name: 'Planning Office', price: '₩58,000', body: '여러 팀, 의존성 보기, 시나리오 복제' },
+    { name: 'Enterprise', price: '맞춤', body: 'SSO, 감사 로그, 전용 온보딩' },
   ],
-
-  faqs: [
-    {
-      q: "무료 플랜은 어떻게 작동하나요?",
-      a: "Starter 플랜은 신용카드 없이 영구 무료입니다. 매월 프로젝트 3개와 대역폭 5GB가 제공됩니다. 더 필요할 때 언제든 업그레이드하세요.",
-    },
-    {
-      q: "Zenith를 자체 호스팅할 수 있나요?",
-      a: "네 — 오픈코어 에디션이 GitHub에서 제공됩니다. 클라우드 호스팅 버전에는 관리형 인프라, 글로벌 CDN, AI 기능이 추가로 포함됩니다.",
-    },
-    {
-      q: "Zenith가 지원하는 프레임워크는 무엇인가요?",
-      a: "정적 에셋이나 Node.js 서버를 출력하는 모든 프레임워크를 지원합니다: Next.js, Remix, Nuxt, SvelteKit, Astro, Vite 등.",
-    },
-    {
-      q: "사용량은 어떻게 청구되나요?",
-      a: "플랜에 포함된 대역폭과 컴퓨팅을 초과한 만큼만 지불합니다. 초과 요금은 GB당, CPU-초당으로 미터링되며 최소 약정은 없습니다.",
-    },
-    {
-      q: "SOC 2 보고서를 요청할 수 있나요?",
-      a: "네. Enterprise 고객은 SOC 2 Type II 보고서를 요청하고 상호 NDA를 체결할 수 있습니다. 보안팀(security@zenith.dev)에 문의하세요.",
-    },
-  ],
-
-  testimonials: [
-    {
-      quote:
-        "배포 파이프라인을 18분에서 45초로 줄였습니다. 이제 팀이 두려움 없이 하루에 여러 번 출시합니다.",
-      author: "Sarah Chen",
-      role: "CTO at Luma",
-      avatar: "SC",
-    },
-    {
-      quote:
-        "Zenith의 AI 코파일럿이 스테이징에 도달하기도 전에 메모리 누수를 잡아냈습니다. 모든 PR을 지켜보는 시니어 엔지니어가 있는 것 같습니다.",
-      author: "Marcus Webb",
-      role: "Lead Engineer at Petal",
-      avatar: "MW",
-    },
-    {
-      quote:
-        "주말 동안 기존 CI/CD 스택에서 마이그레이션했습니다. 개발자 경험이 지금까지 써본 것 중 단연 최고입니다.",
-      author: "Aiko Tanaka",
-      role: "Engineering Manager at Arc",
-      avatar: "AT",
-    },
-  ],
-
-  nav: {
-    logo: "Zenith",
-    links: ["기능", "요금제", "문서", "블로그"],
-    cta: "무료 시작",
-  },
-
-  footer: {
-    tagline: "훌륭한 소프트웨어를 가장 빠르게 출시하는 방법.",
-    columns: [
-      {
-        heading: "제품",
-        links: ["기능", "요금제", "변경 로그", "로드맵"],
-      },
-      {
-        heading: "개발자",
-        links: ["문서", "API 레퍼런스", "CLI", "연동"],
-      },
-      { heading: "회사", links: ["소개", "블로그", "채용", "언론"] },
-      {
-        heading: "법적 고지",
-        links: ["개인정보처리방침", "이용약관", "보안", "쿠키 정책"],
-      },
-    ],
-    bottom: "© 2026 Zenith Technologies, Inc. 모든 권리 보유.",
-  },
 }

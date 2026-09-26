@@ -1,964 +1,390 @@
-/* Daily Wire — News Portal. All selectors scoped under .sample-daily-wire */
-
 .sample-daily-wire {
-  --dw-accent: #1d4ed8;
-  --dw-accent-dark: #1e3a8a;
-  --dw-accent-light: #dbeafe;
-  --dw-accent-mid: #3b82f6;
-  --dw-bg: #f8f9fa;
-  --dw-surface: #ffffff;
-  --dw-border: #e2e8f0;
-  --dw-border-light: #f1f5f9;
-  --dw-text: #0f172a;
-  --dw-text-secondary: #475569;
-  --dw-text-muted: #94a3b8;
-  --dw-text-inverse: #ffffff;
-  --dw-up: #16a34a;
-  --dw-down: #dc2626;
-  --dw-cat-world: #1d4ed8;
-  --dw-cat-business: #0891b2;
-  --dw-cat-tech: #7c3aed;
-  --dw-cat-sports: #ea580c;
-  --dw-cat-culture: #a21caf;
-  --dw-cat-health: #16a34a;
-  --dw-cat-politics: #dc2626;
-  --dw-cat-opinion: #b45309;
-
-  min-height: 100vh;
-  background: var(--dw-bg);
-  color: var(--dw-text);
-  font-family: 'Georgia', 'Times New Roman', serif;
-  font-size: 15px;
+  background: #fff;
+  color: #262323;
+  font-family: Arial,'Malgun Gothic',sans-serif;
   line-height: 1.6;
+  letter-spacing: 0;
+  min-height: 100vh;
 }
-
-/* ── Ticker ── */
-
-.sample-daily-wire .dw-ticker {
-  background: var(--dw-accent);
-  color: var(--dw-text-inverse);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  height: 32px;
+.sample-daily-wire * {
+  box-sizing: border-box;
+  letter-spacing: 0;
 }
-
-.sample-daily-wire .dw-ticker-label {
-  background: var(--dw-accent-dark);
-  padding: 0 14px;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 700;
-  font-size: 11px;
-  flex-shrink: 0;
-  gap: 6px;
+.sample-daily-wire button {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
 }
-
-.sample-daily-wire .dw-ticker-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #fbbf24;
-  animation: dw-pulse 1.5s ease-in-out infinite;
+.sample-daily-wire button:focus-visible,.sample-daily-wire input:focus-visible {
+  outline: 2px solid #813447;
+  outline-offset: 4px;
 }
-
-@keyframes dw-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
-}
-
-.sample-daily-wire .dw-ticker-track {
-  flex: 1;
-  overflow: hidden;
-  position: relative;
-}
-
-.sample-daily-wire .dw-ticker-inner {
-  display: flex;
-  gap: 0;
-  animation: dw-ticker-scroll 40s linear infinite;
-  width: max-content;
-}
-
-.sample-daily-wire .dw-ticker-item {
-  white-space: nowrap;
-  padding: 0 32px 0 0;
-}
-
-.sample-daily-wire .dw-ticker-item::before {
-  content: '•';
-  margin-right: 12px;
-  opacity: 0.5;
-}
-
-@keyframes dw-ticker-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .sample-daily-wire .dw-ticker-inner {
-    animation: none;
-  }
-  .sample-daily-wire .dw-ticker-dot {
-    animation: none;
-  }
-}
-
-/* ── Masthead ── */
-
 .sample-daily-wire .dw-masthead {
-  background: var(--dw-surface);
-  border-bottom: 3px solid var(--dw-accent);
-  padding: 16px 0 0;
-}
-
-.sample-daily-wire .dw-masthead-top {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 20px 14px;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 16px;
-}
-
-.sample-daily-wire .dw-masthead-meta {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 11px;
-  color: var(--dw-text-muted);
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.sample-daily-wire .dw-masthead-meta-date {
-  font-weight: 600;
-  color: var(--dw-text-secondary);
-}
-
-.sample-daily-wire .dw-publication-name {
-  text-align: center;
-  font-size: 42px;
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  line-height: 1;
-  color: var(--dw-text);
-  font-family: 'Georgia', 'Times New Roman', serif;
-}
-
-.sample-daily-wire .dw-publication-name span {
-  color: var(--dw-accent);
-}
-
-.sample-daily-wire .dw-publication-tagline {
-  text-align: center;
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--dw-text-muted);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  margin-top: 4px;
-}
-
-.sample-daily-wire .dw-weather {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 11px;
-  color: var(--dw-text-secondary);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 2px;
-}
-
-.sample-daily-wire .dw-weather-temp {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--dw-text);
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-/* Section nav */
-.sample-daily-wire .dw-section-nav {
-  background: var(--dw-accent);
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.sample-daily-wire .dw-section-nav::-webkit-scrollbar {
-  display: none;
-}
-
-.sample-daily-wire .dw-section-nav-inner {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 20px;
-  display: flex;
-  align-items: center;
-}
-
-.sample-daily-wire .dw-section-nav-item {
-  padding: 10px 14px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: rgba(255, 255, 255, 0.8);
-  white-space: nowrap;
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  transition: color 0.15s, border-color 0.15s;
-}
-
-.sample-daily-wire .dw-section-nav-item:hover,
-.sample-daily-wire .dw-section-nav-item.active {
+  background: #742e3c;
   color: #fff;
-  border-bottom-color: #fbbf24;
+  padding: 18px 5% 26px;
 }
-
-/* ── Page body layout ── */
-
-.sample-daily-wire .dw-page {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 20px 40px;
-}
-
-/* ── Hero section ── */
-
-.sample-daily-wire .dw-hero {
-  display: grid;
-  grid-template-columns: 1fr 300px;
-  gap: 0;
-  border-bottom: 1px solid var(--dw-border);
-  padding: 24px 0;
-}
-
-.sample-daily-wire .dw-hero-main {
-  padding-right: 24px;
-  border-right: 1px solid var(--dw-border);
-}
-
-.sample-daily-wire .dw-hero-image {
-  width: 100%;
-  aspect-ratio: 16/9;
-  border-radius: 4px;
-  margin-bottom: 16px;
-}
-
-.sample-daily-wire .dw-hero-category {
-  display: inline-block;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--dw-accent);
-  margin-bottom: 8px;
-}
-
-.sample-daily-wire .dw-hero-headline {
-  font-size: 32px;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  margin: 0 0 12px;
-  color: var(--dw-text);
-}
-
-.sample-daily-wire .dw-hero-standfirst {
-  font-size: 17px;
-  line-height: 1.55;
-  color: var(--dw-text-secondary);
-  margin: 0 0 14px;
-  font-style: italic;
-}
-
-.sample-daily-wire .dw-hero-byline {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 12px;
-  color: var(--dw-text-muted);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.sample-daily-wire .dw-hero-byline span {
-  color: var(--dw-text-secondary);
-  font-weight: 600;
-}
-
-.sample-daily-wire .dw-byline-sep {
-  color: var(--dw-border);
-}
-
-/* Secondary column */
-.sample-daily-wire .dw-hero-secondary {
-  padding-left: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.sample-daily-wire .dw-secondary-article {
-  padding: 14px 0;
-  border-bottom: 1px solid var(--dw-border-light);
-  display: grid;
-  grid-template-columns: 80px 1fr;
-  gap: 12px;
-  align-items: start;
-}
-
-.sample-daily-wire .dw-secondary-article:last-child {
-  border-bottom: none;
-}
-
-.sample-daily-wire .dw-secondary-thumb {
-  width: 80px;
-  height: 60px;
-  border-radius: 3px;
-  flex-shrink: 0;
-}
-
-.sample-daily-wire .dw-secondary-content {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.sample-daily-wire .dw-secondary-category {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--dw-accent);
-}
-
-.sample-daily-wire .dw-secondary-headline {
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1.3;
-  color: var(--dw-text);
-  margin: 0;
-}
-
-.sample-daily-wire .dw-secondary-timestamp {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 11px;
-  color: var(--dw-text-muted);
-}
-
-/* ── Middle band: grid + sidebar ── */
-
-.sample-daily-wire .dw-middle {
-  display: grid;
-  grid-template-columns: 1fr 220px;
-  gap: 0;
-  border-bottom: 1px solid var(--dw-border);
-  padding: 24px 0;
-}
-
-.sample-daily-wire .dw-grid-area {
-  padding-right: 24px;
-  border-right: 1px solid var(--dw-border);
-}
-
-.sample-daily-wire .dw-section-label {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 11px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--dw-accent);
-  margin-bottom: 14px;
-  padding-bottom: 6px;
-  border-bottom: 2px solid var(--dw-accent);
-  display: inline-block;
-}
-
-.sample-daily-wire .dw-news-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.sample-daily-wire .dw-card {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--dw-border-light);
-}
-
-.sample-daily-wire .dw-card:nth-child(n+4) {
-  padding-top: 0;
-}
-
-.sample-daily-wire .dw-card-image {
-  width: 100%;
-  aspect-ratio: 16/9;
-  border-radius: 3px;
-}
-
-.sample-daily-wire .dw-card-cat {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-.sample-daily-wire .dw-card-headline {
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 1.3;
-  margin: 0;
-  color: var(--dw-text);
-}
-
-.sample-daily-wire .dw-card-excerpt {
-  font-size: 13px;
-  color: var(--dw-text-secondary);
-  line-height: 1.5;
-  margin: 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.sample-daily-wire .dw-card-footer {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 11px;
-  color: var(--dw-text-muted);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: auto;
-}
-
-/* ── Most Read sidebar ── */
-
-.sample-daily-wire .dw-sidebar {
-  padding-left: 24px;
-  display: flex;
-  flex-direction: column;
-}
-
-.sample-daily-wire .dw-most-read-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.sample-daily-wire .dw-most-read-item {
-  display: flex;
-  gap: 12px;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--dw-border-light);
-  align-items: flex-start;
-}
-
-.sample-daily-wire .dw-most-read-item:last-child {
-  border-bottom: none;
-}
-
-.sample-daily-wire .dw-most-read-rank {
-  font-size: 28px;
-  font-weight: 900;
-  color: var(--dw-accent-light);
-  line-height: 1;
-  flex-shrink: 0;
-  width: 28px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-}
-
-.sample-daily-wire .dw-most-read-content {
-  flex: 1;
-}
-
-.sample-daily-wire .dw-most-read-cat {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--dw-accent);
-  margin-bottom: 3px;
-}
-
-.sample-daily-wire .dw-most-read-headline {
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 1.35;
-  color: var(--dw-text);
-}
-
-/* ── Opinion strip ── */
-
-.sample-daily-wire .dw-opinion-strip {
-  padding: 24px 0;
-  border-bottom: 1px solid var(--dw-border);
-}
-
-.sample-daily-wire .dw-opinion-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0;
-  margin-top: 16px;
-}
-
-.sample-daily-wire .dw-opinion-card {
-  padding: 0 24px 0 0;
-  margin-right: 24px;
-  border-right: 1px solid var(--dw-border);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.sample-daily-wire .dw-opinion-card:last-child {
-  border-right: none;
-  padding-right: 0;
-  margin-right: 0;
-}
-
-.sample-daily-wire .dw-opinion-author-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.sample-daily-wire .dw-opinion-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  color: white;
-  flex-shrink: 0;
-}
-
-.sample-daily-wire .dw-opinion-author-name {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--dw-text);
-}
-
-.sample-daily-wire .dw-opinion-author-bio {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 11px;
-  color: var(--dw-text-muted);
-}
-
-.sample-daily-wire .dw-opinion-title {
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 1.35;
-  font-style: italic;
-  color: var(--dw-text);
-}
-
-.sample-daily-wire .dw-opinion-read-link {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--dw-accent);
-}
-
-/* ── Markets & Scores widget ── */
-
-.sample-daily-wire .dw-widgets {
-  display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: 0;
-  padding: 24px 0;
-  border-bottom: 1px solid var(--dw-border);
-}
-
-.sample-daily-wire .dw-markets {
-  padding-right: 24px;
-  border-right: 1px solid var(--dw-border);
-}
-
-.sample-daily-wire .dw-market-table {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-top: 12px;
-}
-
-.sample-daily-wire .dw-market-entry {
-  background: var(--dw-surface);
-  border: 1px solid var(--dw-border);
-  border-radius: 4px;
-  padding: 10px 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.sample-daily-wire .dw-market-symbol {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 11px;
-  font-weight: 800;
-  color: var(--dw-text-muted);
-  text-transform: uppercase;
-}
-
-.sample-daily-wire .dw-market-value {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--dw-text);
-}
-
-.sample-daily-wire .dw-market-change {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.sample-daily-wire .dw-market-change.up { color: var(--dw-up); }
-.sample-daily-wire .dw-market-change.down { color: var(--dw-down); }
-
-.sample-daily-wire .dw-scores {
-  padding-left: 24px;
-}
-
-.sample-daily-wire .dw-score-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  margin-top: 12px;
-}
-
-.sample-daily-wire .dw-score-row {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr auto;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--dw-border-light);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 13px;
-}
-
-.sample-daily-wire .dw-score-row:last-child {
-  border-bottom: none;
-}
-
-.sample-daily-wire .dw-score-team {
-  font-weight: 700;
-  color: var(--dw-text);
-}
-
-.sample-daily-wire .dw-score-team.away {
-  text-align: right;
-}
-
-.sample-daily-wire .dw-score-num {
-  font-size: 18px;
-  font-weight: 900;
-  color: var(--dw-accent);
-  min-width: 28px;
-  text-align: center;
-}
-
-.sample-daily-wire .dw-score-status {
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--dw-text-muted);
-  background: var(--dw-border-light);
-  padding: 2px 6px;
-  border-radius: 2px;
-  white-space: nowrap;
-  grid-column: 1 / -1;
-  text-align: center;
-}
-
-/* ── Footer ── */
-
-.sample-daily-wire .dw-footer {
-  background: var(--dw-text);
-  color: rgba(255, 255, 255, 0.7);
-  padding: 32px 0 20px;
-  margin-top: 0;
-}
-
-.sample-daily-wire .dw-footer-inner {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.sample-daily-wire .dw-footer-brand {
-  font-size: 28px;
-  font-weight: 900;
-  color: white;
-  margin-bottom: 4px;
-}
-
-.sample-daily-wire .dw-footer-brand span {
-  color: var(--dw-accent-mid);
-}
-
-.sample-daily-wire .dw-footer-tagline {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.4);
-  margin-bottom: 24px;
-}
-
-.sample-daily-wire .dw-footer-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 20px;
-  margin-bottom: 20px;
-}
-
-.sample-daily-wire .dw-footer-link {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
-  cursor: pointer;
-}
-
-.sample-daily-wire .dw-footer-link:hover {
-  color: white;
-}
-
-.sample-daily-wire .dw-footer-bottom {
-  padding-top: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.3);
+.sample-daily-wire .dw-masthead>div {
   display: flex;
   justify-content: space-between;
+  font-size: 11px;
+  max-width: 1320px;
+  margin: auto;
+  color: #e7cbd0;
+}
+.sample-daily-wire h1 {
+  font: 700 62px/1.3 Georgia,'Batang',serif;
+  text-align: center;
+  margin: 0;
+}
+.sample-daily-wire h1 span {
+  display: block;
+  font: 11px Arial;
+  margin-top: 8px;
+}
+.sample-daily-wire .dw-masthead>p {
+  text-align: center;
+  font-size: 12px;
+  margin: 12px 0 0;
+  color: #e7cbd0;
+}
+.sample-daily-wire .dw-wrap {
+  max-width: 1440px;
+  padding: 0 4%;
+  margin: auto;
+}
+.sample-daily-wire .dw-nav {
+  display: flex;
+  gap: 28px;
   align-items: center;
-  gap: 12px;
+  border-bottom: 2px solid #262323;
+  padding: 0 0 0;
   flex-wrap: wrap;
 }
-
-/* ── Category color helpers ── */
-
-.sample-daily-wire .cat-world    { color: var(--dw-cat-world); }
-.sample-daily-wire .cat-business { color: var(--dw-cat-business); }
-.sample-daily-wire .cat-tech     { color: var(--dw-cat-tech); }
-.sample-daily-wire .cat-sports   { color: var(--dw-cat-sports); }
-.sample-daily-wire .cat-culture  { color: var(--dw-cat-culture); }
-.sample-daily-wire .cat-health   { color: var(--dw-cat-health); }
-.sample-daily-wire .cat-politics { color: var(--dw-cat-politics); }
-.sample-daily-wire .cat-opinion  { color: var(--dw-cat-opinion); }
-
-/* ── Responsive: tablet (768px) ── */
-
-@media (max-width: 1024px) {
-  .sample-daily-wire .dw-news-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .sample-daily-wire .dw-market-table {
-    grid-template-columns: repeat(3, 1fr);
-  }
+.sample-daily-wire .dw-nav button {
+  padding: 14px 0 11px;
+  border-bottom: 3px solid transparent;
+  font-size: 13px;
 }
-
-@media (max-width: 768px) {
-  .sample-daily-wire .dw-publication-name {
-    font-size: 28px;
+.sample-daily-wire .dw-nav button[aria-pressed=true] {
+  border-color: #8c354a;
+  color: #812e43;
+}
+.sample-daily-wire .dw-nav input {
+  margin-left: auto;
+  border: 0;
+  background: #f3f3f3;
+  padding: 8px 12px;
+  font: 12px Arial;
+  width: 190px;
+  min-width: 0;
+}
+.sample-daily-wire .dw-edition {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  border-bottom: 1px solid #bbb;
+  margin-bottom: 24px;
+  font-size: 12px;
+}
+.sample-daily-wire .dw-edition strong {
+  color: #812e43;
+  white-space: nowrap;
+}
+.sample-daily-wire .dw-edition p {
+  margin: 13px 0;
+}
+.sample-daily-wire .dw-edition>span {
+  margin-left: auto;
+  font-size: 10px;
+  color: #777;
+}
+.sample-daily-wire .dw-front {
+  display: grid;
+  grid-template-columns: minmax(0,2.6fr) minmax(0,1.25fr) minmax(0,1fr);
+  gap: 24px;
+}
+.sample-daily-wire .dw-article-link {
+  display: block;
+  width: 100%;
+  align-self: start;
+}
+.sample-daily-wire img {
+  width: 100%;
+  object-fit: cover;
+  display: block;
+}
+.sample-daily-wire .dw-lead>img {
+  aspect-ratio: 1.65;
+}
+.sample-daily-wire .dw-category {
+  font-size: 11px;
+  color: #873448;
+  display: block;
+  margin: 12px 0 8px;
+}
+.sample-daily-wire .dw-lead h2 {
+  font: 700 34px/1.4 Georgia,'Batang',serif;
+  margin: 0 0 12px;
+  word-break: keep-all;
+}
+.sample-daily-wire .dw-article-link p {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.8;
+  margin: 10px 0;
+}
+.sample-daily-wire .dw-meta {
+  font-size: 10px;
+  color: #777;
+}
+.sample-daily-wire .dw-article-link:hover h2,.sample-daily-wire .dw-article-link:hover h3 {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.sample-daily-wire .dw-secondaries {
+  border-left: 1px solid #ddd;
+  padding-left: 22px;
+}
+.sample-daily-wire .dw-secondaries>button {
+  padding: 0 0 20px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ccc;
+}
+.sample-daily-wire .dw-secondaries .dw-category {
+  margin-top: 0;
+}
+.sample-daily-wire .dw-secondaries h3 {
+  font: 700 20px/1.5 Georgia,'Batang',serif;
+  margin: 0 0 12px;
+  word-break: keep-all;
+}
+.sample-daily-wire .dw-secondaries img {
+  aspect-ratio: 1.9;
+}
+.sample-daily-wire .dw-aside {
+  border-left: 1px solid #ddd;
+  padding-left: 20px;
+}
+.sample-daily-wire .dw-aside>h2 {
+  font-size: 14px;
+  border-top: 3px solid #742e3c;
+  padding-top: 10px;
+  margin: 0 0 10px;
+}
+.sample-daily-wire .dw-aside>button {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 0;
+  border-bottom: 1px solid #ccc;
+}
+.sample-daily-wire .dw-aside>button>span {
+  font: 26px Georgia;
+  color: #853749;
+}
+.sample-daily-wire .dw-aside h3 {
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0;
+  word-break: keep-all;
+}
+.sample-daily-wire .dw-note {
+  background: #f1f0ee;
+  padding: 18px;
+  margin-top: 26px;
+}
+.sample-daily-wire .dw-note>span {
+  font-size: 10px;
+  color: #853749;
+}
+.sample-daily-wire .dw-note h3 {
+  font: 700 19px/1.6 Georgia,'Batang',serif;
+  margin-top: 12px;
+}
+.sample-daily-wire .dw-note p {
+  font-size: 12px;
+  color: #666;
+  line-height: 1.9;
+}
+.sample-daily-wire .dw-note button {
+  font-size: 11px;
+  border-bottom: 1px solid #777;
+  padding-bottom: 4px;
+}
+.sample-daily-wire .dw-more {
+  border-top: 3px solid #262323;
+  padding-top: 14px;
+  margin-top: 35px;
+}
+.sample-daily-wire .dw-more>h2 {
+  font-size: 19px;
+  margin: 0 0 20px;
+}
+.sample-daily-wire .dw-more>div {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 25px;
+}
+.sample-daily-wire .dw-more img {
+  aspect-ratio: 1.8;
+}
+.sample-daily-wire .dw-more h3 {
+  font: 700 22px/1.4 Georgia,'Batang',serif;
+  margin: 0;
+  word-break: keep-all;
+}
+.sample-daily-wire footer {
+  border-top: 1px solid #222;
+  padding: 25px 0;
+  margin-top: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  font-size: 10px;
+  color: #777;
+}
+.sample-daily-wire footer strong {
+  font: 700 22px Georgia,'Batang',serif;
+  color: #742e3c;
+  white-space: nowrap;
+}
+.sample-daily-wire .dw-reader {
+  max-width: 760px;
+  margin: auto;
+}
+.sample-daily-wire .dw-reader h2 {
+  font: 700 38px/1.5 Georgia,'Batang',serif;
+  word-break: keep-all;
+  margin: 10px 0;
+}
+.sample-daily-wire .dw-reader .dw-deck {
+  font-size: 17px;
+  color: #666;
+}
+.sample-daily-wire .dw-reader figure {
+  margin: 26px 0;
+}
+.sample-daily-wire .dw-reader img {
+  aspect-ratio: 1.6;
+}
+.sample-daily-wire figcaption {
+  font-size: 11px;
+  color: #777;
+  margin-top: 7px;
+}
+.sample-daily-wire .dw-prose {
+  font-size: 17px;
+  line-height: 2;
+  word-break: keep-all;
+  margin: 24px auto;
+  max-width: 660px;
+}
+.sample-daily-wire .dw-back,.sample-daily-wire .dw-save {
+  font-size: 12px;
+  border-bottom: 1px solid #742e3c;
+  padding: 8px 0;
+}
+.sample-daily-wire .dw-empty {
+  padding: 80px 0;
+  min-height: 350px;
+}
+.sample-daily-wire .dw-empty h2 {
+  font-size: 24px;
+}
+.sample-daily-wire .dw-empty button {
+  text-decoration: underline;
+}
+@media(max-width:1000px) {
+  .sample-daily-wire .dw-front {
+    grid-template-columns: 2fr 1fr;
   }
-
-  .sample-daily-wire .dw-masthead-top {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 8px;
+  .sample-daily-wire .dw-aside {
+    grid-column: span 2;
+    border-left: 0;
+    padding-left: 0;
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 0 25px;
   }
-
-  .sample-daily-wire .dw-masthead-meta {
+  .sample-daily-wire .dw-aside>h2,.sample-daily-wire .dw-note {
+    grid-column: span 2;
+  }
+  .sample-daily-wire .dw-note {
     display: none;
   }
-
-  .sample-daily-wire .dw-weather {
-    align-items: center;
+}
+@media(max-width:600px) {
+  .sample-daily-wire .dw-masthead {
+    padding: 16px 20px 22px;
   }
-
-  .sample-daily-wire .dw-hero {
+  .sample-daily-wire h1 {
+    font-size: 42px;
+    margin-top: 15px;
+  }
+  .sample-daily-wire .dw-masthead>div {
+    font-size: 9px;
+  }
+  .sample-daily-wire .dw-wrap {
+    padding: 0 20px;
+  }
+  .sample-daily-wire .dw-nav {
+    gap: 20px;
+    padding-bottom: 12px;
+  }
+  .sample-daily-wire .dw-nav button {
+    font-size: 12px;
+    padding-bottom: 7px;
+  }
+  .sample-daily-wire .dw-nav input {
+    width: 100%;
+    margin: 0;
+  }
+  .sample-daily-wire .dw-edition {
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 10px 0;
+  }
+  .sample-daily-wire .dw-edition p {
+    margin: 0;
+  }
+  .sample-daily-wire .dw-edition>span {
+    width: 100%;
+    margin: 0;
+  }
+  .sample-daily-wire .dw-front {
     grid-template-columns: 1fr;
   }
-
-  .sample-daily-wire .dw-hero-main {
-    padding-right: 0;
-    border-right: none;
-    border-bottom: 1px solid var(--dw-border);
-    padding-bottom: 20px;
+  .sample-daily-wire .dw-lead h2 {
+    font-size: 29px;
   }
-
-  .sample-daily-wire .dw-hero-secondary {
+  .sample-daily-wire .dw-secondaries {
+    border-left: 0;
     padding-left: 0;
+    border-top: 2px solid #222;
     padding-top: 20px;
   }
-
-  .sample-daily-wire .dw-hero-headline {
-    font-size: 24px;
+  .sample-daily-wire .dw-aside {
+    grid-column: auto;
+    display: block;
   }
-
-  .sample-daily-wire .dw-middle {
+  .sample-daily-wire .dw-more>div {
     grid-template-columns: 1fr;
+    gap: 30px;
   }
-
-  .sample-daily-wire .dw-grid-area {
-    padding-right: 0;
-    border-right: none;
+  .sample-daily-wire footer {
+    flex-wrap: wrap;
+    gap: 10px;
   }
-
-  .sample-daily-wire .dw-news-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .sample-daily-wire footer p {
+    width: 100%;
   }
-
-  .sample-daily-wire .dw-sidebar {
-    padding-left: 0;
-    padding-top: 24px;
-    border-top: 1px solid var(--dw-border);
-  }
-
-  .sample-daily-wire .dw-opinion-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .sample-daily-wire .dw-opinion-card {
-    border-right: none;
-    padding-right: 0;
-    margin-right: 0;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--dw-border);
-  }
-
-  .sample-daily-wire .dw-opinion-card:last-child {
-    border-bottom: none;
-  }
-
-  .sample-daily-wire .dw-widgets {
-    grid-template-columns: 1fr;
-  }
-
-  .sample-daily-wire .dw-markets {
-    padding-right: 0;
-    border-right: none;
-    padding-bottom: 24px;
-    border-bottom: 1px solid var(--dw-border);
-  }
-
-  .sample-daily-wire .dw-scores {
-    padding-left: 0;
-    padding-top: 24px;
-  }
-}
-
-/* ── Responsive: mobile (375px) ── */
-
-@media (max-width: 480px) {
-  .sample-daily-wire .dw-news-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .sample-daily-wire .dw-market-table {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .sample-daily-wire .dw-hero-standfirst {
-    font-size: 15px;
-  }
-
-  .sample-daily-wire .dw-page {
-    padding: 0 12px 40px;
-  }
-}
-
-/* ── Fade-in animation ── */
-
-.sample-daily-wire .dw-fade-in {
-  opacity: 0;
-  animation: dw-fade 0.5s ease forwards;
-}
-
-.sample-daily-wire .dw-fade-in-delay-1 { animation-delay: 0.1s; }
-.sample-daily-wire .dw-fade-in-delay-2 { animation-delay: 0.2s; }
-.sample-daily-wire .dw-fade-in-delay-3 { animation-delay: 0.3s; }
-
-@keyframes dw-fade {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .sample-daily-wire .dw-fade-in {
-    opacity: 1;
-    animation: none;
-  }
-}
-
-/* ── News card hover lift ── */
-.sample-daily-wire .dw-card {
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
-  border-radius: 4px;
-  will-change: transform;
-}
-
-/* ── Opinion card hover ── */
-.sample-daily-wire .dw-opinion-card {
-  transition: opacity 0.2s ease;
-}
-
-.sample-daily-wire .dw-opinion-card:hover {
-  opacity: 0.85;
-}
-
-/* ── Market entry — animated value color flash on load ── */
-.sample-daily-wire .dw-market-value {
-  display: block;
-  font-variant-numeric: tabular-nums;
-}
-
-/* ── Most-read item hover ── */
-.sample-daily-wire .dw-most-read-item {
-  transition: background 0.18s ease;
-  border-radius: 3px;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-.sample-daily-wire .dw-most-read-item:hover {
-  background: var(--dw-border-light);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .sample-daily-wire .dw-card,
-  .sample-daily-wire .dw-opinion-card,
-  .sample-daily-wire .dw-most-read-item {
-    transition: none;
+  .sample-daily-wire .dw-reader h2 {
+    font-size: 29px;
   }
 }

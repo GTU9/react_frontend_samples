@@ -109,7 +109,10 @@ function ListView({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: 'easeOut' }}
         >
-          <h1 className="ib-list-header__title">모든 글</h1>
+          <div>
+            <h1 className="ib-list-header__title">조용한 문장들</h1>
+            <p className="ib-list-header__note">읽고, 기록하고, 오래 남기는 흰 종이의 블로그</p>
+          </div>
           <p className="ib-list-header__count">{posts.length}편</p>
         </motion.div>
 
@@ -124,10 +127,17 @@ function ListView({
             <p className="ib-empty__sub">첫 번째 글을 써보세요.</p>
           </motion.div>
         ) : (
-          <div className="ib-post-list">
-            {posts.map((post, i) => (
-              <PostCard key={post.id} post={post} index={i} onOpen={onOpen} reduced={reduced} />
-            ))}
+          <div className="ib-list-shell">
+            <aside className="ib-margin-note" aria-label="편집 노트">
+              <img src="/media/inkwell-blog/notebook-desk.jpg" alt="노트와 펜이 놓인 책상" />
+              <p>좋은 문장은 조용히, 그러나 오래 남는다.</p>
+              <span>Inkwell notebook</span>
+            </aside>
+            <div className="ib-post-list">
+              {posts.map((post, i) => (
+                <PostCard key={post.id} post={post} index={i} onOpen={onOpen} reduced={reduced} />
+              ))}
+            </div>
           </div>
         )}
       </div>

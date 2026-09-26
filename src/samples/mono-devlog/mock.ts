@@ -15,48 +15,40 @@ export interface Post {
 export const seedPosts: Post[] = [
   {
     id: 'react-rendering-opt',
-    title: 'React 렌더링 최적화: useMemo와 useCallback의 올바른 사용법',
+    title: 'Next.js 14에서 이미지 최적화 경계 정리',
     excerpt:
-      'React 컴포넌트가 불필요하게 다시 렌더링되는 원인을 분석하고, useMemo·useCallback을 언제 써야 하는지 실제 예제로 살펴봅니다.',
+      '원격 이미지, LCP 후보, CDN 캐시 정책이 충돌했던 배포 기록. 숫자보다 먼저 병목의 위치를 고정했다.',
     tags: ['React', 'Performance', '최적화'],
     date: '2026-06-10',
     readTime: '8분',
     body: [
       {
         kind: 'p',
-        text: 'React 앱이 커질수록 불필요한 리렌더링이 성능 병목이 됩니다. 많은 개발자들이 useMemo와 useCallback을 만능 해결책으로 남용하는데, 오히려 메모이제이션 비용이 더 클 수도 있습니다.',
+        text: '이번 병목은 컴포넌트 렌더링이 아니라 이미지 경계에서 발생했다. 첫 화면의 대표 이미지가 원격 CDN에서 내려오고 있었고, 브라우저는 레이아웃 정보를 늦게 받았다.',
       },
       {
         kind: 'p',
-        text: '핵심 원칙은 간단합니다. 연산 비용이 비싸거나, 자식 컴포넌트가 React.memo로 감싸져 있고 해당 함수·값을 props로 전달할 때만 써야 합니다.',
+        text: '해결은 복잡하지 않았다. LCP 후보를 명시하고, 사용 가능한 크기를 제한하고, 캐시 정책을 문서화했다. 중요한 것은 최적화 코드보다 관찰 가능한 기준을 남기는 일이었다.',
       },
       {
         kind: 'code',
         lang: 'tsx',
-        filename: 'ExpensiveList.tsx',
-        code: `// 잘못된 예: 단순 원시값 메모이제이션 — 의미 없음
-const doubled = useMemo(() => count * 2, [count])
-
-// 올바른 예: 무거운 연산이거나 memo 자식에 전달할 때만
-const sortedItems = useMemo(
-  () => [...items].sort((a, b) => a.score - b.score),
-  [items]
-)
-
-const handleSelect = useCallback(
-  (id: string) => dispatch({ type: 'SELECT', id }),
-  [dispatch]
-)`,
+        filename: 'image-policy.ts',
+        code: `export const imagePolicy = {
+  lead: '(min-width: 1024px) 720px, 100%',
+  card: '(min-width: 900px) 320px, 100%',
+  priorityIds: new Set(['home-lead', 'article-cover']),
+}`,
       },
       {
         kind: 'p',
-        text: 'React DevTools Profiler를 먼저 켜서 실제로 느린 부분을 측정한 뒤 최적화를 적용하세요. 추측으로 최적화하면 코드만 복잡해집니다.',
+        text: '측정 결과 LCP는 3.8초에서 2.1초로 줄었다. 더 중요한 변화는 다음 작업자가 어디를 건드리면 위험한지 바로 알 수 있게 된 점이다.',
       },
     ],
   },
   {
     id: 'ts-generics-deep',
-    title: 'TypeScript 제네릭 심화: 조건부 타입과 infer 키워드',
+    title: '배포 로그를 읽기 좋은 사건 단위로 자르기',
     excerpt:
       '제네릭의 기본을 넘어 조건부 타입과 infer로 복잡한 타입 변환을 우아하게 처리하는 방법을 소개합니다.',
     tags: ['TypeScript', '타입시스템', '제네릭'],
@@ -103,7 +95,7 @@ type First = Head<[string, number, boolean]>  // string`,
   },
   {
     id: 'css-layout-modern',
-    title: 'CSS 레이아웃 완전 정복: Grid와 Flexbox 언제 무엇을 쓸까',
+    title: 'Grid와 Flexbox 선택 기준을 팀 규칙으로 남기기',
     excerpt:
       'Flexbox와 Grid는 서로 경쟁하는 기술이 아닙니다. 각각의 강점을 이해하고 함께 사용하는 전략을 정리했습니다.',
     tags: ['CSS', 'Layout', 'Grid', 'Flexbox'],
@@ -149,7 +141,7 @@ type First = Head<[string, number, boolean]>  // string`,
   },
   {
     id: 'algorithm-sliding-window',
-    title: '슬라이딩 윈도우 알고리즘: O(n²)을 O(n)으로 줄이는 방법',
+    title: '슬라이딩 윈도우로 이벤트 버퍼 줄이기',
     excerpt:
       '연속된 부분 배열·부분 문자열 문제에서 자주 등장하는 슬라이딩 윈도우 기법을 직관적으로 설명합니다.',
     tags: ['알고리즘', 'JavaScript', '자료구조'],
@@ -191,7 +183,7 @@ console.log(maxSubarraySum([2, 1, 5, 1, 3, 2], 3))`,
   },
   {
     id: 'vite-build-config',
-    title: 'Vite 빌드 설정 최적화: 번들 크기를 40% 줄인 방법',
+    title: 'Vite 청크 경고를 소음이 아닌 신호로 만들기',
     excerpt:
       '프로덕션 빌드에서 번들 크기를 분석하고, 코드 스플리팅·트리 셰이킹·압축 설정으로 실제 크기를 줄인 경험을 공유합니다.',
     tags: ['Vite', '빌드최적화', 'Frontend'],
@@ -239,7 +231,7 @@ export default defineConfig({
   },
   {
     id: 'git-rebase-workflow',
-    title: 'Git rebase 실전 가이드: 깔끔한 커밋 히스토리 만들기',
+    title: '리베이스 전 팀에게 남기는 세 줄짜리 메모',
     excerpt:
       '팀 코드 리뷰에서 "커밋 정리해 주세요"라는 말을 들어 봤다면, git rebase -i로 히스토리를 다듬는 방법을 알아봅니다.',
     tags: ['Git', 'Workflow', '협업'],

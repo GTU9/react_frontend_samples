@@ -92,9 +92,7 @@ function PostCard({
       aria-label={`${post.title} 글 읽기`}
     >
       <div className="vb-post-card__header">
-        <span className="vb-post-card__mood" aria-hidden="true">
-          {post.mood}
-        </span>
+        <img className="vb-post-card__image" src={post.image} alt={post.imageAlt} loading="lazy" />
         <div className="vb-post-card__meta">
           <h2 className="vb-post-card__title">{post.title}</h2>
           <p className="vb-post-card__excerpt">{post.excerpt}</p>
@@ -106,8 +104,9 @@ function PostCard({
         </div>
         <span className="vb-post-card__author">{post.author}</span>
         <span className="vb-dot" aria-hidden="true" />
-        <span className="vb-post-card__date">{post.date}</span>
-        <span className="vb-tag">{post.tag}</span>
+          <span className="vb-post-card__date">{post.date}</span>
+          <span className="vb-tag">{post.tag}</span>
+          <span className="vb-place">{post.mood}</span>
         <div className="vb-post-card__likes" aria-label={`좋아요 ${post.likes}개`}>
           <span className="vb-heart-icon" aria-hidden="true">♡</span>
           {post.likes}
@@ -131,9 +130,8 @@ function PostListView({
     <section className="vb-feed" aria-label="게시글 목록">
       <div className="vb-container">
         <motion.div {...fadeUp(reduced, 0.05)} className="vb-hero">
-          <span className="vb-hero__tagline">일상 · 감성 · 기록</span>
-          <h1 className="vb-hero__title">나의 이야기를 담는 공간</h1>
-          <p className="vb-hero__sub">카페, 여행, 책, 취미 — 소소한 하루의 기록들</p>
+          <h1 className="vb-hero__title">여행이 남긴, 조금 더 나은 하루</h1>
+          <p className="vb-hero__sub">장소의 빛과 냄새, 골목의 소리까지 천천히 적어 두는 개인 여행 노트</p>
         </motion.div>
 
         {posts.length === 0 ? (
@@ -204,6 +202,7 @@ function ArticleView({
           <span className="vb-article__mood" aria-hidden="true">
             {post.mood}
           </span>
+          <img className="vb-article__image" src={post.image} alt={post.imageAlt} />
           <h1 className="vb-article__title">{post.title}</h1>
           <div className="vb-article__byline">
             <div className="vb-avatar" aria-hidden="true">
@@ -253,7 +252,7 @@ function ArticleView({
 }
 
 // ——— Mood options ———
-const MOODS = ['☕', '✈️', '📖', '🌅', '🧶', '🌸', '🍜', '🎵']
+const MOODS = ['바다', '골목', '책', '아침', '손일', '시장', '기차', '정원']
 
 // ——— Live Preview Card ———
 function LivePreview({
@@ -338,6 +337,8 @@ function ComposeView({
       tag: tag.trim() || '일상',
       mood: mood || '✍️',
       likes: 0,
+      image: '/media/velvet-blog/canal.jpg',
+      imageAlt: '새 여행 글 기본 이미지',
     }
 
     onPublish(newPost)

@@ -110,7 +110,7 @@ function ListView({
     >
       <div className="pr-list-header">
         <h1 className="pr-list-headline">
-          모든 글<span className="pr-list-headline__accent">.</span>
+          독립 시민 지면<span className="pr-list-headline__accent">.</span>
         </h1>
         <p className="pr-list-count">{filtered.length}편</p>
       </div>
@@ -260,7 +260,7 @@ function WriteView({
         {/* Form column */}
         <div className="pr-write-form-col">
           <div className="pr-write-heading">
-            <span className="pr-write-heading__label">글 작성</span>
+            <span className="pr-write-heading__label">오피니언 작성</span>
           </div>
 
           {error && (

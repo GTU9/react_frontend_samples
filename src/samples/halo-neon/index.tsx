@@ -65,9 +65,12 @@ function PostCard({
         if (e.key === 'Enter' || e.key === ' ') onSelect(post)
       }}
     >
-      <span className="hn-post-card__tag">{post.tag}</span>
-      <h2 className="hn-post-card__title">{post.title}</h2>
-      <p className="hn-post-card__excerpt">{post.excerpt}</p>
+      <img className="hn-post-card__image" src={post.image} alt={post.imageAlt} loading="lazy" />
+      <div className="hn-post-card__body">
+        <span className="hn-post-card__tag">{post.tag}</span>
+        <h2 className="hn-post-card__title">{post.title}</h2>
+        <p className="hn-post-card__excerpt">{post.excerpt}</p>
+      </div>
       <div className="hn-post-card__footer">
         <span className="hn-post-card__author">{post.author}</span>
         <span className="hn-post-card__views">조회 {post.views.toLocaleString()}</span>
@@ -131,6 +134,7 @@ function ArticleView({
         <button className="hn-article__back" type="button" onClick={onBack}>
           &larr; 목록
         </button>
+        <img className="hn-article__image" src={post.image} alt={post.imageAlt} />
         <span className="hn-article__tag">{post.tag}</span>
         <h1 className="hn-article__title">{post.title}</h1>
         <div className="hn-article__meta">
@@ -253,6 +257,8 @@ function WriteView({
       date: todayString(),
       tag: form.tag.trim() || '일반',
       views: 0,
+      image: '/media/halo-neon/vinyl.jpg',
+      imageAlt: '새 음악 글 기본 이미지',
     }
     onPublish(newPost)
   }
@@ -391,11 +397,6 @@ export default function HaloNeon() {
 
   return (
     <div className="sample-halo-neon">
-      {/* Background layers */}
-      <div className="hn-grid-bg" aria-hidden="true" />
-      <div className="hn-scanlines" aria-hidden="true" />
-
-      {/* Content */}
       <div className="hn-content">
         {/* Top bar */}
         <header className="hn-topbar">

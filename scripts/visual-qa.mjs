@@ -5,7 +5,7 @@ import { chromium } from 'playwright'
 import { mkdirSync, writeFileSync } from 'node:fs'
 
 const BASE = process.argv[2] || 'http://localhost:4173'
-const OUT = '.omc/visual-qa'
+const OUT = process.env.VISUAL_QA_OUT || '.omc/visual-qa'
 mkdirSync(OUT, { recursive: true })
 
 const sampleIds = [
@@ -19,10 +19,11 @@ const sampleIds = [
   'converse-chat', 'tempo-music', 'board-tasks',
 ]
 
+const requested = process.argv[3]?.split(',')
 const routes = [
   { id: 'gallery', path: '/' },
   ...sampleIds.map((id) => ({ id, path: `/sample/${id}` })),
-]
+].filter(route => !requested || requested.includes(route.id))
 
 const viewports = [
   { name: 'desktop', width: 1440, height: 900 },
@@ -86,6 +87,32 @@ try {
       }
       await page.waitForTimeout(700)
 
+      const diagnostics = await page.evaluate(async (id) => {
+        const root = id === 'gallery' ? document.querySelector('.showcase-gallery') : document.querySelector('.sample-' + id)
+        const backgrounds = [...new Set(Array.from(root?.querySelectorAll('*') ?? []).flatMap(el =>
+          Array.from(getComputedStyle(el).backgroundImage.matchAll(/url\(["']?([^"')]+)["']?\)/g), match => match[1]),
+        ))]
+        const backgroundResults = await Promise.all(backgrounds.map(src => new Promise(resolve => {
+          const img = new Image()
+          img.onload = () => resolve(null)
+          img.onerror = () => resolve(src)
+          img.src = src
+          setTimeout(() => resolve(img.complete && img.naturalWidth ? null : src), 5000)
+        })))
+        return {
+          title: document.title,
+          hasContent: !!root && root.textContent.trim().length > 30,
+          horizontalOverflow: document.documentElement.scrollWidth > innerWidth + 1,
+          brokenImages: Array.from(document.images).filter(img => !img.complete || img.naturalWidth === 0).map(img => img.getAttribute('src')),
+          brokenBackgrounds: backgroundResults.filter(Boolean),
+          frameworkOverlay: !!document.querySelector('vite-error-overlay'),
+        }
+      }, route.id)
+      if (!diagnostics.hasContent || diagnostics.frameworkOverlay || diagnostics.horizontalOverflow || diagnostics.brokenImages.length || diagnostics.brokenBackgrounds.length) {
+        ok = false
+        messages.push({ type: 'layout', text: JSON.stringify(diagnostics) })
+      }
+
       const file = `${OUT}/${route.id}-${vp.name}.png`
       try {
         await page.screenshot({ path: file, fullPage: true })
@@ -104,6 +131,7 @@ try {
         warningCount: messages.length - errors.length,
         messages,
         file,
+        diagnostics,
       })
       console.log(
         `${ok ? 'OK ' : 'ERR'} ${route.id} [${vp.name}]  errors=${errors.length} warnings=${messages.length - errors.length}`,
@@ -132,4 +160,4 @@ if (totalErrors > 0) {
     }
   }
 }
-process.exit(0)
+process.exit(report.some(r => !r.ok || r.errorCount > 0) ? 1 : 0)

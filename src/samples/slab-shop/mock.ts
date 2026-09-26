@@ -1,149 +1,139 @@
 export interface ColorSwatch {
-  name: string;
-  hex: string;
+  name: string
+  hex: string
 }
 
 export interface Variant {
-  size: string;
-  available: boolean;
+  size: string
+  available: boolean
 }
 
 export interface Spec {
-  label: string;
-  value: string;
+  label: string
+  value: string
 }
 
 export interface Review {
-  id: number;
-  author: string;
-  rating: number;
-  date: string;
-  body: string;
-  verified: boolean;
+  id: number
+  author: string
+  rating: number
+  date: string
+  body: string
+  verified: boolean
 }
 
-export interface RelatedProduct {
-  id: number;
-  title: string;
-  price: number;
-  accentColor: string;
-  tag: string;
+export interface CatalogItem {
+  id: string
+  title: string
+  subtitle: string
+  price: number
+  imageIndex: number
+  tag: string
 }
 
 export interface Product {
-  id: number;
-  title: string;
-  subtitle: string;
-  price: number;
-  originalPrice: number;
-  sku: string;
-  description: string;
-  colors: ColorSwatch[];
-  variants: Variant[];
-  thumbnailColors: string[];
-  specs: Spec[];
-  reviews: Review[];
-  relatedProducts: RelatedProduct[];
+  id: string
+  title: string
+  subtitle: string
+  price: number
+  originalPrice: number
+  sku: string
+  description: string
+  colors: ColorSwatch[]
+  variants: Variant[]
+  specs: Spec[]
+  reviews: Review[]
+  relatedProducts: CatalogItem[]
 }
 
 export const product: Product = {
-  id: 1,
-  title: "BRUTAL RUNNER X9",
-  subtitle: "유니섹스 고성능 스니커즈",
-  price: 189,
-  originalPrice: 249,
-  sku: "BRX-2024-009",
+  id: 'slab-stool-01',
+  title: '모듈 스툴 01',
+  subtitle: '실내외 겸용 폴리프로필렌 오브제 스툴',
+  price: 149000,
+  originalPrice: 178000,
+  sku: 'SLAB-OBJ-ST01-RD',
   description:
-    "타협 없음. 최강의 임팩트. BRUTAL RUNNER X9는 가황 처리된 로우 솔, 노출형 폼 미드솔, 그리고 절대 사과하지 않는 구조로 모든 기대를 산산이 부순다. 발로 자신의 의지를 표현하는 이들을 위해 만들어졌다.",
+    '가벼운 구조, 넓은 다리 간격, 물청소 가능한 표면. 현관, 작업실, 베란다를 오가며 오래 쓰도록 만든 SLAB의 기본 오브제입니다.',
   colors: [
-    { name: "로우 블랙", hex: "#0a0a0a" },
-    { name: "애시드 화이트", hex: "#f5f5f0" },
-    { name: "오렌지 킬", hex: "#ff5c00" },
-    { name: "콘크리트", hex: "#8c8c84" },
+    { name: '시그널 레드', hex: '#d71920' },
+    { name: '매트 블랙', hex: '#111111' },
+    { name: '웜 화이트', hex: '#f5f3ef' },
+    { name: '스틸 그레이', hex: '#8d8d86' },
   ],
   variants: [
-    { size: "US 6", available: false },
-    { size: "US 7", available: true },
-    { size: "US 8", available: true },
-    { size: "US 9", available: true },
-    { size: "US 10", available: true },
-    { size: "US 11", available: false },
-    { size: "US 12", available: true },
-    { size: "US 13", available: true },
+    { size: 'H45', available: true },
+    { size: 'H50', available: true },
+    { size: 'H65', available: false },
+    { size: '2개 세트', available: true },
+    { size: '4개 세트', available: true },
   ],
-  thumbnailColors: ["#0a0a0a", "#ff5c00", "#f5f5f0", "#8c8c84", "#1a1a2e"],
   specs: [
-    { label: "어퍼", value: "로우 캔버스 + 발리스틱 메시" },
-    { label: "솔", value: "가황 고무, 32mm 스택" },
-    { label: "미드솔", value: "노출형 EVA 폼" },
-    { label: "라이닝", value: "흡습 속건 테리" },
-    { label: "클로저", value: "플랫 왁스 레이스, 토널" },
-    { label: "무게", value: "340g / 11.99oz (US9)" },
-    { label: "원산지", value: "포르투갈" },
-    { label: "컬래버", value: "Studio BRUT × District Nine" },
+    { label: '소재', value: '재활용 폴리프로필렌 70%, 유리섬유 보강' },
+    { label: '치수', value: 'W390 x D390 x H450mm' },
+    { label: '하중', value: '정적 하중 130kg 테스트 완료' },
+    { label: '마감', value: '무광 질감, 미끄럼 방지 풋캡' },
+    { label: '관리', value: '중성세제와 젖은 천으로 세척' },
+    { label: '제조', value: '경기 김포 소량 사출 공장' },
   ],
   reviews: [
     {
       id: 1,
-      author: "MARCUS T.",
+      author: '정우',
       rating: 5,
-      date: "2024-11-03",
-      body: "느낌이 다르다. 쿠션도 허풍도 없음 — 오직 구조와 의도뿐. 갤러리 오프닝에 신고 갔더니 세 명이나 어디서 샀냐고 물었다. 완벽.",
+      date: '2026.08.18',
+      body: '작업실 샘플 테이블 옆에 두었는데 가볍고 단단합니다. 빨간색이 공간을 살려줘요.',
       verified: true,
     },
     {
       id: 2,
-      author: "YUKI N.",
+      author: '하린',
       rating: 4,
-      date: "2024-10-21",
-      body: "폭이 약간 좁게 나온다. 발이 넓으면 반 사이즈 업 추천. 그 외에는 실루엣이 면도날처럼 날카롭다. 오렌지 컬러는 진짜 미쳤다.",
+      date: '2026.07.30',
+      body: '베란다 식물 받침으로 쓰다가 손님 오면 의자로 씁니다. 모서리 마감이 깔끔합니다.',
       verified: true,
     },
     {
       id: 3,
-      author: "DEV M.",
+      author: '민규',
       rating: 5,
-      date: "2024-09-15",
-      body: "12년째 하입 스니커를 신어왔다. 이 신발만큼 의도적으로 느껴지는 건 없었다. 노출형 폼 미드솔은 천재적이거나 미친 짓이거나 — 아마 둘 다일 것.",
+      date: '2026.07.11',
+      body: '가구보다 공구에 가까운 태도라 마음에 듭니다. 2개 세트 추천합니다.',
       verified: false,
-    },
-    {
-      id: 4,
-      author: "CAMILLE R.",
-      rating: 3,
-      date: "2024-08-30",
-      body: "디자인은 마음에 드는데 캔버스 어퍼는 길들이는 데 약 일주일 걸린다. 그 이후엔 완벽. 내구성은 두고 봐야 하지만 기대된다.",
-      verified: true,
     },
   ],
   relatedProducts: [
     {
-      id: 2,
-      title: "SLAB MULE 01",
-      price: 129,
-      accentColor: "#ff5c00",
-      tag: "신상",
+      id: 'shelf',
+      title: '스틸 셸프 3단',
+      subtitle: '볼트 조립식 크롬 보관대',
+      price: 329000,
+      imageIndex: 1,
+      tag: '공간',
     },
     {
-      id: 3,
-      title: "GRID BOOT HVY",
-      price: 219,
-      accentColor: "#0a0a0a",
-      tag: "컬래버",
+      id: 'lamp',
+      title: '테스크 램프 B2',
+      subtitle: '스프링 암 작업등',
+      price: 189000,
+      imageIndex: 2,
+      tag: '조명',
     },
     {
-      id: 4,
-      title: "FLAT CAP DERBY",
-      price: 159,
-      accentColor: "#1a1a2e",
-      tag: "세일",
+      id: 'crate',
+      title: '월 크레이트',
+      subtitle: '타공 벽걸이 수납함',
+      price: 76000,
+      imageIndex: 3,
+      tag: '수납',
     },
     {
-      id: 5,
-      title: "CHUNK SLIDE V2",
-      price: 89,
-      accentColor: "#3d2b1f",
-      tag: "인기",
+      id: 'table',
+      title: '플랫팩 사이드',
+      subtitle: '자작나무 조립 테이블',
+      price: 214000,
+      imageIndex: 5,
+      tag: '가구',
     },
   ],
-};
+}

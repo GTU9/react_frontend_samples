@@ -1,4 +1,4 @@
-import { Suspense } from 'react'
+import { Suspense, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { ErrorBoundary } from '../components/ErrorBoundary'
 import type { Sample } from '../samples/registry'
@@ -9,6 +9,10 @@ interface SampleFrameProps {
 
 export function SampleFrame({ sample }: SampleFrameProps) {
   const { Component } = sample
+  useEffect(() => {
+    document.title = `${sample.title} · Interface Index`
+    return () => { document.title = '인터페이스 아카이브' }
+  }, [sample.title])
   return (
     <div style={{ minHeight: '100vh' }}>
       <div
@@ -21,8 +25,7 @@ export function SampleFrame({ sample }: SampleFrameProps) {
           gap: '0.75rem',
           padding: '0.5rem 1rem',
           fontSize: '0.875rem',
-          backdropFilter: 'blur(8px)',
-          background: 'rgba(255, 255, 255, 0.6)',
+          background: '#fafafa',
           borderBottom: '1px solid rgba(0, 0, 0, 0.08)',
         }}
       >
@@ -56,7 +59,7 @@ export function SampleFrame({ sample }: SampleFrameProps) {
                   animation: 'sampleframe-spin 0.8s linear infinite',
                 }}
               />
-              <style>{`@keyframes sampleframe-spin { to { transform: rotate(360deg); } }`}</style>
+              <style>{`@keyframes sampleframe-spin { to { transform: rotate(360deg); } } @media (prefers-reduced-motion: reduce) { [aria-label="샘플 로딩 중"] { animation: none !important; } }`}</style>
             </div>
           }
         >
